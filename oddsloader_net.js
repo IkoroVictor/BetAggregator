@@ -73,6 +73,7 @@ request(options, function (error, response, body) {
             game.odds.handicap_0_2_1.nb = odds[0];
             game.odds.handicap_0_2_x.nb = odds[1];
             game.odds.handicap_0_2_2.nb = odds[2];
+            game.odds.handicap_0_2_2.nb = odds[2];
 
         }
 
