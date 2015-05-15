@@ -16,10 +16,12 @@ function Constants()
     this.nairastake_home = 'https://nairastake.com';
     this.nairastake_home = 'https://nairastake.com';
 
-    //System constants
+    //DB constants
     this.MONGO_DB_HOST = '127.0.0.1';
-    this.MONGO_DB_PORT = 27107;
+    this.MONGO_DB_PORT = 27017;
     this.MONGO_DB_NAME = 'naijaodds';
+
+
 
 
 
@@ -37,9 +39,13 @@ function GameContainer()
 
         id:'',
         title:'',
+        category_key:'',
+        datetime:'',
         time:'',
+        date:'',
         home:'',
         away: '',
+        url: '',
         play_codes: {},
         odds: {
 

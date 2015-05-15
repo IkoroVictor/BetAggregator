@@ -8,7 +8,7 @@ function NairabetParser()
 
 }
 
-NairabetParser.prototype.getGameOdds = function($, game)
+NairabetParser.prototype.getGameOdds = function($, game, db)
 {
 
     var nparser = require('./parsers').getNairabetParser();
@@ -31,9 +31,14 @@ NairabetParser.prototype.getGameOdds = function($, game)
         //parse straight_win
         if (tag == nparser.straight_win_tag) {
             var odds = nparser.parse_basic_op($(this).next(), $);
-            game.odds['1'].nb = odds[0];
-            game.odds['x'].nb = odds[1];
-            game.odds['2'].nb = odds[2];
+
+
+           /* db.update({'games.key': game.key }, {
+                "odds['1'].nb" : odds[0],
+                "odds['x'].nb" : odds[1],
+                "odds['2'].nb" : odds[2]
+            })*/
+
         }
 
         //Handicap 0:1
@@ -680,18 +685,15 @@ NairabetParser.prototype.getGames = function($, data)
 
         if($(this).attr('id')  == 'categoryTitlePanel')
         {
-
-            if(current_cat != undefined)
-            {
-                data.categories[helper.generateGameCategoryKey(current_cat.title)] = current_cat;
-            }
             var child = $(this);
-            var category = { title:'', games:{}}
+            var category = { title:'', key:'', games:{}}
 
             category.title =  $('#categoryText', child).text().trim();
-
+            category.key = helper.generateGameCategoryKey(category.title);
             current_cat = category;
-        }else
+            data.categories[current_cat.key] = current_cat;
+        }
+        else
         {
             if(($(this).attr('class') == 'category_bets_odd')  || ($(this).attr('class') == 'category_bets_even'))
             {
@@ -700,7 +702,7 @@ NairabetParser.prototype.getGames = function($, data)
                 var vars = $('#codePanel', this).eq(0).next().next().attr('onclick').replace(/'/g, '').split(',');
 
 
-                game.time = $('.home_event_start', this).eq(0).text();
+                game.datetime = $('.home_event_start', this).eq(0).text();
 
                 //game.time = vars[3];
 
@@ -711,8 +713,24 @@ NairabetParser.prototype.getGames = function($, data)
                 game.home = sides[0].trim();
                 game.away = sides[1].trim();
 
-                current_cat.games[game.id] = game;
 
+                console.log(game.datetime);
+                //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
+
+                var vars2 = $('#moreBetsPanel', this).children().eq(0).attr('onclick');
+
+                if(vars2 != undefined)
+                {
+                    game.url = vars2.split("'")[1];
+                }
+                game.date = game.datetime.split(" ")[0];
+                game.time = game.datetime.split(" ")[1];
+
+
+                if(current_cat != undefined)
+                    game.category_key = current_cat.key;
+
+                data.games[game.id] = game;
 
             }
         }

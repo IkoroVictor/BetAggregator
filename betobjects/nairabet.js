@@ -70,14 +70,7 @@ Nairabet.prototype.clean_symbols = function(val)
 }
 
 
-Nairabet.prototype.day_bet_url_suffix = '1x2';
-
-
-
-
-
-
-
+Nairabet.prototype.day_bet_url_suffix = '/bets/date/';
 
 
 

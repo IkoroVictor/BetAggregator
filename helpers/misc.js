@@ -24,20 +24,38 @@ exports.clean = function(val)
 
 exports.clean_symbols = function(val)
 {
-    return val.trim().replace(/ |-|:/g, '');
+    return val.trim().replace(/ |-|.|:/g, '');
 }
 
 exports.exec_db= function(db, callback)
 {
-    if(!db.isOpen())
+    if(GLOBAL.db_conn_status == 0) //TODO  Please FIX. Determine if the connection to MongoDB is still alive else Reconnect and execute the callback
     {
         db.open(function(err,db)
         {
-           callback();
+           if(!err)
+           {
+               callback();
+               GLOBAL.db_conn_status == 1;
+           }
+
         });
     }
     else
     {
         callback();
     }
+}
+
+
+exports.getDefaultRequestOption = function()
+{
+    return {
+        uri: '',
+        proxy: 'http://127.0.0.1:8080',
+        headers: {
+
+            'User-Agent': 'request'
+        }
+    };
 }
