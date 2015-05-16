@@ -24,7 +24,7 @@ exports.clean = function(val)
 
 exports.clean_symbols = function(val)
 {
-    return val.trim().replace(/ |-|.|:/g, '');
+    return val.trim().replace(/ |-|\.|\?|\/|\\|:/g, '');
 }
 
 exports.exec_db= function(db, callback)

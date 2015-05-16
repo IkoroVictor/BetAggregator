@@ -9,7 +9,7 @@ var nb = require('./parsers/nairabet').getNairabetParser();
 var nb_obj = require('./betobjects/nairabet').getNairabetObject();
 var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
-var emitter = require('events').EventEmitter;
+//var emitter = require('events').EventEmitter;
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 
@@ -73,14 +73,9 @@ var load_all = function (error, response, body) {
                                                 bet_days.update(
 
                                                     {short_date: val.short_date },
-                                                    { $set:{games: val.games, categories: val.categories}},
+                                                    { $set: {games: val.games, categories: val.categories}},
 
                                                     function (er2, count, status) {
-
-                                                        //console.log(er2);
-                                                        //console.log(status);
-                                                        //console.log(count);
-
                                                         if (!er2) {
                                                             Object.keys(val.games).forEach(function (key) {
 
@@ -89,12 +84,12 @@ var load_all = function (error, response, body) {
                                                                     return;
                                                                 var op = helper.getDefaultRequestOption();
 
-                                                                op.uri = value.url;
+                                                                op.uri = constants.nairabet_home + value.url;
                                                                 console.log('Loading game odds for game : ' + op.uri);
                                                                 request(op, function (e3, r3, b3) {
                                                                     console.log(e3);
                                                                     console.log(b3);
-                                                                    //this.setMaxListeners(0);
+                                                                    this.setMaxListeners(0);
                                                                     var root_obj = cheerio.load(b3);
                                                                     nb.getGameOdds(root_obj, value, db);
                                                                     console.log('Game odds for game : ' + op.uri + ' loaded');

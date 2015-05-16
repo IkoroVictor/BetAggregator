@@ -683,6 +683,8 @@ NairabetParser.prototype.getGames = function($, data)
     $('#betsTable').children().each( function(index, elem)
     {
 
+
+        console.log($(this).attr('id'));
         if($(this).attr('id')  == 'categoryTitlePanel')
         {
             var child = $(this);
@@ -690,6 +692,7 @@ NairabetParser.prototype.getGames = function($, data)
 
             category.title =  $('#categoryText', child).text().trim();
             category.key = helper.generateGameCategoryKey(category.title);
+            console.log(category.key);
             current_cat = category;
             data.categories[current_cat.key] = current_cat;
         }
@@ -714,10 +717,10 @@ NairabetParser.prototype.getGames = function($, data)
                 game.away = sides[1].trim();
 
 
-                console.log(game.datetime);
+                //console.log(game.datetime);
                 //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
 
-                var vars2 = $('#moreBetsPanel', this).children().eq(0).attr('onclick');
+                var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
 
                 if(vars2 != undefined)
                 {
