@@ -59,3 +59,42 @@ exports.getDefaultRequestOption = function()
         }
     };
 }
+
+exports.validate_odds = function(odds, count)
+{
+    if((odds == undefined) || odds == null)
+    {
+        return false;
+    }
+
+    if(odds.length == 0)
+    {
+        return false;
+    }
+
+    if(odds.length == count)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+exports.schedule_recurrent_job= function (scheduler,minutes,callback )
+{
+    var rule = scheduler.recurrenceRule()
+    rule.minute = new schedule.Range(0, 59, minutes);
+
+    scheduler.scheduleJob(rule, function()
+    {
+        try{
+            callback();
+        }
+        catch(ex)
+        {
+            console.log(ex);
+        }
+    });
+}

@@ -23,7 +23,8 @@ function Constants()
 
 
 
-
+    //System Constants
+    this.RECURRENT_JOB_INTERVAL = 5; //in minutes
 
 }
 
