@@ -1079,6 +1079,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
 
+
     });
 
     return game;
@@ -1104,7 +1105,7 @@ NairabetParser.prototype.getGames = function ($, data) {
 
             category.title = $('#categoryText', child).text().trim();
             category.key = helper.generateGameCategoryKey(category.title);
-            console.log(category.key);
+            //console.log(category.key);
             current_cat = category;
             data.categories[current_cat.key] = current_cat;
         }

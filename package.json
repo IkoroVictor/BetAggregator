@@ -2,7 +2,7 @@
   "name": "BetAggregator",
   "version": "1.0.0",
   "description": "",
-  "main": "start_service.js",
+  "main": "index.js",
   "dependencies": {
     "cheerio": "^0.19.0",
     "mongodb": "^2.0.31",

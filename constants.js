@@ -25,6 +25,7 @@ function Constants()
 
     //System Constants
     this.RECURRENT_JOB_INTERVAL = 5; //in minutes
+    this.QUEUE_CONCURRENCY = 1; //in minutes
 
 }
 

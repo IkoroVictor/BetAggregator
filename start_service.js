@@ -4,18 +4,20 @@
 
 
 var request = require('request');
+var async = require('async');
 var constants = require('./constants').loadConstants();
 var nb = require('./parsers/nairabet').getNairabetParser();
 var nb_obj = require('./betobjects/nairabet').getNairabetObject();
 var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
 var scheduler = require('node-schedule');
-//var emitter = require('events').EventEmitter;
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 
-
-//emitter.setMaxListeners(0);
+var game_queues = async.queue(function (task, callback) {
+    task.payload();
+    callback();
+}, constants.QUEUE_CONCURRENCY)
 
 
 var options = helper.getDefaultRequestOption();
@@ -40,7 +42,7 @@ var load_all = function (error, response, body) {
         Object.keys(days).forEach(function (key) {
             var val = days[key];
 
-            if ( key == '20.05.15' /*key.length > 3*/) //filter for '4H', '1H', '12H' etc
+            if (/*key == '20.05.15'*/ key.length > 3) //filter for '4H', '1H', '12H' etc
             {
                 helper.exec_db(db, function () {
                     db.createCollection("days", function (err, bet_days) {
@@ -70,6 +72,11 @@ var load_all = function (error, response, body) {
 
                                                 var root_obj = cheerio.load(b);
                                                 nb.getGames(root_obj, val);
+                                                if(val.games.length < 1)
+                                                {
+                                                    console.log(' No games loaded for' + op.uri);
+                                                    return;
+                                                }
                                                 console.log(' Games loaded for' + op.uri);
                                                 db.createCollection('games',
 
@@ -97,25 +104,33 @@ var load_all = function (error, response, body) {
                                                                         var rule = new scheduler.RecurrenceRule();
                                                                         rule.minute = new scheduler.Range(0, 59, constants.RECURRENT_JOB_INTERVAL);
 
-                                                                        var  nb_job = scheduler.scheduleJob(rule, function () {
+                                                                        var nb_job = scheduler.scheduleJob(rule, function () {
 
-                                                                            if(value.date <  '')
+
+                                                                            if (value.date < '') //Validate if job should still run
                                                                                 nb_job.cancel();
 
-                                                                            request(op, function (e3, r3, b3) {
-                                                                                if (!e3 || (typeof b3 != 'undefined')) {
-                                                                                    this.setMaxListeners(0);
-                                                                                    var root_obj = cheerio.load(b3);
-                                                                                    try {
-                                                                                        nb.getGameOdds(root_obj, value, games);
-                                                                                    }
-                                                                                    catch (ex) {
-                                                                                        console.log(ex)
-                                                                                    }
+                                                                            game_queues.push({name: ('nb_' + key), payload: function () {
 
-                                                                                    console.log('Game odds for game : ' + op.uri + ' loaded');
-                                                                                }
+                                                                                request(op, function (e3, r3, b3) {
+                                                                                    if (!e3 || (typeof b3 != 'undefined')) {
+                                                                                        this.setMaxListeners(0);
+                                                                                        var root_obj = cheerio.load(b3);
+                                                                                        try {
+                                                                                            nb.getGameOdds(root_obj, value, games);
+                                                                                        }
+                                                                                        catch (ex) {
+                                                                                            console.log(ex)
+                                                                                        }
+
+                                                                                        console.log('Game odds for game : ' + op.uri + ' loaded');
+                                                                                    }
+                                                                                })
+                                                                            }}, function (err) {
+                                                                                console.log('Queue Error [NB_' + key + '] : ' + err)
                                                                             })
+
+
                                                                         });
 
                                                                     })
