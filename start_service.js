@@ -37,6 +37,8 @@ var load_all = function (error, response, body) {
         $ = cheerio.load(body);
         nb.getMatchDays($, days)
         //nb.getMockMatchDays($, days)
+        body = null;
+        $ = null
 
         Object.keys(days).forEach(function (key) {
             var val = days[key];
@@ -92,10 +94,14 @@ var load_all = function (error, response, body) {
                                                         console.log(err);
                                                         return;
                                                     }
+                                                    b = null;
+                                                    $ = null;
+
 
                                                     if (val.games.length < 1) {
                                                         console.log(' No games loaded for' + op.uri);
-                                                        return;
+//                                                        32`
+// eturn;
                                                     }
                                                     console.log(' Games loaded for' + op.uri);
                                                     db.createCollection('games',
@@ -142,6 +148,9 @@ var load_all = function (error, response, body) {
                                                                                             catch (ex) {
                                                                                                 console.log(ex)
                                                                                             }
+
+                                                                                            b3 = null;
+                                                                                            root_obj = null;
 
                                                                                             console.log('Game odds for game : ' + op.uri + ' loaded');
                                                                                         }
