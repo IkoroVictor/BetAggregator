@@ -176,11 +176,10 @@ var load_all = function (error, response, body) {
                 })
             }
         });
-
     }
     else {
         console.log(response);
-        console.log(error);
+        console.log("Could not connect:" +  error);
     }
 }
 
