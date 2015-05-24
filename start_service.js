@@ -96,12 +96,11 @@ var load_all = function (error, response, body) {
                                                     }
                                                     b = null;
                                                     $ = null;
-
+                                                    global.gc()
 
                                                     if (val.games.length < 1) {
                                                         console.log(' No games loaded for' + op.uri);
-//                                                        32`
-// eturn;
+                                                        return;
                                                     }
                                                     console.log(' Games loaded for' + op.uri);
                                                     db.createCollection('games',
