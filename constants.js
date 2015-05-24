@@ -18,7 +18,7 @@ function Constants()
 
     //DB constants
     //this.MONGO_DB_URL= 'mongodb://localhost:27017/naijaodds';
-    this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@ds012345.mongolab.com:56789/naijaodds';
+    this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@ds031962.mongolab.com:31962/naijaodds';
 
 
     //this.MONGO_DB_HOST = 'ds012345.mongolab.com';
