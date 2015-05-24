@@ -188,27 +188,27 @@ var load_all = function (error, response, body) {
     }
 }
 
-exports.startNaijaOddsWorker = function () {
-    db.open(function (err, db) {
-        if (!err) {
-            GLOBAL.db_conn_status = 1;
 
-            db.authenticate(constants.MONGO_DB_USERNAME, constants.MONGO_DB_PASSWORD, function (err, result) {
-                if (!err) {
-                    request(options, load_all).setMaxListeners(0);
-                }
-                else
-                    console.log(err);
+db.open(function (err, db) {
+    if (!err) {
+        GLOBAL.db_conn_status = 1;
+
+        db.authenticate(constants.MONGO_DB_USERNAME, constants.MONGO_DB_PASSWORD, function (err, result) {
+            if (!err) {
+                request(options, load_all).setMaxListeners(0);
+            }
+            else
+                console.log(err);
 
 
-            });
+        });
 
-        } else {
-            GLOBAL.db_conn_status = 0;
-            console.log('llllll');
-        }
-    })
-}
+    } else {
+        GLOBAL.db_conn_status = 0;
+        console.log('llllll');
+    }
+})
+
 
 
 
