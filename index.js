@@ -5,7 +5,9 @@
 
 var express = require('express');
 var app = express();
+var naijaodds = require('./start_service');
 
+naijaodds.startNaijaOddsWorker();
 
 app.get('/', function(req, res){
     res.end('hello world');
