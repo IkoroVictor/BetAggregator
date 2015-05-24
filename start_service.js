@@ -196,7 +196,7 @@ MongoClient.connect(constants.MONGO_DB_URL, function(err, temp_db) {
     }
     else {
         GLOBAL.db_conn_status = 0;
-        console.log('llllll');
+        console.log('DB ERROR: ' +  err);
     }
 
 
