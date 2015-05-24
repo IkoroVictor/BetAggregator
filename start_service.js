@@ -12,8 +12,9 @@ var nb_obj = require('./betobjects/nairabet').getNairabetObject();
 var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
 var scheduler = require('node-schedule');
-var Db = require('mongodb').Db;
-var Server = require('mongodb').Server;
+var MongoClient = require('mongodb').MongoClient;
+
+var db = null;
 
 
 var game_queues = async.queue(function (task, callback) {
@@ -26,11 +27,6 @@ var options = helper.getDefaultRequestOption();
 
 options.uri = constants.nairabet_home;
 
-var db = new Db(constants.MONGO_DB_NAME,
-    new Server(constants.MONGO_DB_HOST, constants.MONGO_DB_PORT,
-        { auto_reconnect: true,
-            poolSize: 20}),
-    { w: 1 });
 
 
 var load_all = function (error, response, body) {
@@ -188,26 +184,25 @@ var load_all = function (error, response, body) {
     }
 }
 
-
-db.open(function (err, db) {
-    if (!err) {
+MongoClient.connect(constants.MONGO_DB_URL, function(err, temp_db) {
+    if(!err)
+    {
+        console.log("Connected correctly to server");
         GLOBAL.db_conn_status = 1;
+        db = temp_db;
 
-        db.authenticate(constants.MONGO_DB_USERNAME, constants.MONGO_DB_PASSWORD, function (err, result) {
-            if (!err) {
-                request(options, load_all).setMaxListeners(0);
-            }
-            else
-                console.log(err);
+        request(options, load_all).setMaxListeners(0);
 
-
-        });
-
-    } else {
+    }
+    else {
         GLOBAL.db_conn_status = 0;
         console.log('llllll');
     }
-})
+
+
+
+});
+
 
 
 

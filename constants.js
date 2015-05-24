@@ -17,14 +17,15 @@ function Constants()
     this.merrybet_home = 'https://merrybet.com';
 
     //DB constants
-    //this.MONGO_DB_HOST = '127.0.0.1';
-    //this.MONGO_DB_PORT = 27017;
+    //this.MONGO_DB_URL= 'mongodb://localhost:27017/naijaodds';
+    this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@ds012345.mongolab.com:56789/naijaodds';
 
-    this.MONGO_DB_HOST = 'ds012345.mongolab.com';
-    this.MONGO_DB_PORT = 56789;
-    this.MONGO_DB_NAME = 'naijaodds';
-    this.MONGO_DB_USERNAME = 'ikorovictor';
-    this.MONGO_DB_PASSWORD = 'prometheus1';
+
+    //this.MONGO_DB_HOST = 'ds012345.mongolab.com';
+    //this.MONGO_DB_PORT = 56789;
+    //this.MONGO_DB_NAME = 'naijaodds';
+    //this.MONGO_DB_USERNAME = 'ikorovictor';
+    //this.MONGO_DB_PASSWORD = 'prometheus1';
 
 
 
