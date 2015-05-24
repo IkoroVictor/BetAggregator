@@ -1098,7 +1098,7 @@ NairabetParser.prototype.getGames = function ($, data) {
     $('#betsTable').children().each(function (index, elem) {
 
 
-        console.log($(this).attr('id'));
+
         if ($(this).attr('id') == 'categoryTitlePanel') {
             var child = $(this);
             var category = { title: '', key: '', games: {}}
@@ -1118,7 +1118,7 @@ NairabetParser.prototype.getGames = function ($, data) {
 
                 game.datetime = $('.home_event_start', this).eq(0).text();
 
-                //game.time = vars[3];
+                game.timestamp  = helper.getTimestamp(game.datetime);
 
                 game.title = vars[2].trim();
                 game.id = helper.generateGameID(game.title)

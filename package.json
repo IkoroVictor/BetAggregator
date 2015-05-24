@@ -19,14 +19,13 @@
     "node-cache": "^2.1.1",
     "noodle": "^0.0.3"
   },
-    "engines": {
-        "node": "0.10.32",
-        "npm": "1.4.28"
-    },
+
 
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node index.js"
+
   },
   "repository": {
     "type": "git",

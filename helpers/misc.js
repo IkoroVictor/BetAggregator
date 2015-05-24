@@ -2,6 +2,8 @@
  * Created by olaokenyi on 5/11/15.
  */
 
+var constants = require('../constants').loadConstants();
+
 
 exports.generateGameCategoryKey = function(val)
 {
@@ -12,7 +14,9 @@ exports.generateGameCategoryKey = function(val)
 exports.generateGameID = function(val)
 {
     //TODO :  generate a Game ID which will be have the same value irrespective of the  betting service
-    return exports.clean_symbols(val).toLowerCase();
+    var x = val.toLowerCase();
+    var z = x.split('').sort();
+    return  exports.clean_symbols(z.join())
 }
 
 
@@ -24,7 +28,7 @@ exports.clean = function(val)
 
 exports.clean_symbols = function(val)
 {
-    return val.trim().replace(/ |-|\.|\?|\/|\\|:/g, '');
+    return val.trim().replace(/ |-|\.|\?|\/|\\|:|,/g, '');
 }
 
 exports.exec_db= function(db, callback)
@@ -85,7 +89,7 @@ exports.validate_odds = function(odds, count)
 exports.schedule_recurrent_job= function (scheduler,minutes,callback )
 {
     var rule = scheduler.recurrenceRule()
-    rule.minute = new schedule.Range(0, 59, minutes);
+    rule.minute = new scheduler.Range(0, 59, minutes);
 
     scheduler.scheduleJob(rule, function()
     {
@@ -98,3 +102,30 @@ exports.schedule_recurrent_job= function (scheduler,minutes,callback )
         }
     });
 }
+
+
+exports.getTimestamp = function(date_time)
+{
+    var temp = date_time.split(' ');
+    if(temp.length < 2)
+    {
+        return -1;
+    }
+    var date = temp[0].split('.');
+    var time = temp[1].split(':');
+
+    var tp = Date.UTC(parseInt('20'+ date[2]), parseInt(date[1]) - 1,parseInt(date[0]), parseInt(time[0]), parseInt(time[1]) )
+
+    return tp;
+
+}
+
+exports.validate_date = function(timestamp)
+{
+    if((Date.now() - timestamp )< constants.TIMESTAMP_DIFFERENCE)
+    {
+        return false;
+    }
+    return true;
+}
+

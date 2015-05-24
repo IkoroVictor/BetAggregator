@@ -14,18 +14,25 @@ function Constants()
     this.lovers_bet_home = 'https://surebet247.com';
     this._9ja_predict_home = 'https://surebet247.com';
     this.nairastake_home = 'https://nairastake.com';
-    this.nairastake_home = 'https://nairastake.com';
+    this.merrybet_home = 'https://merrybet.com';
 
     //DB constants
-    this.MONGO_DB_HOST = '127.0.0.1';
-    this.MONGO_DB_PORT = 27017;
+    //this.MONGO_DB_HOST = '127.0.0.1';
+    //this.MONGO_DB_PORT = 27017;
+
+    this.MONGO_DB_HOST = 'ds012345.mongolab.com';
+    this.MONGO_DB_PORT = 56789;
     this.MONGO_DB_NAME = 'naijaodds';
+    this.MONGO_DB_USERNAME = 'ikorovictor';
+    this.MONGO_DB_PASSWORD = 'prometheus1';
 
 
 
     //System Constants
     this.RECURRENT_JOB_INTERVAL = 5; //in minutes
     this.QUEUE_CONCURRENCY = 1; //in minutes
+    this.FUZZY_STRING_MATCH_THRESHOLD = 0.8; //
+    this.TIMESTAMP_DIFFERENCE = 640000; //
 
 }
 
@@ -45,6 +52,7 @@ function GameContainer()
         datetime:'',
         time:'',
         date:'',
+        timestamp:0,
         home:'',
         away: '',
         url: '',
