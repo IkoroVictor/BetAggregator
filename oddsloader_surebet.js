@@ -9,6 +9,7 @@ var cheerio = require('cheerio');
 var request = require('request');
 var g = require('./constants').newGame();
 var nparser = require('./betobjects/surebet').getSurebetObject();
+var memwatch = require('memwatch');
 
 var data = {
 
@@ -809,6 +810,7 @@ $('.event_game_title', root).each(function (indx, elem) {
 
 //nparser.getGames($, data);
 console.log(game);
+console.log(memwatch.gc());
 
 
 

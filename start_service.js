@@ -13,7 +13,7 @@ var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
 var scheduler = require('node-schedule');
 var MongoClient = require('mongodb').MongoClient;
-var g = require('idle-gc');
+
 var memwatch = require('memwatch');
 var db = null;
 
@@ -26,8 +26,6 @@ memwatch.on('leak', function(info)
 memwatch.on('stats', function(stats) {
     console.log('[MEM STATS] : ' + stats);
 });
-
-g.start(2500);  // Run garbage collection at 2.5 second intervals. Stops the old timer first.
 
 
 
