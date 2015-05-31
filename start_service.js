@@ -13,8 +13,24 @@ var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
 var scheduler = require('node-schedule');
 var MongoClient = require('mongodb').MongoClient;
-
+var g = require('idle-gc');
+var memwatch = require('memwatch');
 var db = null;
+
+
+memwatch.on('leak', function(info)
+{
+    console.log('[MEM LEAK] : ' + info);
+})
+
+memwatch.on('stats', function(stats) {
+    console.log('[MEM STATS] : ' + stats);
+});
+
+g.start(2500);  // Run garbage collection at 2.5 second intervals. Stops the old timer first.
+
+
+
 
 
 var game_queues = async.queue(function (task, callback) {
@@ -132,8 +148,14 @@ var load_all = function (error, response, body) {
                                                                             var nb_job = scheduler.scheduleJob(rule, function () {
 
 
-                                                                                if (value.date < '') //Validate if job should still run
+                                                                                if (value.date < '')
+																				{
+																				
+																				//Validate if job should still run
                                                                                     nb_job.cancel();
+																					nb_job = null;
+																				}
+																					
 
                                                                                 game_queues.push({name: ('nb_' + key), payload: function () {
 
@@ -150,7 +172,7 @@ var load_all = function (error, response, body) {
 
                                                                                             b3 = null;
                                                                                             root_obj = null;
-
+                                                                                            console.log(memwatch.gc());
                                                                                             console.log('Game odds for game : ' + op.uri + ' loaded');
                                                                                         }
                                                                                     })

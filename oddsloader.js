@@ -8,14 +8,25 @@ var fs = require('fs');
 var cheerio = require('cheerio');
 var request = require('request');
 var g = require('./constants').newGame();
-var nparser = require('./parsers').getNairabetParser();
+var nparser = require('./betobjects/merrybet').getMerrybetObject();
+
+var data = {
+
+    full_date: '19.05.15',
+        short_date: '19.05.15',
+    sql_date: '',
+    categories: {
+
+},
+    games: []
+
+};
 
 game = g.game;
 
 
 
-
-$ = cheerio.load(fs.readFileSync('./nb_match2.html'), {
+$ = cheerio.load(fs.readFileSync('./html_files/merrybet_match.html'), {
     normalizeWhitespace: false,
         xmlMode: false,
         decodeEntities: true
@@ -28,7 +39,7 @@ $('</tr>').insertAfter('.event_game_title');
 fs.writeFileSync('./nb_match2.html', $.html());
 */
 
-var root = $('#betsTable');
+/*var root = $('#betsTable');
 
 var match_title = $('.column_middle_left', '#eventTitlePanel', root).text();
 var match_time = $('.column_middle_right', '#eventTitlePanel', root).text();
@@ -38,7 +49,7 @@ game.time = match_time;
 game.title = match_title;
 
 game.home = match_title.split('-')[0].trim();
-game.away = match_title.split('-')[1].trim();
+game.away = match_title.split('-')[1].trim();*/
 
 /*
 $('.event_game_title', root).each(function(indx, elem)
@@ -47,9 +58,23 @@ $('.event_game_title', root).each(function(indx, elem)
 });
 */
 
-$('.event_game_title_tr').each(function(indx, elem)
-{
-    var tag = nparser.clean($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
+
+
+
+
+
+ $('#betsTable').children().each(function (indx, elem) {
+
+ var tag = ''
+ var game_code = '';
+ var temp = $('#gameNameText', this);
+
+ if(temp.length)
+ {
+ t = temp.text().split('(');
+ tag = nparser.clean_symbols(t[0].toLowerCase());
+ game_code = t[1].split(')')[0];
+ }
 
     //parse straight_win
     if( tag == nparser.straight_win_tag)
@@ -776,7 +801,9 @@ $('.event_game_title_tr').each(function(indx, elem)
 
 });
 
-console.log(game.odds);
+
+//nparser.getGames($, data);
+console.log(game);
 
 
 

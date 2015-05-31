@@ -17,7 +17,8 @@
     "fuzzyset.js": "^0.0.1",
     "express": "^4.12.3",
     "node-cache": "^2.1.1",
-    "noodle": "^0.0.3"
+    "noodle": "^0.0.3",
+    "idle-gc": "^1.0.0"
   },
 
 

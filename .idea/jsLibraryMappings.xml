@@ -2,6 +2,7 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{Node.js Dependencies for BetAggregator}" />
+    <file url="file://$PROJECT_DIR$/oddsloader_surebet.js" libraries="{Node.js v0.10.32 Core Modules}" />
   </component>
 </project>
 

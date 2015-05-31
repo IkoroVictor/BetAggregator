@@ -13,19 +13,40 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
     var helper = require('../helpers/misc');
     var root = $('#betsTable');
 
-    var match_title = $('.column_middle_left', '#eventTitlePanel', root).text();
-    var match_time = $('.column_middle_right', '#eventTitlePanel', root).text();
+    var match_title = $('#eventTitleText', root).text();
+    var match_time = $('#eventStartText',  root).text();
 
 
     game.time = match_time;
     game.title = match_title;
 
-    /*game.home = match_title.split('-')[0].trim();
-     game.away = match_title.split('-')[1].trim();*/
+    try
+    {
+        game.id = helper.generateGameID(game.title)
+        game.sorted_id = helper.generateSortedGameID(game.title)
+        game.home = match_title.split('-')[0].trim();
+        game.away = match_title.split('-')[1].trim();
+    }
+    catch(ex)
+    {
+        console.log(ex);
+    }
 
 
-    $('.event_game_title_tr').each(function (indx, elem) {
-        var tag = nparser.clean($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
+
+    $('#betsTable').children().each(function (indx, elem) {
+
+        var tag = ''
+        var game_code = '';
+        var temp = $('#gameNameText', this);
+
+        if(temp.length)
+        {
+             t = temp.text().split('(');
+             tag = nparser.clean_symbols(t[0].toLowerCase());
+             game_code = t[1].split(')')[0];
+        }
+
 
         //parse straight_win
         if (tag == nparser.straight_win_tag) {
@@ -282,8 +303,8 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
-            'odds.draw_no_bet_half.home.mb' : odds[0],
-            'odds.draw_no_bet_half.away.mb' : odds[1]
+                    'odds.draw_no_bet_half.home.mb': odds[0],
+                    'odds.draw_no_bet_half.away.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -297,8 +318,8 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
-                    'odds.draw_no_bet_half_2.home.mb' : odds[0],
-                    'odds.draw_no_bet_half_2.away.mb' : odds[1]
+                    'odds.draw_no_bet_half_2.home.mb': odds[0],
+                    'odds.draw_no_bet_half_2.away.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -312,12 +333,12 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
-            'odds.under0_5_half.mb': odds[0],
-            'odds.over0_5_half.mb' :odds[1]
+                    'odds.under0_5_half.mb': odds[0],
+                    'odds.over0_5_half.mb': odds[1]
 
-        }}, function (err, count, status) {
-        //console.log(err);
-    });
+                }}, function (err, count, status) {
+                    //console.log(err);
+                });
 
 
         }
@@ -329,7 +350,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under1_5_half.mb': odds[0],
-                    'odds.over1_5_half.mb' :odds[1]
+                    'odds.over1_5_half.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -344,7 +365,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under2_5_half.mb': odds[0],
-                    'odds.over2_5_half.mb' :odds[1]
+                    'odds.over2_5_half.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -360,7 +381,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under0_5_half_2.mb': odds[0],
-                    'odds.over0_5_half_2.mb' :odds[1]
+                    'odds.over0_5_half_2.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -376,7 +397,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under1_5_half_2.mb': odds[0],
-                    'odds.over1_5_half_2.mb' :odds[1]
+                    'odds.over1_5_half_2.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -391,7 +412,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under2_5_half_2.mb': odds[0],
-                    'odds.over2_5_half_2.mb' :odds[1]
+                    'odds.over2_5_half_2.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -406,7 +427,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under0_5.mb': odds[0],
-                    'odds.over0_5.mb' :odds[1]
+                    'odds.over0_5.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -420,7 +441,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under1_5.mb': odds[0],
-                    'odds.over1_5.mb' :odds[1]
+                    'odds.over1_5.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -434,7 +455,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under2_5.mb': odds[0],
-                    'odds.over2_5.mb' :odds[1]
+                    'odds.over2_5.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -448,7 +469,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under3_5.mb': odds[0],
-                    'odds.over3_5.mb' :odds[1]
+                    'odds.over3_5.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -462,7 +483,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under4_5.mb': odds[0],
-                    'odds.over4_5.mb' :odds[1]
+                    'odds.over4_5.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -475,7 +496,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under5_5.mb': odds[0],
-                    'odds.over5_5.mb' :odds[1]
+                    'odds.over5_5.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -488,7 +509,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under6_5.mb': odds[0],
-                    'odds.over6_5.mb' :odds[1]
+                    'odds.over6_5.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -502,7 +523,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.under7_5.mb': odds[0],
-                    'odds.over7_5.mb' :odds[1]
+                    'odds.over7_5.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -518,7 +539,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.bts.yes.mb': odds[0],
-                    'odds.bts.no.mb' :odds[1]
+                    'odds.bts.no.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -533,7 +554,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.bts_half.yes.mb': odds[0],
-                    'odds.bts_half.no.mb' :odds[1]
+                    'odds.bts_half.no.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -548,7 +569,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.bts_half_2.yes.mb': odds[0],
-                    'odds.bts_half_2.no.mb' :odds[1]
+                    'odds.bts_half_2.no.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -563,13 +584,11 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.total_goals.odd.mb': odds[0],
-                    'odds.total_goals.even.mb' :odds[1]
+                    'odds.total_goals.even.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
                 });
-
-
 
 
         }
@@ -579,7 +598,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.total_goals_half.odd.mb': odds[0],
-                    'odds.total_goals_half.even.mb' :odds[1]
+                    'odds.total_goals_half.even.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -594,7 +613,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.total_goals_half_2.odd.mb': odds[0],
-                    'odds.total_goals_half_2.even.mb' :odds[1]
+                    'odds.total_goals_half_2.even.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -610,12 +629,11 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under0_5_card.mb': odds[0],
-                    'odds.odds.over0_5_card.mb' :odds[1]
+                    'odds.odds.over0_5_card.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
                 });
-
 
 
         }
@@ -626,7 +644,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under_5_card.mb': odds[0],
-                    'odds.odds.over1_5_card.mb' :odds[1]
+                    'odds.odds.over1_5_card.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -640,7 +658,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under2_5_card.mb': odds[0],
-                    'odds.odds.over2_5_card.mb' :odds[1]
+                    'odds.odds.over2_5_card.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -654,7 +672,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under3_5_card.mb': odds[0],
-                    'odds.odds.over3_5_card.mb' :odds[1]
+                    'odds.odds.over3_5_card.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -668,7 +686,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under4_5_card.mb': odds[0],
-                    'odds.odds.over4_5_card.mb' :odds[1]
+                    'odds.odds.over4_5_card.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -682,7 +700,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under5_5_card.mb': odds[0],
-                    'odds.odds.over5_5_card.mb' :odds[1]
+                    'odds.odds.over5_5_card.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -695,7 +713,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under6_5_card.mb': odds[0],
-                    'odds.odds.over6_5_card.mb' :odds[1]
+                    'odds.odds.over6_5_card.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -711,7 +729,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under0_5_card_half.mb': odds[0],
-                    'odds.odds.over0_5_card_half.mb' :odds[1]
+                    'odds.odds.over0_5_card_half.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -725,7 +743,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under1_5_card_half.mb': odds[0],
-                    'odds.odds.over1_5_card_half.mb' :odds[1]
+                    'odds.odds.over1_5_card_half.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -739,7 +757,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under2_5_card_half.mb': odds[0],
-                    'odds.odds.over2_5_card_half.mb' :odds[1]
+                    'odds.odds.over2_5_card_half.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -753,7 +771,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2))
                 db.update({'id': game.id }, {$set: {
                     'odds.odds.under3_5_card_half.mb': odds[0],
-                    'odds.odds.over3_5_card_half.mb' :odds[1]
+                    'odds.odds.over3_5_card_half.mb': odds[1]
 
                 }}, function (err, count, status) {
                     //console.log(err);
@@ -768,19 +786,18 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 9))
                 db.update({'id': game.id }, {$set: {
                     'odds.halftime_fulltime.home_home.mb': odds[0],
-                    'odds.halftime_fulltime.home_x.mb' : odds[1],
-                    'odds.halftime_fulltime.home_away.mb' : odds[2],
-                    'odds.halftime_fulltime.x_home.mb' : odds[3],
-                    'odds.halftime_fulltime.x_x.mb' : odds[4],
-                    'odds.halftime_fulltime.x_away.mb' : odds[5],
-                    'odds.halftime_fulltime.away_home.mb' : odds[6],
-                    'odds.halftime_fulltime.away_x.mb' : odds[7],
-                    'odds.halftime_fulltime.away_away.mb' : odds[8]
+                    'odds.halftime_fulltime.home_x.mb': odds[1],
+                    'odds.halftime_fulltime.home_away.mb': odds[2],
+                    'odds.halftime_fulltime.x_home.mb': odds[3],
+                    'odds.halftime_fulltime.x_x.mb': odds[4],
+                    'odds.halftime_fulltime.x_away.mb': odds[5],
+                    'odds.halftime_fulltime.away_home.mb': odds[6],
+                    'odds.halftime_fulltime.away_x.mb': odds[7],
+                    'odds.halftime_fulltime.away_away.mb': odds[8]
 
                 }}, function (err, count, status) {
                     //console.log(err);
                 });
-
 
 
         }
@@ -801,24 +818,23 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
                 });
 
 
-
         }
 
 
         //Total goals (Away)
         if (tag == (nparser.total_goals_tag + '(' + nparser.clean(game.away.toLowerCase()) + ')' )) {
             var odds = nparser.parse_basic_op($(this).next(), $);
-             if (helper.validate_odds(odds, 4))
-            db.update({'id': game.id }, {$set: {
-                'odds.team_total_goals.away.0.mb': odds[0],
-                'odds.team_total_goals.away.1.mb': odds[1],
-                'odds.team_total_goals.away.2.mb': odds[2],
-                'odds.team_total_goals.away.3+.mb': odds[3]
+            if (helper.validate_odds(odds, 4))
+                db.update({'id': game.id }, {$set: {
+                    'odds.team_total_goals.away.0.mb': odds[0],
+                    'odds.team_total_goals.away.1.mb': odds[1],
+                    'odds.team_total_goals.away.2.mb': odds[2],
+                    'odds.team_total_goals.away.3+.mb': odds[3]
 
 
-            }}, function (err, count, status) {
-                //console.log(err);
-            });
+                }}, function (err, count, status) {
+                    //console.log(err);
+                });
 
 
         }
@@ -927,7 +943,6 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
                 });
 
 
-
         }
 
         //Away clean sheet
@@ -981,8 +996,8 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.home_win_over0_5.mb': odds[1],
                     'odds.draw_under0_5.mb': odds[2],
                     'odds.draw_over0_5.mb': odds[3],
-                    'odds.away_win_under0_5.mb' :odds[4],
-                    'odds.away_win_over0_5.mb' :odds[5]
+                    'odds.away_win_under0_5.mb': odds[4],
+                    'odds.away_win_over0_5.mb': odds[5]
 
 
                 }}, function (err, count, status) {
@@ -1000,8 +1015,8 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.home_win_over1_5.mb': odds[1],
                     'odds.draw_under1_5.mb': odds[2],
                     'odds.draw_over1_5.mb': odds[3],
-                    'odds.away_win_under1_5.mb' :odds[4],
-                    'odds.away_win_over1_5.mb' :odds[5]
+                    'odds.away_win_under1_5.mb': odds[4],
+                    'odds.away_win_over1_5.mb': odds[5]
 
 
                 }}, function (err, count, status) {
@@ -1019,8 +1034,8 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.home_win_over2_5.mb': odds[1],
                     'odds.draw_under2_5.mb': odds[2],
                     'odds.draw_over2_5.mb': odds[3],
-                    'odds.away_win_under2_5.mb' :odds[4],
-                    'odds.away_win_over2_5.mb' :odds[5]
+                    'odds.away_win_under2_5.mb': odds[4],
+                    'odds.away_win_over2_5.mb': odds[5]
 
 
                 }}, function (err, count, status) {
@@ -1038,8 +1053,8 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.home_win_over3_5.mb': odds[1],
                     'odds.draw_under3_5.mb': odds[2],
                     'odds.draw_over3_5.mb': odds[3],
-                    'odds.away_win_under3_5.mb' :odds[4],
-                    'odds.away_win_over3_5.mb' :odds[5]
+                    'odds.away_win_under3_5.mb': odds[4],
+                    'odds.away_win_over3_5.mb': odds[5]
 
 
                 }}, function (err, count, status) {
@@ -1056,8 +1071,8 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.home_win_over4_5.mb': odds[1],
                     'odds.draw_under4_5.mb': odds[2],
                     'odds.draw_over4_5.mb': odds[3],
-                    'odds.away_win_under4_5.mb' :odds[4],
-                    'odds.away_win_over4_5.mb' :odds[5]
+                    'odds.away_win_under4_5.mb': odds[4],
+                    'odds.away_win_over4_5.mb': odds[5]
 
 
                 }}, function (err, count, status) {
@@ -1079,7 +1094,6 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
 
-
     });
 
     return game;
@@ -1097,45 +1111,95 @@ MerrybetParser.prototype.getGames = function ($, data) {
 
     $('#betsTable').children().each(function (index, elem) {
 
+        if ($('#categoryTitlePanel', this).length) {
+            var child = $('#categoryTitlePanel', this).eq(0);
+            var category = { title: '', games: {}}
 
-        console.log($(this).attr('id'));
-        if ($(this).attr('id') == 'categoryTitlePanel') {
-            var child = $(this);
-            var category = { title: '', key: '', games: {}}
+            $('.header_links2', child).each(function (indx2, elem2) {
+                category.title += ($(this, child).text() + " | ")
+            });
 
-            category.title = $('#categoryText', child).text().trim();
             category.key = helper.generateGameCategoryKey(category.title);
-            //console.log(category.key);
             current_cat = category;
             data.categories[current_cat.key] = current_cat;
         }
+
         else {
+
             if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
 
+                var child = $('#betsPanel', this).eq(0);
+
+                var game_title= " - ";
                 var game = require('../constants').newGame().game;
-                var vars = $('#codePanel', this).eq(0).next().next().attr('onclick').replace(/'/g, '').split(',');
 
 
-                game.datetime = $('.home_event_start', this).eq(0).text();
+                //=================METHOD 1 ==================
+                // TODO: Remember to get the team names when getting the odds because some team names might be incomplete
 
-                game.timestamp  = helper.getTimestamp(game.datetime);
+                 var game_title = $('#categoryText',child,  this).eq(0).text();
 
-                game.title = vars[2].trim();
+
+
+
+               /*=================METHOD 2(Less Reliable)=================
+
+                var vars = $('.outcome_odds_category',child, this).eq(0).attr('onclick');
+
+
+                if(vars != undefined)
+                {
+                    vars = vars.split("'");
+                     game_title = vars[3];
+                }
+                */
+
+
+
+                game.datetime = $('#betDateText',child,  this).eq(0).text();
+
+                game.timestamp = helper.getTimestamp(game.datetime);
+
+                game.title = game_title.trim();
                 game.id = helper.generateGameID(game.title)
+                game.sorted_id = helper.generateSortedGameID(game.title)
 
-                var sides = vars[2].split('-');
+
+                var sides = game_title.split('-');
                 game.home = sides[0].trim();
                 game.away = sides[1].trim();
 
 
-                //console.log(game.datetime);
+
                 //TODO  Please don't rely on structure of the website.. use IDs  or CLASS to get Game URLS
 
-                var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
+
+                var  vars= $('#moreBetsPanel',child, this).eq(0).attr('onclick');
+                if(vars != undefined)
+                {
+                    vars = vars.split("'");
+                    var more_id = vars[1];  //Second Index
+                    var vars2 =  $('#moreBetsPanel',child, this).eq(0).attr('onclick');
+                    if (vars2 != undefined) {
+                        game.url = vars2.split("'")[1];
+                    }
+                }
+
+
+
+
+               /* ==================METHOD 2===========================
+
+               var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
 
                 if (vars2 != undefined) {
                     game.url = vars2.split("'")[1];
                 }
+
+                */
+
+
+
                 game.date = game.datetime.split(" ")[0];
                 game.time = game.datetime.split(" ")[1];
 

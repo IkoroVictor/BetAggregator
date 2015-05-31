@@ -48,6 +48,7 @@ function GameContainer()
     this.game = {
 
         id:'',
+        sorted_id:'',
         title:'',
         category_key:'',
         datetime:'',

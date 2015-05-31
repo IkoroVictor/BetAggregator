@@ -239,18 +239,13 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.first_goal_time_tag) {
             var val = nparser.parse_op_with_keys($(this).next(), $);
             try {
+                temp_data = {};
                 for (var i = 0; i < val.odds.length; i++) {
-                    var obj = 'odds.first_goal_time.' + nparser.clean(val.keys[i]).toLowerCase() + '.nb';
-                    //console.log(nparser.clean(val.keys[i]));
-
-                    /*db.update({'id': game.id }, {$set: {
-
-                     obj : val.odds[i]
-                     }}, function (err, count, status) {
-                     //console.log(err);
-                     });*/
-
+                    temp_data['odds.first_goal_time.' + nparser.clean(val.keys[i]).toLowerCase() + '.nb'] = val.odds[i] ;
                 }
+                db.update({'id': game.id }, {$set: temp_data}, function (err, count, status) {
+                    //console.log(err);
+                });
             }
             catch (ex) {
                 console.log(ex);
@@ -826,10 +821,13 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         //Correct Score
         if (tag == (nparser.correct_score_tag )) {
             var val = nparser.parse_op_with_keys($(this).next(), $);
-
+            temp_data = {}
             for (var i = 0; i < val.odds.length; i++) {
-                game.odds.correct_score[nparser.clean_symbols(val.keys[i])].nb = val.odds[i];
+                temp_data['odds.correct_score' + nparser.clean_symbols(val.keys[i]) + '.nb'] = val.odds[i];
             }
+            db.update({'id': game.id }, {$set: temp_data}, function (err, count, status) {
+                //console.log(err);
+            });
         }
 
         //Correct Score First Half

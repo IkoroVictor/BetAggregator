@@ -15,6 +15,13 @@ exports.generateGameID = function(val)
 {
     //TODO :  generate a Game ID which will be have the same value irrespective of the  betting service
     var x = val.toLowerCase();
+    return  exports.clean_symbols(x.trim())
+}
+
+exports.generateSortedGameID = function(val)
+{
+    //TODO :  generate a Game ID with letters sorted alphabetically in ascending order which will be have the same value irrespective of the  betting service
+    var x = val.toLowerCase();
     var z = x.split('').sort();
     return  exports.clean_symbols(z.join())
 }
@@ -28,7 +35,7 @@ exports.clean = function(val)
 
 exports.clean_symbols = function(val)
 {
-    return val.trim().replace(/ |-|\.|\?|\/|\\|:|,/g, '');
+    return val.trim().replace(/ |-|\.|\?|\/|\\|:|,|\|/g, '');
 }
 
 exports.exec_db= function(db, callback)
