@@ -234,5 +234,15 @@ MongoClient.connect(constants.MONGO_DB_URL, function(err, temp_db) {
 
 
 
+//Run garbage collector every minute
+rule = new scheduler.RecurrenceRule();
+rule.minute = new scheduler.Range(0, 59, 1);
+
+gc_job = scheduler.scheduleJob(rule, function () {
+    global.gc();
+    });
+
+
+
 
 
