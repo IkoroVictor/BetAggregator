@@ -136,7 +136,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.12_half.nb': odds[1],
                     'odds.x2_half.nb': odds[2]
                 }}, function (err, count, status) {
-                    console.log(err);
+                    //console.log(err);
                 });
 
         }
@@ -151,7 +151,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.x2_half_2.nb': odds[2]
 
                 }}, function (err, count, status) {
-                    console.log(err);
+                   //console.log(err);
                 });
 
         }
@@ -168,7 +168,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.2_half.nb': odds[2]
 
                 }}, function (err, count, status) {
-                    console.log(err);
+                    //console.log(err);
                 });
 
         }
@@ -183,7 +183,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.x_half_2.nb': odds[1],
                     'odds.2_half_2.nb': odds[2]
                 }}, function (err, count, status) {
-                    console.log(err);
+                    //console.log(err);
                 });
 
         }

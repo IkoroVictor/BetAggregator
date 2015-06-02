@@ -55,7 +55,7 @@ var load_all = function (error, response, body) {
         //nb.getMockMatchDays($, days)
         body = null;
         $ = null
-
+        global.gc();
         Object.keys(days).forEach(function (key) {
             var val = days[key];
 
@@ -208,7 +208,7 @@ var load_all = function (error, response, body) {
         });
     }
     else {
-        console.log(response);
+        console.log('[RESPONSE]: ' + response);
         console.log("Could not connect:" +  error);
     }
 }

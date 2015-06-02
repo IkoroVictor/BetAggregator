@@ -44,6 +44,7 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
 
             root_obj = null;
             b = null;
+            global.gc();
 
             if (day.games.length < 1) {
                 console.log(' No games loaded for' + op.uri);
