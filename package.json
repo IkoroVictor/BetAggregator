@@ -23,6 +23,10 @@
   "devDependencies": {
       "memwatch": "^0.2.2"
   },
+
+    "engines": {
+        "node": "0.12.x"
+    },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -112,7 +112,7 @@ var load_all = function (error, response, body) {
                                                     }
                                                     b = undefined;
                                                     $ = undefined;
-                                                    global.gc()
+                                                    //global.gc()
 
                                                     if (val.games.length < 1) {
                                                         console.log(' No games loaded for' + op.uri);
@@ -172,7 +172,7 @@ var load_all = function (error, response, body) {
 
                                                                                             b3 = null;
                                                                                             root_obj = undefined;
-                                                                                            global.gc();
+                                                                                            //global.gc();
                                                                                             console.log('Game odds for game : ' + op.uri + ' loaded');
                                                                                         }
                                                                                     })
