@@ -823,6 +823,8 @@ console.log(game);
 
 
 
+
+
 /*
 $('#betsTable').children().each( function(index, elem)
 {
