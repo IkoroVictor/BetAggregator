@@ -42,8 +42,8 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
 
             }
 
-            root_obj = undefined;
-            b = undefined;
+            root_obj = null;
+            b = null;
 
             if (day.games.length < 1) {
                 console.log(' No games loaded for' + op.uri);
@@ -82,8 +82,8 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
                                 catch (ex) {
                                     console.log(ex)
                                 }
-                                root_obj = undefined;
-                                b3 = undefined;
+                                root_obj = null;
+                                b3 = null;
                                 global.gc();
 
                                 console.log('Game odds for game : ' + op.uri + ' loaded');

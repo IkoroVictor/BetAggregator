@@ -110,8 +110,8 @@ var load_all = function (error, response, body) {
                                                         console.log(err);
                                                         return;
                                                     }
-                                                    b = undefined;
-                                                    $ = undefined;
+                                                    b = null;
+                                                    $ = null;
                                                     global.gc()
 
                                                     if (val.games.length < 1) {
@@ -153,7 +153,7 @@ var load_all = function (error, response, body) {
 																				
 																				//Validate if job should still run
                                                                                     nb_job.cancel();
-																					nb_job = undefined;
+																					nb_job = null;
 																				}
 																					
 
@@ -171,7 +171,7 @@ var load_all = function (error, response, body) {
                                                                                             }
 
                                                                                             b3 = null;
-                                                                                            root_obj = undefined;
+                                                                                            root_obj = null;
                                                                                             global.gc();
                                                                                             console.log('Game odds for game : ' + op.uri + ' loaded');
                                                                                         }

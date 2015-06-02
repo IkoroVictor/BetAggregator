@@ -1095,8 +1095,11 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
 
     });
+    nparser = null;
+    helper = null;
+    root = null;
 
-    return game;
+    //return game;
 
 }
 
@@ -1214,6 +1217,10 @@ MerrybetParser.prototype.getGames = function ($, data) {
 
 
     });
+
+    nparser = null;
+    helper = null;
+    root = null;
 
 
 }

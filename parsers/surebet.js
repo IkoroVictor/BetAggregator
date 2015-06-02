@@ -1090,9 +1090,10 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
 
     });
-
-    return game;
-
+     nparser = null;
+     helper = null;
+     root = null;
+    //return game;
 }
 
 
@@ -1159,6 +1160,10 @@ SurebetParser.prototype.getGames = function ($, data) {
 
 
     });
+
+    nparser = null;
+    helper = null;
+    root = null;
 
 
 }

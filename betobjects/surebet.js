@@ -2,7 +2,7 @@
  * Created by olaokenyi on 5/1/15.
  */
 
-var constants = require('./../constants')
+//var constants = require('./../constants')
 var nb = require('./nairabet');
 
 
