@@ -177,7 +177,7 @@ var load_all = function (error, response, body) {
                                                                                             b3 = null;
                                                                                             root_obj = null;
                                                                                             global.gc();
-                                                                                            console.log('[[===========]' + JSON.stringify(process.memoryUsage()))
+                                                                                            //console.log('[[===========]' + JSON.stringify(process.memoryUsage()))
                                                                                             console.log('Game odds for game : ' + op.uri + ' loaded');
                                                                                         }
                                                                                     })

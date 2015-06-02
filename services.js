@@ -87,7 +87,7 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
                                 root_obj = null;
                                 b3 = null;
                                 global.gc();
-                                console.log('[[===========]' + JSON.stringify(process.memoryUsage()))
+                                //console.log('[[===========]' + JSON.stringify(process.memoryUsage()))
                                 console.log('Game odds for game : ' + op.uri + ' loaded');
                             }
                         })
