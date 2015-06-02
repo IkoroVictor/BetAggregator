@@ -115,7 +115,7 @@ var load_all = function (error, response, body) {
                                                     }
                                                     b = null;
                                                     $ = null;
-                                                    global.gc()
+                                                    global.gc();
 
 
                                                     if (val.games.length < 1) {
