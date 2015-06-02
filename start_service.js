@@ -14,10 +14,11 @@ var cheerio = require('cheerio');
 var scheduler = require('node-schedule');
 var MongoClient = require('mongodb').MongoClient;
 
-var memwatch = require('memwatch');
+//var memwatch = require('memwatch');
 var db = null;
 
 
+/*
 memwatch.on('leak', function(info)
 {
     console.log('[MEM LEAK] : ' + info);
@@ -26,6 +27,7 @@ memwatch.on('leak', function(info)
 memwatch.on('stats', function(stats) {
     console.log('[MEM STATS] : ' + stats);
 });
+*/
 
 
 
@@ -108,8 +110,8 @@ var load_all = function (error, response, body) {
                                                         console.log(err);
                                                         return;
                                                     }
-                                                    b = null;
-                                                    $ = null;
+                                                    b = undefined;
+                                                    $ = undefined;
                                                     global.gc()
 
                                                     if (val.games.length < 1) {
@@ -151,7 +153,7 @@ var load_all = function (error, response, body) {
 																				
 																				//Validate if job should still run
                                                                                     nb_job.cancel();
-																					nb_job = null;
+																					nb_job = undefined;
 																				}
 																					
 
@@ -169,8 +171,8 @@ var load_all = function (error, response, body) {
                                                                                             }
 
                                                                                             b3 = null;
-                                                                                            root_obj = null;
-                                                                                            console.log(memwatch.gc());
+                                                                                            root_obj = undefined;
+                                                                                            global.gc();
                                                                                             console.log('Game odds for game : ' + op.uri + ' loaded');
                                                                                         }
                                                                                     })
