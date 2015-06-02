@@ -6,7 +6,7 @@
 var request = require('request');
 var async = require('async');
 var constants = require('./constants').loadConstants();
-var services = require('./services')
+
 var nb = require('./parsers/nairabet').getNairabetParser();
 var nb_obj = require('./betobjects/nairabet').getNairabetObject();
 var helper = require('./helpers/misc');
@@ -78,6 +78,7 @@ var load_all = function (error, response, body) {
                                             if (!er2) {
 
                                                 var val = documents[0];
+                                                var services = require('./services')
                                                 services.startBetParsingService(constants.nairabet_home, nb_obj, nb, game_queues, val, games);
 
                                                 //var mb = require('./parsers/merrybet').getMerrybetParser();
