@@ -50,6 +50,7 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
                 console.log(' No games loaded for' + op.uri);
                 return;
             }
+            console.log('[[===========]' + process.memoryUsage())
             console.log(' Games loaded for' + op.uri);
 
             Object.keys(day.games).forEach(function (key) {

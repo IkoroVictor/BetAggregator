@@ -94,7 +94,9 @@ var load_all = function (error, response, body) {
                                             console.log(val);
                                             console.log(err);
                                         }
+
                                         else {
+
                                             var op = helper.getDefaultRequestOption();
                                             op.uri = constants.nairabet_home + nb_obj.day_bet_url_suffix + val.short_date;
                                             console.log('Begin loading games for' + op.uri);
@@ -114,7 +116,7 @@ var load_all = function (error, response, body) {
                                                     b = null;
                                                     $ = null;
                                                     global.gc()
-
+                                                    console.log('[[===========]' + process.memoryUsage())
                                                     if (val.games.length < 1) {
                                                         console.log(' No games loaded for' + op.uri);
                                                         return;
