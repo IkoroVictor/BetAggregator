@@ -116,6 +116,7 @@ var load_all = function (error, response, body) {
                                                     b = null;
                                                     $ = null;
                                                     global.gc()
+
                                                     console.log('[[===========]' + process.memoryUsage())
                                                     if (val.games.length < 1) {
                                                         console.log(' No games loaded for' + op.uri);
