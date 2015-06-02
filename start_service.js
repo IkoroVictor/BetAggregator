@@ -117,7 +117,7 @@ var load_all = function (error, response, body) {
                                                     $ = null;
                                                     global.gc()
 
-                                                    console.log('[[===========]' + process.memoryUsage())
+
                                                     if (val.games.length < 1) {
                                                         console.log(' No games loaded for' + op.uri);
                                                         return;
@@ -177,6 +177,7 @@ var load_all = function (error, response, body) {
                                                                                             b3 = null;
                                                                                             root_obj = null;
                                                                                             global.gc();
+                                                                                            console.log('[[===========]' + process.memoryUsage())
                                                                                             console.log('Game odds for game : ' + op.uri + ' loaded');
                                                                                         }
                                                                                     })

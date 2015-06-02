@@ -811,8 +811,8 @@ $('.event_game_title', root).each(function (indx, elem) {
 //nparser.getGames($, data);
 console.log(game);
 
-global.gc();
-console.log('eeee')
+//global.gc();
+console.log(process.memoryUsage())
 
 
 
