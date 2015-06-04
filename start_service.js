@@ -36,7 +36,12 @@ memwatch.on('stats', function(stats) {
 var game_queues = async.queue(function (task, callback) {
     task.payload();
     callback();
-}, constants.QUEUE_CONCURRENCY)
+}, constants.QUEUE_CONCURRENCY);
+
+game_queues.drain = function() {
+    console.log('all queue have been processed');
+    global.gc();
+}
 
 
 var options = helper.getDefaultRequestOption();
@@ -182,7 +187,7 @@ var load_all = function (error, response, body) {
                                                                                         }
                                                                                     })
                                                                                 }}, function (err) {
-                                                                                    console.log('Queue Error [NB_' + key + '] : ' + err)
+                                                                                    console.log('Queue Length : ' + game_queues.length() )
                                                                                 })
 
 
