@@ -244,7 +244,10 @@ rule = new scheduler.RecurrenceRule();
 rule.minute = new scheduler.Range(0, 59, 1);
 
 gc_job = scheduler.scheduleJob(rule, function () {
+    console.log('running gc..');
+
     global.gc();
+    console.log('ended running gc..');
     });
 
 
