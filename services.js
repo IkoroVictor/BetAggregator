@@ -93,7 +93,7 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
                         })
                     }}, function (err) {
                         if(err)
-                            console.log('Queue Error [' + nb_object.short_name +'_' + key + '] : ' + err)
+                            console.log('Queue Length : ' + game_queues.length() )
 
                     })
 
