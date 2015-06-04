@@ -2,7 +2,7 @@
  * Created by olaokenyi on 5/12/15.
  */
 
-
+require('newrelic');
 var request = require('request');
 var async = require('async');
 var constants = require('./constants').loadConstants();
