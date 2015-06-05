@@ -135,7 +135,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.1x_half.nb': odds[0],
                     'odds.12_half.nb': odds[1],
                     'odds.x2_half.nb': odds[2]
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -167,7 +167,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.x_half.nb': odds[1],
                     'odds.2_half.nb': odds[2]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -182,7 +182,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.1_half_2.nb': odds[0],
                     'odds.x_half_2.nb': odds[1],
                     'odds.2_half_2.nb': odds[2]
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -199,7 +199,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.most_scoring_half.half_2.nb': odds[2],
                     'odds.most_scoring_half.equal.nb': odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -213,7 +213,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.first_goal.home.nb': odds[0],
                     'odds.first_goal.away.nb': odds[2],
                     'odds.first_goal.no_goal.nb': odds[1]
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
         }
@@ -228,7 +228,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.last_goal.home.nb': odds[0],
                     'odds.last_goal.away.nb': odds[2],
                     'odds.last_goal.no_goal.nb': odds[1]
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -243,7 +243,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                 for (var i = 0; i < val.odds.length; i++) {
                     temp_data['odds.first_goal_time.' + nparser.clean(val.keys[i]).toLowerCase() + '.nb'] = val.odds[i] ;
                 }
-                db.update({'id': game.id }, {$set: temp_data}, function (err, count, status) {
+                db.update({'id': game.id }, {$set: temp_data}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
             }
@@ -263,7 +263,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.draw_no_bet.home.nb': odds[0],
                     'odds.draw_no_bet.away.nb': odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -280,7 +280,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
             'odds.draw_no_bet_half.home.nb' : odds[0],
             'odds.draw_no_bet_half.away.nb' : odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -295,7 +295,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.draw_no_bet_half_2.home.nb' : odds[0],
                     'odds.draw_no_bet_half_2.away.nb' : odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -326,7 +326,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under1_5_half.nb': odds[0],
                     'odds.over1_5_half.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -341,7 +341,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under2_5_half.nb': odds[0],
                     'odds.over2_5_half.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -357,7 +357,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under0_5_half_2.nb': odds[0],
                     'odds.over0_5_half_2.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -373,7 +373,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under1_5_half_2.nb': odds[0],
                     'odds.over1_5_half_2.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -388,7 +388,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under2_5_half_2.nb': odds[0],
                     'odds.over2_5_half_2.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -403,7 +403,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under0_5.nb': odds[0],
                     'odds.over0_5.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -417,7 +417,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under1_5.nb': odds[0],
                     'odds.over1_5.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -431,7 +431,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under2_5.nb': odds[0],
                     'odds.over2_5.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -445,7 +445,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under3_5.nb': odds[0],
                     'odds.over3_5.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -459,7 +459,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under4_5.nb': odds[0],
                     'odds.over4_5.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -472,7 +472,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under5_5.nb': odds[0],
                     'odds.over5_5.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -485,7 +485,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under6_5.nb': odds[0],
                     'odds.over6_5.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -499,7 +499,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.under7_5.nb': odds[0],
                     'odds.over7_5.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -515,7 +515,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.bts.yes.nb': odds[0],
                     'odds.bts.no.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -530,7 +530,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.bts_half.yes.nb': odds[0],
                     'odds.bts_half.no.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -545,7 +545,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.bts_half_2.yes.nb': odds[0],
                     'odds.bts_half_2.no.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -560,7 +560,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.total_goals.odd.nb': odds[0],
                     'odds.total_goals.even.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -576,7 +576,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.total_goals_half.odd.nb': odds[0],
                     'odds.total_goals_half.even.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -591,7 +591,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.total_goals_half_2.odd.nb': odds[0],
                     'odds.total_goals_half_2.even.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -607,7 +607,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under0_5_card.nb': odds[0],
                     'odds.odds.over0_5_card.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -623,7 +623,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under_5_card.nb': odds[0],
                     'odds.odds.over1_5_card.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -637,7 +637,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under2_5_card.nb': odds[0],
                     'odds.odds.over2_5_card.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -651,7 +651,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under3_5_card.nb': odds[0],
                     'odds.odds.over3_5_card.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -665,7 +665,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under4_5_card.nb': odds[0],
                     'odds.odds.over4_5_card.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -679,7 +679,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under5_5_card.nb': odds[0],
                     'odds.odds.over5_5_card.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -692,7 +692,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under6_5_card.nb': odds[0],
                     'odds.odds.over6_5_card.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -708,7 +708,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under0_5_card_half.nb': odds[0],
                     'odds.odds.over0_5_card_half.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -722,7 +722,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under1_5_card_half.nb': odds[0],
                     'odds.odds.over1_5_card_half.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -736,7 +736,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under2_5_card_half.nb': odds[0],
                     'odds.odds.over2_5_card_half.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -750,7 +750,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.odds.under3_5_card_half.nb': odds[0],
                     'odds.odds.over3_5_card_half.nb' :odds[1]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -772,7 +772,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.halftime_fulltime.away_x.nb' : odds[7],
                     'odds.halftime_fulltime.away_away.nb' : odds[8]
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -791,7 +791,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.team_total_goals.home.3+.nb': odds[3]
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -866,7 +866,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.ten_mins.2.nb': odds[2]
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -885,7 +885,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -902,7 +902,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -920,7 +920,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -938,7 +938,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -961,7 +961,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -983,7 +983,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.away_win_over0_5.nb' :odds[5]
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -1002,7 +1002,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.away_win_over1_5.nb' :odds[5]
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -1021,7 +1021,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.away_win_over2_5.nb' :odds[5]
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -1040,7 +1040,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.away_win_over3_5.nb' :odds[5]
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
@@ -1058,7 +1058,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                     'odds.away_win_over4_5.nb' :odds[5]
 
 
-                }}, function (err, count, status) {
+                }}, {upsert: true}, function (err, count, status) {
                     //console.log(err);
                 });
 
