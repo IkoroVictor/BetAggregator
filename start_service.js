@@ -184,6 +184,12 @@ var load_all = function (error, response, body) {
                                                                                             global.gc();
                                                                                             //console.log('[[===========]' + JSON.stringify(process.memoryUsage()))
                                                                                             console.log('Game odds for game : ' + op.uri + ' loaded');
+
+                                                                                            //TODO: This is a temporary restart job for heroku, Please FIX THE MEMORY LEAK issue
+                                                                                            mem = process.memoryUsage();
+                                                                                            console.log(JSON.stringify(mem));
+                                                                                            if(mem.heapTotal > constants.PAAS_MAX_HEAP_USAGE)
+                                                                                                process.exit(0);
                                                                                         }
                                                                                     })
                                                                                 }}, function (err) {
@@ -257,13 +263,6 @@ gc_job = scheduler.scheduleJob(rule, function () {
 
 
 
-//This is a temporary restart job for heroku, Please FIX THE MEMORY LEAK issue
-restart_job = scheduler.scheduleJob(rule, function () {
-    mem = process.memoryUsage();
-    console.log(JSON.stringify(mem));
-    if(mem.heapTotal > constants.PAAS_MAX_HEAP_USAGE)
-        process.exit(0);
-    });
 
 
 

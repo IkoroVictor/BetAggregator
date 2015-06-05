@@ -92,6 +92,11 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
                                 global.gc();
                                 //console.log('[[===========]' + JSON.stringify(process.memoryUsage()))
                                 console.log('Game odds for game : ' + op.uri + ' loaded');
+                                //TODO: This is a temporary restart job for heroku, Please FIX THE MEMORY LEAK issue
+                                mem = process.memoryUsage();
+                                console.log(JSON.stringify(mem));
+                                if(mem.heapTotal > constants.PAAS_MAX_HEAP_USAGE)
+                                    process.exit(0);
                             }
                         })
                     }}, function (err) {
