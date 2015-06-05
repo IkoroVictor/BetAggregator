@@ -38,7 +38,7 @@ function Constants()
 
 
    //Heroku/PaaS Constants
-    this.PAAS_MAX_HEAP_USAGE = 1320000000; //In Bytes
+    this.PAAS_MAX_HEAP_USAGE = 620000000; //In Bytes 1320000000
 
 }
 
