@@ -28,6 +28,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
     $('.event_game_title_tr').each(function (indx, elem) {
         var tag = nparser.clean($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
         temp_data = {};
+        obj = undefined;
         //parse straight_win
         if (tag == nparser.straight_win_tag) {
             var odds = nparser.parse_basic_op($(this).next(), $);
