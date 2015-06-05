@@ -35,6 +35,11 @@ function Constants()
     this.FUZZY_STRING_MATCH_THRESHOLD = 0.8; //
     this.TIMESTAMP_DIFFERENCE = 640000; //
 
+
+
+   //Heroku/PaaS Constants
+    this.PAAS_MAX_HEAP_USAGE = 1320000000; //In Bytes
+
 }
 
 

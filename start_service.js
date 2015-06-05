@@ -260,7 +260,9 @@ gc_job = scheduler.scheduleJob(rule, function () {
 //This is a temporary restart job for heroku, Please FIX THE MEMORY LEAK issue
 restart_job = scheduler.scheduleJob(rule, function () {
     mem = process.memoryUsage();
-    console.log(JSON.stringify(mem));
+    //console.log(JSON.stringify(mem));
+    if(mem.heapTotal > constants.PAAS_MAX_HEAP_USAGE)
+        process.exit(0);
     });
 
 
