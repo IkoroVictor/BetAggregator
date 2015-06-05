@@ -7,9 +7,9 @@
 var fs = require('fs');
 var cheerio = require('cheerio');
 var request = require('request');
-var g = require('./constants').newGame();
+var g = require('./constants_old').newGame();
 var nparser = require('./betobjects/surebet').getSurebetObject();
-var memwatch = require('memwatch');
+//var memwatch = require('memwatch');
 
 var data = {
 
