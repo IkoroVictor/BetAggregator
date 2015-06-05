@@ -249,10 +249,18 @@ rule = new scheduler.RecurrenceRule();
 rule.minute = new scheduler.Range(0, 59, 1);
 
 gc_job = scheduler.scheduleJob(rule, function () {
-    console.log('running gc..');
+    //console.log('running gc..');
 
-    global.gc();
-    console.log('ended running gc..');
+    //global.gc();
+    //console.log('ended running gc..');
+    });
+
+
+
+//This is a temporary restart job for heroku, Please FIX THE MEMORY LEAK issue
+restart_job = scheduler.scheduleJob(rule, function () {
+    mem = process.memoryUsage();
+    console.log(JSON.stringify(mem));
     });
 
 

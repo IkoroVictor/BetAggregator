@@ -2,14 +2,14 @@
  * Created by olaokenyi on 5/22/15.
  */
 
+
+
 var request = require('request');
 var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
 var scheduler = require('node-schedule');
 var constants = require('./constants').loadConstants();
 var async = require('async');
-
-
 
 var queue = async.queue(function (task, callback) {
     task.payload();
@@ -20,6 +20,9 @@ var queue = async.queue(function (task, callback) {
 
 
 exports.startBetParsingService = function (home_url, nb_object, nb_parser, games_queue, day, game_collection) {
+
+
+
     var op = helper.getDefaultRequestOption();
     op.uri = home_url + nb_object.day_bet_url_suffix + day.short_date;
     console.log('Begin loading games for' + op.uri);
@@ -93,7 +96,7 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
                         })
                     }}, function (err) {
                         if(err)
-                            console.log('Queue Length : ' + game_queues.length() )
+                            console.log('Queue Length : ' + queue.length() )
 
                     })
 
