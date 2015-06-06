@@ -897,6 +897,10 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
             function (err, count, status) {
                 if (err)
                     console.log(err);
+                else
+                {
+                    console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
+                }
                 temp_data = null;
             });
     })
