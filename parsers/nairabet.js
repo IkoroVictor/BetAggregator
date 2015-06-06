@@ -24,10 +24,11 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
     /*game.home = match_title.split('-')[0].trim();
      game.away = match_title.split('-')[1].trim();*/
 
+    var temp_data = {};
 
     $('.event_game_title_tr').each(function (indx, elem) {
         var tag = nparser.clean($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
-        var temp_data = {};
+
         obj = undefined;
         //parse straight_win
         if (tag == nparser.straight_win_tag) {
@@ -205,7 +206,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
             try {
                 temp_data = {};
                 for (var i = 0; i < val.odds.length; i++) {
-                    temp_data['odds.first_goal_time.' + nparser.clean(val.keys[i]).toLowerCase() + '.nb'] = val.odds[i];
+                    temp_data['odds.first_goal_time..' + nparser.clean(val.keys[i]).toLowerCase() + '.nb'] = val.odds[i];
                 }
 
             }
@@ -635,7 +636,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Total goals (Home)
-        if (tag == (nparser.total_goals_tag + '(' + nparser.clean(game.home.toLowerCase()) + ')' )) {
+        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean(game.home.toLowerCase()) + ')' )) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 4)) {
                 temp_data['odds.team_total_goals.home.0.nb'] = odds[0];
@@ -651,7 +652,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Total goals (Away)
-        if (tag == (nparser.total_goals_tag + '(' + nparser.clean(game.away.toLowerCase()) + ')' )) {
+        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean(game.away.toLowerCase()) + ')' )) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 4)) {
                 temp_data['odds.team_total_goals.away.0.nb'] = odds[0];
@@ -670,7 +671,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
             var val = nparser.parse_op_with_keys($(this).next(), $);
 
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.correct_score' + nparser.clean_symbols(val.keys[i]) + '.nb'] = val.odds[i];
+                temp_data['odds.correct_score.' + nparser.clean_symbols(val.keys[i]) + '.nb'] = val.odds[i];
             }
 
         }
@@ -679,7 +680,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.correct_score_first_half_tag )) {
             var val = nparser.parse_op_with_keys($(this).next(), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.correct_score_half' + nparser.clean_symbols(val.keys[i])] = val.odds[i];
+                temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i])+'.nb']  = val.odds[i];
 
                 if (obj != undefined) {
                     //obj.nb = val.odds[i];                 }
@@ -692,7 +693,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.correct_score_second_half_tag )) {
             var val = nparser.parse_op_with_keys($(this).next(), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.correct_score_half_2' + nparser.clean_symbols(val.keys[i])] = val.odds[i];
+                temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i])+'.nb']  = val.odds[i];
 
                 if (obj != undefined) {
                     //obj.nb = val.odds[i];                 }
@@ -877,7 +878,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.number_of_goals_tag )) {
             var val = nparser.parse_op_with_keys($(this).next(), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.number_of_goals' + nparser.clean(val.keys[i])] = val.odds[i];
+                temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i])+'.nb']  = val.odds[i];
 
                 if (obj != undefined) {
                     //obj.nb = val.odds[i];                 }
