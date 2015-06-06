@@ -27,7 +27,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
     $('.event_game_title_tr').each(function (indx, elem) {
         var tag = nparser.clean($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
-        temp_data = {};
+        var temp_data = {};
         obj = undefined;
         //parse straight_win
         if (tag == nparser.straight_win_tag) {
@@ -885,27 +885,29 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
             }
         }
 
+        process.nextTick(function()
+        {
+            db.update({'id': game.id }, {$set: temp_data}, {upsert: true},
+                function (err, count, status) {
+                    if (err)
+                        console.log(err);
+                    else
+                    {
+                        console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
+                        console.log('[DATA]: ' + JSON.stringify(temp_data));
+
+                    }
+                    temp_data = null;
+                });
+        })
+
 
     });
 
 
     root = null;
     global.gc();
-    process.nextTick(function()
-    {
-        db.update({'id': game.id }, {$set: temp_data}, {upsert: true},
-            function (err, count, status) {
-                if (err)
-                    console.log(err);
-                else
-                {
-                    console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
-                    console.log('[DATA]: ' + JSON.stringify(temp_data));
 
-                }
-                temp_data = null;
-            });
-    })
 
     //return game;
 
