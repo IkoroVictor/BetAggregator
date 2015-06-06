@@ -891,12 +891,16 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
     root = null;
     global.gc();
-    db.update({'id': game.id }, {$set: temp_data}, {upsert: true},
-        function (err, count, status) {
-            if (err)
-                console.log(err);
-            temp_data = null;
-        });
+    process.nextTick(function()
+    {
+        db.update({'id': game.id }, {$set: temp_data}, {upsert: true},
+            function (err, count, status) {
+                if (err)
+                    console.log(err);
+                temp_data = null;
+            });
+    })
+
     //return game;
 
 
