@@ -7,7 +7,7 @@
 //var fs  = require('fs');
 //var cheerio = require('cheerio');
 //var express = require('express');
-
+var helper =  require('../helpers/misc');
 
 
 
@@ -61,12 +61,12 @@ Nairabet.prototype.parse_basic_op = function( cheerio_object, root)
 
 Nairabet.prototype.clean = function(val)
 {
-    return require('../helpers/misc').clean(val);
+    return helper.clean(val);
 }
 
 Nairabet.prototype.clean_symbols = function(val)
 {
-    return require('../helpers/misc').clean_symbols(val);
+    return helper.clean_symbols(val);
 }
 
 
