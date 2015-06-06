@@ -886,24 +886,26 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
             }
         }
 
-        process.nextTick(function()
-        {
-            db.update({'id': game.id }, {$set: temp_data}, {upsert: true},
-                function (err, count, status) {
-                    if (err)
-                        console.log(err);
-                    else
-                    {
-                        console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
-                        console.log('[DATA]: ' + JSON.stringify(temp_data));
 
-                    }
-                    temp_data = null;
-                });
-        })
 
 
     });
+
+    process.nextTick(function()
+    {
+        db.update({'id': game.id }, {$set: temp_data}, {upsert: true},
+            function (err, count, status) {
+                if (err)
+                    console.log(err);
+                else
+                {
+                    console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
+                    console.log('[DATA]: ' + JSON.stringify(temp_data));
+
+                }
+                temp_data = null;
+            });
+    })
 
 
     root = null;
