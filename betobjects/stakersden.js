@@ -18,14 +18,18 @@ Stakersden.prototype = nb.getNairabetObject();
 
 Stakersden.prototype.parse_basic_op = function( cheerio_object, root)
 {
-    var odds = [];
-    root('.category_outcome', cheerio_object).each(function(i, e)
-    {
-        odds.push(parseFloat(root(this).children().eq(0).children().eq(0).children().eq(1).text().trim()));
 
-    });
+        var odds = [];
+        root('.eoo_p', cheerio_object).each(function(i, e)
+        {
+            odds.push(parseFloat(root(this).text().trim()));
+            console.log(root(this).text());
 
-    return odds;
+        });
+
+        return odds;
+
+
 }
 
 Stakersden.prototype.parse_op_with_keys = function( cheerio_object, root)
@@ -42,17 +46,6 @@ Stakersden.prototype.parse_op_with_keys = function( cheerio_object, root)
     return {odds: odds, keys: keys};
 }
 
-Stakersden.prototype.parse_basic_op = function( cheerio_object, root)
-{
-    var odds = [];
-    root('.category_outcome', cheerio_object).each(function(i, e)
-    {
-        odds.push(parseFloat(root(this).children().eq(0).children().eq(0).children().eq(1).text().trim()));
-
-    });
-
-    return odds;
-}
 
 Stakersden.prototype.clean = function(val)
 {

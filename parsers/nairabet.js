@@ -27,7 +27,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
     var temp_data = {};
 
     $('.event_game_title_tr').each(function (indx, elem) {
-        var tag = nparser.clean($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
+        var tag = nparser.clean_symbols($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
 
         obj = undefined;
         //parse straight_win
@@ -920,59 +920,64 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 NairabetParser.prototype.getGames = function ($, data) {
 
 
+    var nparser = require('../betobjects/nairabet').getNairabetObject();
+
+    var helper = require('../helpers/misc');
+
     var current_cat = undefined;
 
     $('#betsTable').children().each(function (index, elem) {
 
 
-        if ($(this).attr('id') == 'categoryTitlePanel') {
-            var child = $(this);
-            var category = { title: '', key: '', games: {}}
+    if ($(this).attr('id') == 'categoryTitlePanel') {
+        var child = $(this);
+        var category = { title: '', key: '', games: {}}
 
-            category.title = $('#categoryText', child).text().trim();
-            category.key = helper.generateGameCategoryKey(category.title);
-            //console.log(category.key);
-            current_cat = category;
-            data.categories[current_cat.key] = current_cat;
-        }
-        else {
-            if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
+        category.title = $('#categoryText', child).text().trim();
+        category.key = helper.generateGameCategoryKey(category.title);
+        //console.log(category.key);
+        current_cat = category;
+        data.categories[current_cat.key] = current_cat;
+    }
+    else {
+        if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
 
-                var game = require('../constants').newGame().game;
-                var vars = $('#codePanel', this).eq(0).next().next().attr('onclick').replace(/'/g, '').split(',');
-
-
-                game.datetime = $('.home_event_start', this).eq(0).text();
-
-                game.timestamp = helper.getTimestamp(game.datetime);
-
-                game.title = vars[2].trim();
-                game.id = helper.generateGameID(game.title)
-
-                var sides = vars[2].split('-');
-                game.home = sides[0].trim();
-                game.away = sides[1].trim();
+            var game = require('../constants').newGame().game;
+            var vars = $('#codePanel', this).eq(0).next().next().attr('onclick').replace(/'/g, '').split(',');
 
 
-                //console.log(game.datetime);
-                //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
+            game.datetime = $('.home_event_start', this).eq(0).text();
 
-                var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
+            game.timestamp  = helper.getTimestamp(game.datetime);
 
-                if (vars2 != undefined) {
-                    game.url = vars2.split("'")[1];
-                }
-                game.date = game.datetime.split(" ")[0];
-                game.time = game.datetime.split(" ")[1];
+            game.title = vars[2].trim();
+            game.id = helper.generateGameID(game.title)
+
+            var sides = vars[2].split('-');
+            game.home = sides[0].trim();
+            game.away = sides[1].trim();
 
 
-                if (current_cat != undefined)
-                    game.category_key = current_cat.key;
+            //console.log(game.datetime);
+            //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
 
-                data.games.push(game);
+            var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
 
+            if (vars2 != undefined) {
+                game.url = vars2.split("'")[1];
             }
+            game.date = game.datetime.split(" ")[0];
+            game.time = game.datetime.split(" ")[1];
+
+
+            if (current_cat != undefined)
+                game.category_key = current_cat.key;
+
+            data.games.push(game);
+
         }
+    }
+
 
 
     });
