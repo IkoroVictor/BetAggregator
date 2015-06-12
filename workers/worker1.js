@@ -22,7 +22,7 @@ var start = function ()
 
     db.createCollection("days", function (err, bet_days) {
         if (!err) {
-            var cursor = bet_days.find({});
+            var cursor = bet_days.find();
             cursor.toArray(function (err, documents) //TODO Don't use 'toArray().length' find a better method to get item count
             {
                 if (documents.length > 0) {
