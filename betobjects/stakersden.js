@@ -24,7 +24,7 @@ Stakersden.prototype.parse_basic_op = function( cheerio_object, root)
         root('.eoo_p', cheerio_object).each(function(i, e)
         {
             odds.push(parseFloat(root(this).text().trim()));
-            console.log(root(this).text());
+
 
         });
 
