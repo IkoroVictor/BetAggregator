@@ -156,7 +156,7 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
                 console.log('Loading game odds for game : ' + op.uri);
 
                 request(op, function (e3, r3, b3) {
-                    if (!e3 || (typeof b3 != 'undefined')) {
+                    if ((!e3 || (typeof b3 != 'undefined')) && r3.statusCode == 200 ) {
                         this.setMaxListeners(0);
                         var root_obj = cheerio.load(b3);
                         try {
