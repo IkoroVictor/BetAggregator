@@ -7,11 +7,8 @@
 var fs = require('fs');
 var cheerio = require('cheerio');
 var request = require('request');
-var g = require('./constants_old').newGame();
-var helper = require('./helpers/misc');
-
-var nparser = require('./betobjects/_1960bet').get_1960betObject();
-//var memwatch = require('memwatch');
+var g = require('./../constants').newGame();
+var nparser = require('./../betobjects/merrybet').getMerrybetObject();
 
 var data = {
 
@@ -29,7 +26,7 @@ game = g.game;
 
 
 
-$ = cheerio.load(fs.readFileSync('./html_files/1960bet.ng_odds.html'), {
+$ = cheerio.load(fs.readFileSync('./html_files/merrybet_match.html'), {
     normalizeWhitespace: false,
         xmlMode: false,
         decodeEntities: true
@@ -63,44 +60,26 @@ $('.event_game_title', root).each(function(indx, elem)
 
 
 
-var helper = require('./helpers/misc');
-var match_title = $('.eventBetPage_eventName_text', '.event_bets').eq(0).text();
-
-var match_time = $('.event_title_panel').children().eq(0).text().split(' ');
-
-
-game.time = match_time[1];
-game.date = match_time[0];
-game.datetime = match_time[0] +  ' ' + match_time[1] ;
-
-game.title = match_title;
-
-try
-{
-    game.id = helper.generateGameID(game.title)
-    game.sorted_id = helper.generateSortedGameID(game.title)
-    game.home = match_title.split('-')[0].trim();
-    game.away = match_title.split('-')[1].trim();
-}
-catch(ex)
-{
-    console.log(ex);
-}
 
 
 
-$('.bets_table_games_container').each(function (indx, elem) {
+ $('#betsTable').children().each(function (indx, elem) {
 
-    var tag = nparser.clean_symbols($('.eventBetPage_gameName_text', this).text().trim()).toLowerCase();
-    var game_code =$('.eventBetPage_gameCode_text', this).text().trim();
+ var tag = ''
+ var game_code = '';
+ var temp = $('#gameNameText', this);
 
-
-    console.log(tag);
+ if(temp.length)
+ {
+ t = temp.text().split('(');
+ tag = nparser.clean_symbols(t[0].toLowerCase());
+ game_code = t[1].split(')')[0];
+ }
 
     //parse straight_win
     if( tag == nparser.straight_win_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds['1'].nb = odds[0];
         game.odds['x'].nb = odds[1];
         game.odds['2'].nb = odds[2];
@@ -109,7 +88,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Handicap 0:1
     if(tag == nparser.handicap_0_1_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.handicap_0_1_1.nb = odds[0];
         game.odds.handicap_0_1_x.nb = odds[1];
         game.odds.handicap_0_1_2.nb = odds[2];
@@ -119,7 +98,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Handicap 0:2
     if(tag == nparser.handicap_0_2_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.handicap_0_2_1.nb = odds[0];
         game.odds.handicap_0_2_x.nb = odds[1];
         game.odds.handicap_0_2_2.nb = odds[2];
@@ -129,7 +108,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Handicap 1:0
     if(tag == nparser.handicap_1_0_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.handicap_1_0_1.nb = odds[0];
         game.odds.handicap_1_0_x.nb = odds[1];
         game.odds.handicap_1_0_2.nb = odds[2];
@@ -139,7 +118,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Handicap 2:0
     if(tag == nparser.handicap_2_0_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.handicap_2_0_1.nb = odds[0];
         game.odds.handicap_2_0_x.nb = odds[1];
         game.odds.handicap_2_0_2.nb = odds[2];
@@ -149,7 +128,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Double chance
     if(tag == nparser.double_chance_tag)
     {
-        var odds = nparser.parse_basic_op($(this), $);
+        var odds = nparser.parse_basic_op($(this).next(), $);
         game.odds['1x'].nb = odds[0];
         game.odds['12'].nb = odds[1];
         game.odds['x2'].nb = odds[2];
@@ -159,7 +138,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Double chance 1st Half
     if(tag == nparser.double_chance_first_half_tag)
     {
-        var odds = nparser.parse_basic_op($(this), $);
+        var odds = nparser.parse_basic_op($(this).next(), $);
         game.odds['1x_half'].nb = odds[0];
         game.odds['12_half'].nb = odds[1];
         game.odds['x2_half'].nb = odds[2];
@@ -168,7 +147,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Double chance 2nd Half
     if(tag == nparser.double_chance_second_half_tag)
     {
-        var odds = nparser.parse_basic_op($(this), $);
+        var odds = nparser.parse_basic_op($(this).next(), $);
         game.odds['1x_half_2'].nb = odds[0];
         game.odds['12_half_2'].nb = odds[1];
         game.odds['x2_half_2'].nb = odds[2];
@@ -177,7 +156,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
      //1st half result
     if(tag == nparser.first_half_result_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds['1_half'].nb = odds[0];
         game.odds['x_half'].nb = odds[1];
         game.odds['2_half'].nb = odds[2];
@@ -186,7 +165,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //2nd half result
     if(tag == nparser.second_half_result_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds['1_half_2'].nb = odds[0];
         game.odds['x_half_2'].nb = odds[1];
         game.odds['2_half_2'].nb = odds[2];
@@ -196,7 +175,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //most scoring half
     if(tag == nparser.most_scoring_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.most_scoring_half.half.nb = odds[0];
         game.odds.most_scoring_half.half_2.nb = odds[2];
         game.odds.most_scoring_half.equal.nb = odds[1];
@@ -206,7 +185,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //To score first
     if(tag == nparser.to_score_first_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.first_goal.home.nb = odds[0];
         game.odds.first_goal.away.nb = odds[2];
         game.odds.first_goal.no_goal.nb = odds[1];
@@ -216,7 +195,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //To score Last
     if(tag == nparser.to_score_last_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.last_goal.home.nb = odds[0];
         game.odds.last_goal.away.nb = odds[2];
         game.odds.last_goal.no_goal.nb = odds[1];
@@ -228,7 +207,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //First Goal Time
     if( tag == nparser.first_goal_time_tag)
     {
-        var val = nparser.parse_op_with_keys( $(this), $);
+        var val = nparser.parse_op_with_keys( $(this).next(), $);
         for(var i = 0; i < val.odds.length; i++)
         {
             var obj = game.odds.first_goal_time[nparser.clean(val.keys[i]).toLowerCase()];
@@ -243,7 +222,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Draw No Bet
     if(tag == nparser.draw_no_bet_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.draw_no_bet.home.nb = odds[0];
         game.odds.draw_no_bet.away.nb = odds[1];
 
@@ -252,7 +231,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Draw No Bet First Half
     if(tag == nparser.draw_no_bet_first_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.draw_no_bet_half.home.nb = odds[0];
         game.odds.draw_no_bet_half.away.nb = odds[1];
 
@@ -261,7 +240,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Draw No Bet Second Half
     if(tag == nparser.draw_no_bet_second_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.draw_no_bet_half_2.home.nb = odds[0];
         game.odds.draw_no_bet_half_2.away.nb = odds[1];
 
@@ -270,7 +249,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over0.5 first half
     if(tag == nparser.under_over_0_5_first_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under0_5_half.nb = odds[0];
         game.odds.over0_5_half.nb = odds[1];
 
@@ -280,7 +259,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over1.5 first half
     if(tag == nparser.under_over_1_5_first_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under1_5_half.nb = odds[0];
         game.odds.over1_5_half.nb = odds[1];
 
@@ -290,7 +269,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over2.5 first half
     if(tag == nparser.under_over_2_5_first_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under2_5_half.nb = odds[0];
         game.odds.over2_5_half.nb = odds[1];
 
@@ -301,7 +280,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over0.5 second half
     if(tag == nparser.under_over_0_5_second_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under0_5_half_2.nb = odds[0];
         game.odds.over0_5_half_2.nb = odds[1];
 
@@ -311,7 +290,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over1.5 second half
     if(tag == nparser.under_over_1_5_second_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under1_5_half_2.nb = odds[0];
         game.odds.over1_5_half_2.nb = odds[1];
 
@@ -321,7 +300,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over2.5 second half
     if(tag == nparser.under_over_2_5_second_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under2_5_half_2.nb = odds[0];
         game.odds.over2_5_half_2.nb = odds[1];
 
@@ -331,7 +310,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over0.5
     if(tag == nparser.under_over_0_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under0_5.nb = odds[0];
         game.odds.over0_5.nb = odds[1];
 
@@ -341,7 +320,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over1.5
     if(tag == nparser.under_over_1_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under1_5.nb = odds[0];
         game.odds.over1_5.nb = odds[1];
 
@@ -350,7 +329,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over2.5
     if(tag == nparser.under_over_2_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under2_5.nb = odds[0];
         game.odds.over2_5.nb = odds[1];
 
@@ -359,7 +338,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over3.5
     if(tag == nparser.under_over_3_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under3_5.nb = odds[0];
         game.odds.over3_5.nb = odds[1];
 
@@ -368,7 +347,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over4.5
     if(tag == nparser.under_over_4_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under4_5.nb = odds[0];
         game.odds.over4_5.nb = odds[1];
 
@@ -377,7 +356,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over5.5
     if(tag == nparser.under_over_5_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under5_5.nb = odds[0];
         game.odds.over5_5.nb = odds[1];
 
@@ -386,7 +365,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over6.5
     if(tag == nparser.under_over_6_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under6_5.nb = odds[0];
         game.odds.over6_5.nb = odds[1];
 
@@ -395,7 +374,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over7.5
     if(tag == nparser.under_over_7_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under7_5.nb = odds[0];
         game.odds.over7_5.nb = odds[1];
 
@@ -406,7 +385,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Both teams to score
     if(tag == nparser.both_teams_to_score_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.bts.yes.nb = odds[0];
         game.odds.bts.no.nb = odds[1];
 
@@ -415,7 +394,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Both teams to score first half
     if(tag == nparser.both_teams_to_score_first_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.bts_half.yes.nb = odds[0];
         game.odds.bts_half.no.nb = odds[1];
 
@@ -424,7 +403,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Both teams to score second half
     if(tag == nparser.both_teams_to_score_second_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.bts_half_2.yes.nb = odds[0];
         game.odds.bts_half_2.no.nb = odds[1];
 
@@ -433,7 +412,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Total Goals
     if(tag == nparser.total_goals_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.total_goals.odd.nb = odds[0];
         game.odds.total_goals.even.nb = odds[1];
 
@@ -442,7 +421,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Total Goals First Half
     if(nparser.clean_symbols(tag) == nparser.total_goals_first_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.total_goals_half.odd.nb = odds[0];
         game.odds.total_goals_half.even.nb = odds[1];
 
@@ -452,7 +431,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Total Goals Second Half
     if(nparser.clean_symbols(tag) == nparser.total_goals_second_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.total_goals_half_2.odd.nb = odds[0];
         game.odds.total_goals_half_2.even.nb = odds[1];
 
@@ -465,7 +444,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over0.5 Cards
     if(tag == nparser.under_over_0_5_cards_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under0_5_card.nb = odds[0];
         game.odds.over0_5_card.nb = odds[1];
 
@@ -475,7 +454,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over1.5 Cards
     if(tag == nparser.under_over_1_5_cards_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under1_5_card.nb = odds[0];
         game.odds.over1_5_card.nb = odds[1];
 
@@ -484,7 +463,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over2.5 Cards
     if(tag == nparser.under_over_2_5_cards_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under2_5_card.nb = odds[0];
         game.odds.over2_5_card.nb = odds[1];
 
@@ -493,7 +472,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over3.5 Cards
     if(tag == nparser.under_over_3_5_cards_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under3_5_card.nb = odds[0];
         game.odds.over3_5_card.nb = odds[1];
 
@@ -502,7 +481,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over4.5 Cards
     if(tag == nparser.under_over_4_5_cards_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under4_5_card.nb = odds[0];
         game.odds.over4_5_card.nb = odds[1];
 
@@ -511,7 +490,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over5.5 Cards
     if(tag == nparser.under_over_5_5_cards_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under5_5_card.nb = odds[0];
         game.odds.over5_5_card.nb = odds[1];
 
@@ -520,7 +499,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over6.5 Cards
     if(tag == nparser.under_over_6_5_cards_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under6_5_card.nb = odds[0];
         game.odds.over6_5_card.nb = odds[1];
 
@@ -532,7 +511,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over0.5 Cards First Half
     if(tag == nparser.under_over_0_5_cards_first_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under0_5_card_half.nb = odds[0];
         game.odds.over0_5_card_half.nb = odds[1];
 
@@ -542,7 +521,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over1.5 Cards First Half
     if(tag == nparser.under_over_1_5_cards_first_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under1_5_card_half.nb = odds[0];
         game.odds.over1_5_card_half.nb = odds[1];
 
@@ -551,7 +530,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over2.5 Cards First Half
     if(tag == nparser.under_over_2_5_cards_first_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under2_5_card_half.nb = odds[0];
         game.odds.over2_5_card_half.nb = odds[1];
 
@@ -561,7 +540,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //under/over3.5 Cards First Half
     if(tag == nparser.under_over_3_5_cards_first_half_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.under3_5_card_half.nb = odds[0];
         game.odds.over3_5_card_half.nb = odds[1];
 
@@ -571,7 +550,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Halftime/Fulltime
     if(tag == nparser.halftime_fulltime_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.halftime_fulltime.home_home.nb = odds[0];
         game.odds.halftime_fulltime.home_x.nb = odds[1];
         game.odds.halftime_fulltime.home_away.nb = odds[2];
@@ -589,7 +568,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Total goals (Home)
     if(tag == (nparser.total_goals_tag +'('+ nparser.clean(game.home.toLowerCase()) + ')' ))
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.team_total_goals.home['0'].nb = odds[0];
         game.odds.team_total_goals.home['1'].nb = odds[1];
         game.odds.team_total_goals.home['2'].nb = odds[2];
@@ -602,7 +581,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Total goals (Away)
     if(tag == (nparser.total_goals_tag +'('+ nparser.clean(game.away.toLowerCase()) + ')' ))
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.team_total_goals.away['0'].nb = odds[0];
         game.odds.team_total_goals.away['1'].nb = odds[1];
         game.odds.team_total_goals.away['2'].nb = odds[2];
@@ -614,42 +593,18 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Correct Score
     if(tag == (nparser.correct_score_tag ))
     {
-        var val = nparser.parse_op_with_keys( $(this), $);
+        var val = nparser.parse_op_with_keys( $(this).next(), $);
 
         for(var i = 0; i < val.odds.length; i++)
         {
-            try
-            {
-                game.odds.correct_score[nparser.clean_symbols(val.keys[i])].nb = val.odds[i];
-            }
-            catch(ex)
-            {
-                console.log(i)
-                vals = val.keys[i].split('-');
-                switch (vals.length)
-                {
-                    //6-0
-                    case 2:
-                        game.odds.correct_score[nparser.clean_symbols(val.keys[i])].nb = val.odds[i];
-                        break;
-
-                    //6-00-6
-                    case 3:
-                        vals2 = vals[1].split('');
-                        game.odds.correct_score[nparser.clean_symbols(vals[0]) ].nb = val.odds[i];
-                        game.odds.correct_score[nparser.clean_symbols(vals[2]) + '-' + vals2[1]].nb = val.odds[i];
-                        break;
-
-
-                }
-            }
+            game.odds.correct_score[nparser.clean_symbols(val.keys[i])].nb = val.odds[i];
         }
     }
 
     //Correct Score First Half
     if(tag == (nparser.correct_score_first_half_tag ))
     {
-        var val = nparser.parse_op_with_keys( $(this), $);
+        var val = nparser.parse_op_with_keys( $(this).next(), $);
         for(var i = 0; i < val.odds.length; i++)
         {
             var obj = game.odds.correct_score_half[nparser.clean_symbols(val.keys[i])];
@@ -667,7 +622,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Correct Score Second Half
     if(tag == (nparser.correct_score_second_half_tag ))
     {
-        var val = nparser.parse_op_with_keys( $(this), $);
+        var val = nparser.parse_op_with_keys( $(this).next(), $);
         for(var i = 0; i < val.odds.length; i++)
         {
             var obj = game.odds.correct_score_half_2[nparser.clean_symbols(val.keys[i])];
@@ -682,7 +637,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Ten Minutes Result
     if( tag == nparser.ten_minutes_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.ten_mins['1'].nb = odds[0];
         game.odds.ten_mins['x'].nb = odds[1];
         game.odds.ten_mins['2'].nb = odds[2];
@@ -693,7 +648,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Most Scoring Half (Home)
     if(tag == ( nparser.clean(game.home.toLowerCase()) + nparser.most_scoring_half_tag))
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.home_most_scoring_half.half.nb = odds[0];
         game.odds.home_most_scoring_half.half_2.nb = odds[1];
         game.odds.home_most_scoring_half.equal.nb = odds[2];
@@ -702,7 +657,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Most Scoring Half (Away)
     if(tag == ( nparser.clean(game.away.toLowerCase()) + nparser.most_scoring_half_tag))
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.away_most_scoring_half.half.nb = odds[0];
         game.odds.away_most_scoring_half.half_2.nb = odds[1];
         game.odds.away_most_scoring_half.equal.nb = odds[2];
@@ -713,7 +668,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Home clean sheet
     if( tag == ( nparser.clean(game.home.toLowerCase()) + nparser.clean_sheet_tag))
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.home_clean_sheet.yes.nb = odds[0];
         game.odds.home_clean_sheet.no.nb = odds[1];
 
@@ -723,7 +678,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Away clean sheet
     if( tag == ( nparser.clean(game.away.toLowerCase()) + nparser.clean_sheet_tag))
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.away_clean_sheet.yes.nb = odds[0];
         game.odds.away_clean_sheet.no.nb = odds[1];
 
@@ -734,7 +689,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Winning Margin
     if( tag == nparser.winning_margin_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.win_margin.home_1.nb = odds[0];
         game.odds.win_margin.home_2.nb = odds[1];
         game.odds.win_margin['home_3+'].nb = odds[2];
@@ -751,7 +706,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //1X2 and Under/Over 0.5
     if( tag == nparser.result_and_under_over_0_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.home_win_under0_5.nb = odds[0];
         game.odds.home_win_over0_5.nb = odds[1];
         game.odds.draw_under0_5.nb = odds[2];
@@ -766,7 +721,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //1X2 and Under/Over 1.5
     if( tag == nparser.result_and_under_over_1_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.home_win_under1_5.nb = odds[0];
         game.odds.home_win_over1_5.nb = odds[1];
         game.odds.draw_under1_5.nb = odds[2];
@@ -781,7 +736,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //1X2 and Under/Over 2.5
     if( tag == nparser.result_and_under_over_2_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.home_win_under2_5.nb = odds[0];
         game.odds.home_win_over2_5.nb = odds[1];
         game.odds.draw_under2_5.nb = odds[2];
@@ -795,7 +750,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //1X2 and Under/Over 3.5
     if( tag == nparser.result_and_under_over_3_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.home_win_under3_5.nb = odds[0];
         game.odds.home_win_over3_5.nb = odds[1];
         game.odds.draw_under3_5.nb = odds[2];
@@ -808,7 +763,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //1X2 and Under/Over 4.5
     if( tag == nparser.result_and_under_over_4_5_tag)
     {
-        var odds = nparser.parse_basic_op( $(this), $);
+        var odds = nparser.parse_basic_op( $(this).next(), $);
         game.odds.home_win_under4_5.nb = odds[0];
         game.odds.home_win_over4_5.nb = odds[1];
         game.odds.draw_under4_5.nb = odds[2];
@@ -822,7 +777,7 @@ $('.bets_table_games_container').each(function (indx, elem) {
     //Number of Goals
     if(tag == (nparser.number_of_goals_tag ))
     {
-        var val = nparser.parse_op_with_keys( $(this), $);
+        var val = nparser.parse_op_with_keys( $(this).next(), $);
         for(var i = 0; i < val.odds.length; i++)
         {
             var obj = game.odds.number_of_goals[nparser.clean(val.keys[i])];
@@ -847,75 +802,52 @@ $('.bets_table_games_container').each(function (indx, elem) {
 });
 
 
-
 //nparser.getGames($, data);
 console.log(game);
 
-//global.gc();
-//console.log(process.memoryUsage())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
-var current_cat = undefined;
+$('#betsTable').children().each( function(index, elem)
+{
 
-$('#betsTable').children().each(function (index, elem) {
+    if($('#categoryTitlePanel', this).length)
+    {
+        var child = $('#categoryTitlePanel', this).eq(0);
+        var category = { title:'', games:{}}
 
-
-    if ($(this).attr('id') == 'categoryTitlePanel') {
-        var child = $(this);
-        var category = { title: '', key: '', games: {}}
-
-        category.title = $(child).children().eq(0).text().trim();
-        category.key = helper.generateGameCategoryKey(category.title);
-        //console.log(category.key);
-        current_cat = category;
-        data.categories[current_cat.key] = current_cat;
-    }
-    else {
-        if ($(this).attr('class') == 'bets_page_categoryContainer')
-            $(this).children().each(function (i, e) {
-                if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
-
-                    var game = require('./constants_old').newGame().game;
-                    var vars = $('.betsPanelEventName-text', this).text().trim();
+        $('.header_links2', child).each(function(indx2, elem2)
+        {
+            category.title += ($(this, child).text() + " | ")
+        });
 
 
-                    game.title = vars.trim();
-                    game.id = helper.generateGameID(game.title)
-
-                    var sides = vars.split('-');
-                    game.home = sides[0].trim();
-                    game.away = sides[1].trim();
-
-
-                    //console.log(game.datetime);
-                    //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
-
-                    var vars2 = $('#moreBetsPanel', this).attr('onclick');
-
-                    if (vars2 != undefined) {
-                        game.url = vars2.split("'")[1];
-                    }
-                    //game.date = game.datetime.split(" ")[0];
-                    // game.time = game.datetime.split(" ")[1];
-
-
-                    if (current_cat != undefined)
-                        game.category_key = current_cat.key;
-
-                    //game.datetime = $('.home_event_start', this).eq(0).text();
-
-                    //game.timestamp = helper.getTimestamp(game.datetime);
-
-                    data.games.push(game);
-                }
-            });
+        data.today.categories[category.title] = category;
+        currentkey = data.today.categories[category.title];
+    }else
+    {
 
     }
 
 
-});
 
 
-*/
-console.log(data.games);
+});*/

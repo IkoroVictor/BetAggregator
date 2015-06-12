@@ -13,6 +13,7 @@ var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
 var scheduler = require('node-schedule');
 var MongoClient = require('mongodb').MongoClient;
+var services = require('./services')
 
 //var memwatch = require('memwatch');
 var db = null;
@@ -83,7 +84,7 @@ var load_all = function (error, response, body) {
                                             if (!er2) {
 
                                                 var val = documents[0];
-                                                var services = require('./services')
+
                                                 services.startBetParsingService(constants.nairabet_home, nb_obj, nb, game_queues, val, games);
 
                                                 //var mb = require('./parsers/merrybet').getMerrybetParser();

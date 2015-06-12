@@ -27,6 +27,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
 
     //USE '$(this).parent().next()' AS OPPOSED TO NAIRABET '$(this).next()' when parsing odds
+    var temp_data = {};
 
     $('.event_game_title').each(function (indx, elem) {
 
@@ -36,210 +37,171 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         game_code = tag_temp[1];
 
 
-        //parse straight_win
         if (tag == nparser.straight_win_tag) {
             var odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    "odds.1.sb": odds[0],
-                    "odds.x.sb": odds[1],
-                    "odds.2.sb": odds[2]
-                }}, function (err, count, status) {
-                    //console.log(err);
-
-                });
+            if (helper.validate_odds(odds, 3)) {
+                temp_data["odds.1.sb.value"] = odds[0];
+                temp_data["odds.x.sb.value"] = odds[1];
+                temp_data["odds.2.sb.value"] = odds[2];
+            }
 
 
         }
 
         //Handicap 0:1
         if (tag == nparser.handicap_0_1_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    'odds.handicap_0_1_1.sb': odds[0],
-                    'odds.handicap_0_1_x.sb': odds[1],
-                    'odds.handicap_0_1_2.sb': odds[2]
-                }}, function (err, count, status) {
-                    //.log(err);
-
-                });
+            if (helper.validate_odds(odds, 3)) {
+                temp_data['odds.handicap_0_1_1.sb.value'] = odds[0];
+                temp_data['odds.handicap_0_1_x.sb.value'] = odds[1];
+                temp_data['odds.handicap_0_1_2.sb.value'] = odds[2]
+            }
 
         }
 
         //Handicap 0:2
         if (tag == nparser.handicap_0_2_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    'odds.handicap_0_2_1.sb': odds[0],
-                    'odds.handicap_0_2_x.sb': odds[1],
-                    'odds.handicap_0_2_2.sb': odds[2]
-                }}, function (err, count, status) {
-                    //console.log(err);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 3)) {
+                temp_data['odds.handicap_0_2_1.sb.value'] = odds[0];
+                temp_data['odds.handicap_0_2_x.sb.value'] = odds[1];
+                temp_data['odds.handicap_0_2_2.sb.value'] = odds[2]
+            }
 
-                });
 
         }
 
         //Handicap 1:0
         if (tag == nparser.handicap_1_0_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    'odds.handicap_1_0_1.sb': odds[0],
-                    'odds.handicap_1_0_x.sb': odds[1],
-                    'odds.handicap_1_0_2.sb': odds[2]
-                }}, function (err, count, status) {
-                    //console.log(err);
-
-                });
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 3)) {
+                temp_data['odds.handicap_1_0_1.sb.value'] = odds[0];
+                temp_data['odds.handicap_1_0_x.sb.value'] = odds[1];
+                temp_data['odds.handicap_1_0_2.sb.value'] = odds[2]
+            }
 
 
         }
 
         //Handicap 2:0
         if (tag == nparser.handicap_2_0_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
+            if (helper.validate_odds(odds, 3)) {
 
-                    'odds.handicap_2_0_1.sb': odds[0],
-                    'odds.handicap_2_0_x.sb': odds[1],
-                    'odds.handicap_2_0_2.sb': odds[2]
+                temp_data['odds.handicap_2_0_1.sb.value'] = odds[0];
+                temp_data['odds.handicap_2_0_x.sb.value'] = odds[1];
+                temp_data['odds.handicap_2_0_2.sb.value'] = odds[2]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
+            }
 
-                });
 
         }
 
         //Double chance
         if (tag == nparser.double_chance_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 3)) {
 
-                    'odds.1x.sb': odds[0],
-                    'odds.12.sb': odds[1],
-                    'odds.x2.sb': odds[2]
+                temp_data['odds.1x.sb.value'] = odds[0];
+                temp_data['odds.12.sb.value'] = odds[1];
+                temp_data['odds.x2.sb.value'] = odds[2]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-
-                });
+            }
 
         }
 
         //Double chance 1st Half
         if (tag == nparser.double_chance_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    'odds.1x_half.sb': odds[0],
-                    'odds.12_half.sb': odds[1],
-                    'odds.x2_half.sb': odds[2]
-                }}, function (err, count, status) {
-                    console.log(err);
-                });
+            if (helper.validate_odds(odds, 3)) {
+                temp_data['odds.1x_half.sb.value'] = odds[0];
+                temp_data['odds.12_half.sb.value'] = odds[1];
+                temp_data['odds.x2_half.sb.value'] = odds[2]
+
+
+            }
 
         }
         //Double chance 2nd Half
         if (tag == nparser.double_chance_second_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    'odds.1x_half_2.sb': odds[0],
-                    'odds.12_half_2.sb': odds[1],
-                    'odds.x2_half_2.sb': odds[2]
+            if (helper.validate_odds(odds, 3)) {
+                temp_data['odds.1x_half_2.sb.value'] = odds[0];
+                temp_data['odds.12_half_2.sb.value'] = odds[1];
+                temp_data['odds.x2_half_2.sb.value'] = odds[2]
 
-                }}, function (err, count, status) {
-                    console.log(err);
-                });
+            }
+
 
         }
         //1st half result
         if (tag == nparser.first_half_result_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
+            if (helper.validate_odds(odds, 3)) {
 
-                    'odds.1_half.sb': odds[0],
-                    'odds.x_half.sb': odds[1],
-                    'odds.2_half.sb': odds[2]
+                temp_data['odds.1_half.sb.value'] = odds[0];
+                temp_data['odds.x_half.sb.value'] = odds[1];
+                temp_data['odds.2_half.sb.value'] = odds[2]
 
-                }}, function (err, count, status) {
-                    console.log(err);
-                });
+            }
+
 
         }
         //2nd half result
         if (tag == nparser.second_half_result_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    'odds.1_half_2.sb': odds[0],
-                    'odds.x_half_2.sb': odds[1],
-                    'odds.2_half_2.sb': odds[2]
-                }}, function (err, count, status) {
-                    console.log(err);
-                });
+            if (helper.validate_odds(odds, 3)) {
+                temp_data['odds.1_half_2.sb.value'] = odds[0];
+                temp_data['odds.x_half_2.sb.value'] = odds[1];
+                temp_data['odds.2_half_2.sb.value'] = odds[2]
+            }
 
         }
 
         //most scoring half
         if (tag == nparser.most_scoring_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
+            if (helper.validate_odds(odds, 3)) {
 
-                    'odds.most_scoring_half.half.sb': odds[0],
-                    'odds.most_scoring_half.half_2.sb': odds[2],
-                    'odds.most_scoring_half.equal.sb': odds[1]
+                temp_data['odds.most_scoring_half.half.sb.value'] = odds[0];
+                temp_data['odds.most_scoring_half.half_2.sb.value'] = odds[2];
+                temp_data['odds.most_scoring_half.equal.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //To score first
         if (tag == nparser.to_score_first_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    'odds.first_goal.home.sb': odds[0],
-                    'odds.first_goal.away.sb': odds[2],
-                    'odds.first_goal.no_goal.sb': odds[1]
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 3)) {
+                temp_data['odds.first_goal.home.sb.value'] = odds[0];
+                temp_data['odds.first_goal.away.sb.value'] = odds[2];
+                temp_data['odds.first_goal.no_goal.sb.value'] = odds[1]
+            }
+
         }
 
         //To score Last
         if (tag == nparser.to_score_last_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
+            if (helper.validate_odds(odds, 3)) {
 
-                    'odds.last_goal.home.sb': odds[0],
-                    'odds.last_goal.away.sb': odds[2],
-                    'odds.last_goal.no_goal.sb': odds[1]
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+                temp_data['odds.last_goal.home.sb.value'] = odds[0];
+                temp_data['odds.last_goal.away.sb.value'] = odds[2];
+                temp_data['odds.last_goal.no_goal.sb.value'] = odds[1]
+            }
 
         }
 
@@ -248,18 +210,11 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.first_goal_time_tag) {
             var val = nparser.parse_op_with_keys($(this).parent().next(), $);
             try {
+                temp_data = {};
                 for (var i = 0; i < val.odds.length; i++) {
-                    var obj = 'odds.first_goal_time.' + nparser.clean(val.keys[i]).toLowerCase() + '.sb';
-                    //console.log(nparser.clean(val.keys[i]));
-
-                    /*db.update({'id': game.id }, {$set: {
-
-                     obj : val.odds[i]
-                     }}, function (err, count, status) {
-                     //console.log(err);
-                     });*/
-
+                    temp_data['odds.first_goal_time..' + nparser.clean(val.keys[i]).toLowerCase() + '.sb.value'] = val.odds[i];
                 }
+
             }
             catch (ex) {
                 console.log(ex);
@@ -269,253 +224,205 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
         //Draw No Bet
         if (tag == nparser.draw_no_bet_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
+            if (helper.validate_odds(odds, 2)) {
 
-                    'odds.draw_no_bet.home.sb': odds[0],
-                    'odds.draw_no_bet.away.sb': odds[1]
+                temp_data['odds.draw_no_bet.home.sb.value'] = odds[0];
+                temp_data['odds.draw_no_bet.away.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
 
         //Draw No Bet First Half
         if (tag == nparser.draw_no_bet_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
 
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-            'odds.draw_no_bet_half.home.sb' : odds[0],
-            'odds.draw_no_bet_half.away.sb' : odds[1]
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.draw_no_bet_half.home.sb.value'] = odds[0];
+                temp_data['odds.draw_no_bet_half.away.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
+
 
         }
 
         //Draw No Bet Second Half
         if (tag == nparser.draw_no_bet_second_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.draw_no_bet_half_2.home.sb' : odds[0],
-                    'odds.draw_no_bet_half_2.away.sb' : odds[1]
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.draw_no_bet_half_2.home.sb.value'] = odds[0];
+                temp_data['odds.draw_no_bet_half_2.away.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
+            //console.log(err);
+
 
         }
 
         //under/over0.5 first half
         if (tag == nparser.under_over_0_5_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-            'odds.under0_5_half.sb': odds[0],
-            'odds.over0_5_half.sb' :odds[1]
-
-        }}, function (err, count, status) {
-        //console.log(err);
-    });
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under0_5_half.sb.value'] = odds[0];
+                temp_data['odds.over0_5_half.sb.value'] = odds[1]
+            }
 
 
         }
 
         //under/over1.5 first half
         if (tag == nparser.under_over_1_5_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under1_5_half.sb': odds[0],
-                    'odds.over1_5_half.sb' :odds[1]
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under1_5_half.sb.value'] = odds[0];
+                temp_data['odds.over1_5_half.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
 
         //under/over2.5 first half
         if (tag == nparser.under_over_2_5_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under2_5_half.sb': odds[0],
-                    'odds.over2_5_half.sb' :odds[1]
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under2_5_half.sb.value'] = odds[0];
+                temp_data['odds.over2_5_half.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
 
 
         //under/over0.5 second half
         if (tag == nparser.under_over_0_5_second_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under0_5_half_2.sb': odds[0],
-                    'odds.over0_5_half_2.sb' :odds[1]
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under0_5_half_2.sb.value'] = odds[0];
+                temp_data['odds.over0_5_half_2.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
 
         //under/over1.5 second half
         if (tag == nparser.under_over_1_5_second_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under1_5_half_2.sb': odds[0],
-                    'odds.over1_5_half_2.sb' :odds[1]
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under1_5_half_2.sb.value'] = odds[0];
+                temp_data['odds.over1_5_half_2.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
 
         //under/over2.5 second half
         if (tag == nparser.under_over_2_5_second_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under2_5_half_2.sb': odds[0],
-                    'odds.over2_5_half_2.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under2_5_half_2.sb.value'] = odds[0];
+                temp_data['odds.over2_5_half_2.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
 
         //under/over0.5
         if (tag == nparser.under_over_0_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under0_5.sb': odds[0],
-                    'odds.over0_5.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under0_5.sb.value'] = odds[0];
+                temp_data['odds.over0_5.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
 
         //under/over1.5
         if (tag == nparser.under_over_1_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under1_5.sb': odds[0],
-                    'odds.over1_5.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under1_5.sb.value'] = odds[0];
+                temp_data['odds.over1_5.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //under/over2.5
         if (tag == nparser.under_over_2_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under2_5.sb': odds[0],
-                    'odds.over2_5.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under2_5.sb.value'] = odds[0];
+                temp_data['odds.over2_5.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //under/over3.5
         if (tag == nparser.under_over_3_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under3_5.sb': odds[0],
-                    'odds.over3_5.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under3_5.sb.value'] = odds[0];
+                temp_data['odds.over3_5.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //under/over4.5
         if (tag == nparser.under_over_4_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under4_5.sb': odds[0],
-                    'odds.over4_5.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under4_5.sb.value'] = odds[0];
+                temp_data['odds.over4_5.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
         //under/over5.5
         if (tag == nparser.under_over_5_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under5_5.sb': odds[0],
-                    'odds.over5_5.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under5_5.sb.value'] = odds[0];
+                temp_data['odds.over5_5.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
+
 
         }
         //under/over6.5
         if (tag == nparser.under_over_6_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under6_5.sb': odds[0],
-                    'odds.over6_5.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under6_5.sb.value'] = odds[0];
+                temp_data['odds.over6_5.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //under/over7.5
         if (tag == nparser.under_over_7_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.under7_5.sb': odds[0],
-                    'odds.over7_5.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.under7_5.sb.value'] = odds[0];
+                temp_data['odds.over7_5.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
@@ -523,311 +430,244 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
         //Both teams to score
         if (tag == nparser.both_teams_to_score_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.bts.yes.sb': odds[0],
-                    'odds.bts.no.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.bts.yes.sb.value'] = odds[0];
+                temp_data['odds.bts.no.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
 
         //Both teams to score first half
         if (tag == nparser.both_teams_to_score_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.bts_half.yes.sb': odds[0],
-                    'odds.bts_half.no.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.bts_half.yes.sb.value'] = odds[0];
+                temp_data['odds.bts_half.no.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
 
         //Both teams to score second half
         if (tag == nparser.both_teams_to_score_second_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.bts_half_2.yes.sb': odds[0],
-                    'odds.bts_half_2.no.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.bts_half_2.yes.sb.value'] = odds[0];
+                temp_data['odds.bts_half_2.no.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
 
         //Total Goals
         if (tag == nparser.total_goals_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.total_goals.odd.sb': odds[0],
-                    'odds.total_goals.even.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.total_goals.odd.sb.value'] = odds[0];
+                temp_data['odds.total_goals.even.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
-
-
+            }
 
 
         }
         //Total Goals First Half
         if (nparser.clean_symbols(tag) == nparser.total_goals_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.total_goals_half.odd.sb': odds[0],
-                    'odds.total_goals_half.even.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.total_goals_half.odd.sb.value'] = odds[0];
+                temp_data['odds.total_goals_half.even.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
 
         //Total Goals Second Half
         if (nparser.clean_symbols(tag) == nparser.total_goals_second_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.total_goals_half_2.odd.sb': odds[0],
-                    'odds.total_goals_half_2.even.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.total_goals_half_2.odd.sb.value'] = odds[0];
+                temp_data['odds.total_goals_half_2.even.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
 
 
         //under/over0.5 Cards
         if (tag == nparser.under_over_0_5_cards_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under0_5_card.sb': odds[0],
-                    'odds.odds.over0_5_card.sb' :odds[1]
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under0_5_card.sb.value'] = odds[0];
+                temp_data['odds.odds.over0_5_card.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
-
+            }
 
 
         }
 
         //under/over1.5 Cards
         if (tag == nparser.under_over_1_5_cards_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under_5_card.sb': odds[0],
-                    'odds.odds.over1_5_card.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under_5_card.sb.value'] = odds[0];
+                temp_data['odds.odds.over1_5_card.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //under/over2.5 Cards
         if (tag == nparser.under_over_2_5_cards_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under2_5_card.sb': odds[0],
-                    'odds.odds.over2_5_card.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under2_5_card.sb.value'] = odds[0];
+                temp_data['odds.odds.over2_5_card.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
-
+            }
 
         }
         //under/over3.5 Cards
         if (tag == nparser.under_over_3_5_cards_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under3_5_card.sb': odds[0],
-                    'odds.odds.over3_5_card.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under3_5_card.sb.value'] = odds[0];
+                temp_data['odds.odds.over3_5_card.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //under/over4.5 Cards
         if (tag == nparser.under_over_4_5_cards_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under4_5_card.sb': odds[0],
-                    'odds.odds.over4_5_card.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under4_5_card.sb.value'] = odds[0];
+                temp_data['odds.odds.over4_5_card.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //under/over5.5 Cards
         if (tag == nparser.under_over_5_5_cards_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under5_5_card.sb': odds[0],
-                    'odds.odds.over5_5_card.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under5_5_card.sb.value'] = odds[0];
+                temp_data['odds.odds.over5_5_card.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
         //under/over6.5 Cards
         if (tag == nparser.under_over_6_5_cards_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under6_5_card.sb': odds[0],
-                    'odds.odds.over6_5_card.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under6_5_card.sb.value'] = odds[0];
+                temp_data['odds.odds.over6_5_card.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
-
+            }
 
         }
 
 
         //under/over0.5 Cards First Half
         if (tag == nparser.under_over_0_5_cards_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under0_5_card_half.sb': odds[0],
-                    'odds.odds.over0_5_card_half.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under0_5_card_half.sb.value'] = odds[0];
+                temp_data['odds.odds.over0_5_card_half.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
 
         //under/over1.5 Cards First Half
         if (tag == nparser.under_over_1_5_cards_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under1_5_card_half.sb': odds[0],
-                    'odds.odds.over1_5_card_half.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under1_5_card_half.sb.value'] = odds[0];
+                temp_data['odds.odds.over1_5_card_half.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //under/over2.5 Cards First Half
         if (tag == nparser.under_over_2_5_cards_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under2_5_card_half.sb': odds[0],
-                    'odds.odds.over2_5_card_half.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under2_5_card_half.sb.value'] = odds[0];
+                temp_data['odds.odds.over2_5_card_half.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
 
         //under/over3.5 Cards First Half
         if (tag == nparser.under_over_3_5_cards_first_half_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.odds.under3_5_card_half.sb': odds[0],
-                    'odds.odds.over3_5_card_half.sb' :odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under3_5_card_half.sb.value'] = odds[0];
+                temp_data['odds.odds.over3_5_card_half.sb.value'] = odds[1]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
 
         //Halftime/Fulltime
         if (tag == nparser.halftime_fulltime_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 9))
-                db.update({'id': game.id }, {$set: {
-                    'odds.halftime_fulltime.home_home.sb': odds[0],
-                    'odds.halftime_fulltime.home_x.sb' : odds[1],
-                    'odds.halftime_fulltime.home_away.sb' : odds[2],
-                    'odds.halftime_fulltime.x_home.sb' : odds[3],
-                    'odds.halftime_fulltime.x_x.sb' : odds[4],
-                    'odds.halftime_fulltime.x_away.sb' : odds[5],
-                    'odds.halftime_fulltime.away_home.sb' : odds[6],
-                    'odds.halftime_fulltime.away_x.sb' : odds[7],
-                    'odds.halftime_fulltime.away_away.sb' : odds[8]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 9)) {
+                temp_data['odds.halftime_fulltime.home_home.sb.value'] = odds[0];
+                temp_data['odds.halftime_fulltime.home_x.sb.value'] = odds[1];
+                temp_data['odds.halftime_fulltime.home_away.sb.value'] = odds[2];
+                temp_data['odds.halftime_fulltime.x_home.sb.value'] = odds[3];
+                temp_data['odds.halftime_fulltime.x_x.sb.value'] = odds[4];
+                temp_data['odds.halftime_fulltime.x_away.sb.value'] = odds[5];
+                temp_data['odds.halftime_fulltime.away_home.sb.value'] = odds[6];
+                temp_data['odds.halftime_fulltime.away_x.sb.value'] = odds[7];
+                temp_data['odds.halftime_fulltime.away_away.sb.value'] = odds[8]
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
-
+            }
 
 
         }
 
         //Total goals (Home)
-        if (tag == (nparser.total_goals_tag + '(' + nparser.clean(game.home.toLowerCase()) + ')' )) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 4))
-                db.update({'id': game.id }, {$set: {
-                    'odds.team_total_goals.home.0.sb': odds[0],
-                    'odds.team_total_goals.home.1.sb': odds[1],
-                    'odds.team_total_goals.home.2.sb': odds[2],
-                    'odds.team_total_goals.home.3+.sb': odds[3]
+        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean(game.home.toLowerCase()) + ')' )) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 4)) {
+                temp_data['odds.team_total_goals.home.0.sb.value'] = odds[0];
+                temp_data['odds.team_total_goals.home.1.sb.value'] = odds[1];
+                temp_data['odds.team_total_goals.home.2.sb.value'] = odds[2];
+                temp_data['odds.team_total_goals.home.3+.sb.value'] = odds[3]
 
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
-
+            }
 
 
         }
 
 
         //Total goals (Away)
-        if (tag == (nparser.total_goals_tag + '(' + nparser.clean(game.away.toLowerCase()) + ')' )) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-             if (helper.validate_odds(odds, 4))
-            db.update({'id': game.id }, {$set: {
-                'odds.team_total_goals.away.0.sb': odds[0],
-                'odds.team_total_goals.away.1.sb': odds[1],
-                'odds.team_total_goals.away.2.sb': odds[2],
-                'odds.team_total_goals.away.3+.sb': odds[3]
+        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean(game.away.toLowerCase()) + ')' )) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 4)) {
+                temp_data['odds.team_total_goals.away.0.sb.value'] = odds[0];
+                temp_data['odds.team_total_goals.away.1.sb.value'] = odds[1];
+                temp_data['odds.team_total_goals.away.2.sb.value'] = odds[2];
+                temp_data['odds.team_total_goals.away.3+.sb.value'] = odds[3]
 
 
-            }}, function (err, count, status) {
-                //console.log(err);
-            });
+            }
 
 
         }
@@ -837,18 +677,19 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
             var val = nparser.parse_op_with_keys($(this).parent().next(), $);
 
             for (var i = 0; i < val.odds.length; i++) {
-                game.odds.correct_score[nparser.clean_symbols(val.keys[i])].sb = val.odds[i];
+                temp_data['odds.correct_score.' + nparser.clean_symbols(val.keys[i]) + '.sb.value'] = val.odds[i];
             }
+
         }
 
         //Correct Score First Half
         if (tag == (nparser.correct_score_first_half_tag )) {
             var val = nparser.parse_op_with_keys($(this).parent().next(), $);
             for (var i = 0; i < val.odds.length; i++) {
-                var obj = game.odds.correct_score_half[nparser.clean_symbols(val.keys[i])];
+                temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i])+'.sb.value']  = val.odds[i];
 
                 if (obj != undefined) {
-                    obj.sb = val.odds[i];
+                    //obj.sb.value = val.odds[i];                 }
                 }
             }
         }
@@ -858,123 +699,99 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.correct_score_second_half_tag )) {
             var val = nparser.parse_op_with_keys($(this).parent().next(), $);
             for (var i = 0; i < val.odds.length; i++) {
-                var obj = game.odds.correct_score_half_2[nparser.clean_symbols(val.keys[i])];
+                temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i])+'.sb.value']  = val.odds[i];
 
                 if (obj != undefined) {
-                    obj.sb = val.odds[i];
+                    //obj.sb.value = val.odds[i];                 }
                 }
             }
         }
 
         //Ten Minutes Result
         if (tag == nparser.ten_minutes_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    'odds.ten_mins.1.sb': odds[0],
-                    'odds.ten_mins.x.sb': odds[1],
-                    'odds.ten_mins.2.sb': odds[2]
+            if (helper.validate_odds(odds, 3)) {
+                temp_data['odds.ten_mins.1.sb.value'] = odds[0];
+                temp_data['odds.ten_mins.x.sb.value'] = odds[1];
+                temp_data['odds.ten_mins.2.sb.value'] = odds[2]
 
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
 
 
         //Most Scoring Half (Home)
         if (tag == ( nparser.clean(game.home.toLowerCase()) + nparser.most_scoring_half_tag)) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    'odds.home_most_scoring_half.half.sb': odds[0],
-                    'odds.home_most_scoring_half.half_2.sb': odds[1],
-                    'odds.home_most_scoring_half.equal.sb': odds[2]
-
+            if (helper.validate_odds(odds, 3)) {
+                temp_data['odds.home_most_scoring_half.half.sb.value'] = odds[0];
+                temp_data['odds.home_most_scoring_half.half_2.sb.value'] = odds[1];
+                temp_data['odds.home_most_scoring_half.equal.sb.value'] = odds[2]
 
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //Most Scoring Half (Away)
         if (tag == ( nparser.clean(game.away.toLowerCase()) + nparser.most_scoring_half_tag)) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 3))
-                db.update({'id': game.id }, {$set: {
-                    'odds.away_most_scoring_half.half.sb': odds[0],
-                    'odds.away_most_scoring_half.half_2.sb': odds[1],
-                    'odds.away_most_scoring_half.equal.sb': odds[2]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 3)) {
+                temp_data['odds.away_most_scoring_half.half.sb.value'] = odds[0];
+                temp_data['odds.away_most_scoring_half.half_2.sb.value'] = odds[1];
+                temp_data['odds.away_most_scoring_half.equal.sb.value'] = odds[2]
 
 
-
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
 
 
         //Home clean sheet
         if (tag == ( nparser.clean(game.home.toLowerCase()) + nparser.clean_sheet_tag)) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.home_clean_sheet.yes.sb': odds[0],
-                    'odds.home_clean_sheet.no.sb': odds[1]
-
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.home_clean_sheet.yes.sb.value'] = odds[0];
+                temp_data['odds.home_clean_sheet.no.sb.value'] = odds[1]
 
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
-
+            }
 
 
         }
 
         //Away clean sheet
         if (tag == ( nparser.clean(game.away.toLowerCase()) + nparser.clean_sheet_tag)) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 2))
-                db.update({'id': game.id }, {$set: {
-                    'odds.away_clean_sheet.yes.sb': odds[0],
-                    'odds.away_clean_sheet.no.sb': odds[1]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.away_clean_sheet.yes.sb.value'] = odds[0];
+                temp_data['odds.away_clean_sheet.no.sb.value'] = odds[1]
 
 
-
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
         }
 
 
         //Winning Margin
         if (tag == nparser.winning_margin_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 7))
-                db.update({'id': game.id }, {$set: {
-                    'odds.win_margin.home_1.sb': odds[0],
-                    'odds.win_margin.home_2.sb': odds[1],
-                    'odds.win_margin.home_3+.sb': odds[2],
-                    'odds.win_margin.away_1.sb': odds[3],
-                    'odds.win_margin.away_2.sb': odds[4],
-                    'odds.win_margin.away_3+.sb': odds[5],
-                    'odds.win_margin.x.sb': odds[6]
-
+            if (helper.validate_odds(odds, 7)) {
+                temp_data['odds.win_margin.home_1.sb.value'] = odds[0];
+                temp_data['odds.win_margin.home_2.sb.value'] = odds[1];
+                temp_data['odds.win_margin.home_3+.sb.value'] = odds[2];
+                temp_data['odds.win_margin.away_1.sb.value'] = odds[3];
+                temp_data['odds.win_margin.away_2.sb.value'] = odds[4];
+                temp_data['odds.win_margin.away_3+.sb.value'] = odds[5];
+                temp_data['odds.win_margin.x.sb.value'] = odds[6]
 
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
@@ -982,96 +799,84 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
         //1X2 and Under/Over 0.5
         if (tag == nparser.result_and_under_over_0_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
 
-            if (helper.validate_odds(odds, 6))
-                db.update({'id': game.id }, {$set: {
-                    'odds.home_win_under0_5.sb': odds[0],
-                    'odds.home_win_over0_5.sb': odds[1],
-                    'odds.draw_under0_5.sb': odds[2],
-                    'odds.draw_over0_5.sb': odds[3],
-                    'odds.away_win_under0_5.sb' :odds[4],
-                    'odds.away_win_over0_5.sb' :odds[5]
+            if (helper.validate_odds(odds, 6)) {
+                temp_data['odds.home_win_under0_5.sb.value'] = odds[0];
+                temp_data['odds.home_win_over0_5.sb.value'] = odds[1];
+                temp_data['odds.draw_under0_5.sb.value'] = odds[2];
+                temp_data['odds.draw_over0_5.sb.value'] = odds[3];
+                temp_data['odds.away_win_under0_5.sb.value'] = odds[4];
+                temp_data['odds.away_win_over0_5.sb.value'] = odds[5]
 
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //1X2 and Under/Over 1.5
         if (tag == nparser.result_and_under_over_1_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 6))
-                db.update({'id': game.id }, {$set: {
-                    'odds.home_win_under1_5.sb': odds[0],
-                    'odds.home_win_over1_5.sb': odds[1],
-                    'odds.draw_under1_5.sb': odds[2],
-                    'odds.draw_over1_5.sb': odds[3],
-                    'odds.away_win_under1_5.sb' :odds[4],
-                    'odds.away_win_over1_5.sb' :odds[5]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 6)) {
+                temp_data['odds.home_win_under1_5.sb.value'] = odds[0];
+                temp_data['odds.home_win_over1_5.sb.value'] = odds[1];
+                temp_data['odds.draw_under1_5.sb.value'] = odds[2];
+                temp_data['odds.draw_over1_5.sb.value'] = odds[3];
+                temp_data['odds.away_win_under1_5.sb.value'] = odds[4];
+                temp_data['odds.away_win_over1_5.sb.value'] = odds[5]
 
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
 
 
         }
         //1X2 and Under/Over 2.5
         if (tag == nparser.result_and_under_over_2_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 6))
-                db.update({'id': game.id }, {$set: {
-                    'odds.home_win_under2_5.sb': odds[0],
-                    'odds.home_win_over2_5.sb': odds[1],
-                    'odds.draw_under2_5.sb': odds[2],
-                    'odds.draw_over2_5.sb': odds[3],
-                    'odds.away_win_under2_5.sb' :odds[4],
-                    'odds.away_win_over2_5.sb' :odds[5]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 6)) {
+                temp_data['odds.home_win_under2_5.sb.value'] = odds[0];
+                temp_data['odds.home_win_over2_5.sb.value'] = odds[1];
+                temp_data['odds.draw_under2_5.sb.value'] = odds[2];
+                temp_data['odds.draw_over2_5.sb.value'] = odds[3];
+                temp_data['odds.away_win_under2_5.sb.value'] = odds[4];
+                temp_data['odds.away_win_over2_5.sb.value'] = odds[5]
 
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
+
 
         }
 
         //1X2 and Under/Over 3.5
         if (tag == nparser.result_and_under_over_3_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 6))
-                db.update({'id': game.id }, {$set: {
-                    'odds.home_win_under3_5.sb': odds[0],
-                    'odds.home_win_over3_5.sb': odds[1],
-                    'odds.draw_under3_5.sb': odds[2],
-                    'odds.draw_over3_5.sb': odds[3],
-                    'odds.away_win_under3_5.sb' :odds[4],
-                    'odds.away_win_over3_5.sb' :odds[5]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 6)) {
+                temp_data['odds.home_win_under3_5.sb.value'] = odds[0];
+                temp_data['odds.home_win_over3_5.sb.value'] = odds[1];
+                temp_data['odds.draw_under3_5.sb.value'] = odds[2];
+                temp_data['odds.draw_over3_5.sb.value'] = odds[3];
+                temp_data['odds.away_win_under3_5.sb.value'] = odds[4];
+                temp_data['odds.away_win_over3_5.sb.value'] = odds[5]
 
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
+
 
         }
         //1X2 and Under/Over 4.5
         if (tag == nparser.result_and_under_over_4_5_tag) {
-            var odds = nparser.parse_basic_op($(this).parent().next(), $);
-            if (helper.validate_odds(odds, 6))
-                db.update({'id': game.id }, {$set: {
-                    'odds.home_win_under4_5.sb': odds[0],
-                    'odds.home_win_over4_5.sb': odds[1],
-                    'odds.draw_under4_5.sb': odds[2],
-                    'odds.draw_over4_5.sb': odds[3],
-                    'odds.away_win_under4_5.sb' :odds[4],
-                    'odds.away_win_over4_5.sb' :odds[5]
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 6)) {
+                temp_data['odds.home_win_under4_5.sb.value'] = odds[0];
+                temp_data['odds.home_win_over4_5.sb.value'] = odds[1];
+                temp_data['odds.draw_under4_5.sb.value'] = odds[2];
+                temp_data['odds.draw_over4_5.sb.value'] = odds[3];
+                temp_data['odds.away_win_under4_5.sb.value'] = odds[4];
+                temp_data['odds.away_win_over4_5.sb.value'] = odds[5]
 
 
-                }}, function (err, count, status) {
-                    //console.log(err);
-                });
+            }
+
 
         }
 
@@ -1079,17 +884,47 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.number_of_goals_tag )) {
             var val = nparser.parse_op_with_keys($(this).parent().next(), $);
             for (var i = 0; i < val.odds.length; i++) {
-                var obj = game.odds.number_of_goals[nparser.clean(val.keys[i])];
+                temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i])+'.sb.value']  = val.odds[i];
 
                 if (obj != undefined) {
-                    obj.sb = val.odds[i];
+                    //obj.sb.value = val.odds[i];                 }
                 }
             }
         }
 
 
+        if(tag.trim() != '')
+        {
+            temp_data['play_codes.'+ tag + '.sb'] = game_code;
+        }
+
 
     });
+
+    process.nextTick(function()
+    {
+        db.update({'id': game.id }, {$set: temp_data}, {upsert: true},
+            function (err, count, status) {
+                if (err)
+                    console.log(err);
+                else
+                {
+                    console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
+                    console.log('[DATA]: ' + JSON.stringify(temp_data));
+
+                }
+                temp_data = null;
+            });
+    })
+
+
+    root = null;
+    global.gc();
+
+
+    //return game;
+
+   
      nparser = null;
      helper = null;
      root = null;
@@ -1127,6 +962,7 @@ SurebetParser.prototype.getGames = function ($, data) {
 
 
                 game.datetime = $('.home_event_start', this).eq(0).text();
+                game.expireAt =  new Date(game.timestamp);
 
                 //game.time = vars[3];
 

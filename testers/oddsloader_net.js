@@ -7,8 +7,8 @@
 var fs = require('fs');
 var cheerio = require('cheerio');
 var request = require('request');
-var g = require('./constants').newGame();
-var nparser = require('./parsers').getNairabetParser();
+var g = require('./../constants').newGame();
+var nparser = require('./.').getNairabetParser();
 
 game = g.game;
 

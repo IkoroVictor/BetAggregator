@@ -43,7 +43,7 @@ var options = {
 
 $ = cheerio.load(fs.readFileSync('./html_files/nairabet2.html'));
 
-var nb = require('./parsers/nairabet').getNairabetParser();
+var nb = require('./../parsers/nairabet').getNairabetParser();
 
 nb.getGames($, data.today);
 

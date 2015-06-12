@@ -36,13 +36,21 @@ Stakersden.prototype.parse_op_with_keys = function( cheerio_object, root)
 {
     var odds = [];
     var keys = []
-    root('.category_outcome', cheerio_object).each(function(i, e)
+
+    root('#outcomePanel',this).each(function(i2,e2)
     {
-        keys.push(root(this).children().eq(0).children().eq(0).children().eq(0).text().trim());
-        odds.push(parseFloat(root(this).children().eq(0).children().eq(0).children().eq(1).text().trim()));
 
-    });
+        root('#outcomeText',this).each( function(){
 
+            keys.push(root(this).text().trim());
+        })
+
+        root('.eoo_p',this).each(function(){
+
+            odds.push(parseFloat(root(this).text().trim()));
+
+        });
+    })
     return {odds: odds, keys: keys};
 }
 

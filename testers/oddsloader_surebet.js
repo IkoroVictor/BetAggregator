@@ -8,7 +8,7 @@ var fs = require('fs');
 var cheerio = require('cheerio');
 var request = require('request');
 var g = require('./constants_old').newGame();
-var nparser = require('./betobjects/surebet').getSurebetObject();
+var nparser = require('./../betobjects/surebet').getSurebetObject();
 //var memwatch = require('memwatch');
 
 var data = {
@@ -60,7 +60,7 @@ $('.event_game_title', root).each(function(indx, elem)
 */
 
 
-var helper = require('./helpers/misc');
+var helper = require('./../helpers/misc');
 var root = $('#betsTable');
 
 var match_title = $('.column_middle_left', '#eventTitlePanel', root).text();

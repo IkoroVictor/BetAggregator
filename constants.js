@@ -8,11 +8,11 @@ function Constants()
     //BET SIDES URL
     this.nairabet_home = 'https://nairabet.com';
     this.surebet_home = 'https://surebet247.com';
-    this.stakersden_home = 'https://surebet247.com';
-    this._1960bet_home = 'https://surebet247.com';
+    this.stakersden_home = 'https://stakersden.com';
+    this._1960bet_home = 'https://1960bet.ng';
     this.bet_naija_home = 'https://surebet247.com';
     this.lovers_bet_home = 'https://surebet247.com';
-    this._9ja_predict_home = 'https://surebet247.com';
+    this.winners_golden_bet_home = 'https://winnersgoldenbet.com';
     this.nairastake_home = 'https://nairastake.com';
     this.merrybet_home = 'https://merrybet.com';
 
