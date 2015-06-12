@@ -1,0 +1,1 @@
+cmd C:\Nodejs\heroku\BetAggregator
