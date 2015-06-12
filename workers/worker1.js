@@ -34,6 +34,7 @@ var start = function ()
 
                         function (er2, games) {
                             if (!er2) {
+                                console.log('[DOC COUNT]: '+  documents.length )
 
                                 async.eachSeries(documents, function( val, callback) {
 
