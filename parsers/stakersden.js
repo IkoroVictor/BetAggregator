@@ -924,7 +924,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
                 else
                 {
                     console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
-                    console.log('[DATA]: ' + JSON.stringify(temp_data));
+                    //console.log('[DATA]: ' + JSON.stringify(temp_data));
 
                 }
                 temp_data = null;
