@@ -33,6 +33,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
     {
         console.log(ex);
     }
+    var temp_data = {};
 
     $('#gameTitlePanel', '#betsTable').each(function (indx, elem) {
 
