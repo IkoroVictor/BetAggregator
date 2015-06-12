@@ -5,7 +5,7 @@
  * Created by olaokenyi on 5/1/15.
  */
 
-//var constants = require('./../constants')
+var constants = require('./../constants')
 var nb = require('./nairabet');
 
 
@@ -59,7 +59,7 @@ WGB.prototype.clean_symbols = function(val)
 }
 
 
-WGB.prototype.day_bet_url_suffix = '/bets/date/';
+WGB.prototype.day_bet_url_suffix = '/search/4/';
 
 
 

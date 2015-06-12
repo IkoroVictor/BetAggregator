@@ -16,6 +16,7 @@ function Stakersden()
 Stakersden.prototype = nb.getNairabetObject();
 
 
+
 Stakersden.prototype.parse_basic_op = function( cheerio_object, root)
 {
 
@@ -65,9 +66,8 @@ Stakersden.prototype.clean_symbols = function(val)
     return require('../helpers/misc').clean_symbols(val);
 }
 
-
-Stakersden.prototype.day_bet_url_suffix = '/bets/date/';
-
+Stakersden.prototype.day_bet_url_suffix = '/Odds/bets/date/';
+Stakersden.prototype.short_name = 'SD';
 
 
 
