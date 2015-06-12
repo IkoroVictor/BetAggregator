@@ -225,7 +225,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
             try {
                 temp_data = {};
                 for (var i = 0; i < val.odds.length; i++) {
-                    temp_data['odds.first_goal_time..' + nparser.clean(val.keys[i]).toLowerCase() + '.sd.value'] = val.odds[i];
+                    temp_data['odds.first_goal_time.' + nparser.clean(val.keys[i]).toLowerCase() + '.sd.value'] = val.odds[i];
                 }
 
             }
