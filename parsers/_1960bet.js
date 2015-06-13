@@ -873,6 +873,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
 
         }
         //1X2 and Under/Over 4.5
+        //1X2 and Under/Over 4.5
         if (tag == nparser.result_and_under_over_4_5_tag) {
             odds = nparser.parse_basic_op($(this), $);
             if (helper.validate_odds(odds, 6)) {
