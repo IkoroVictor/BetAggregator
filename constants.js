@@ -9,7 +9,7 @@ function Constants()
     this.nairabet_home = 'https://nairabet.com';
     this.surebet_home = 'https://surebet247.com';
     this.stakersden_home = 'https://stakersden.com';
-    this._1960bet_home = 'https://1960bet.ng';
+    this._1960bet_home = 'https://www.1960bet.com';
     this.bet_naija_home = 'https://surebet247.com';
     this.lovers_bet_home = 'https://surebet247.com';
     this.winners_golden_bet_home = 'https://winnersgoldenbet.com';

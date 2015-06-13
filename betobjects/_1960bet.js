@@ -71,7 +71,7 @@ _1960bet.prototype.clean_symbols = function(val)
 }
 
 
-_1960bet.prototype.day_bet_url_suffix = '/bets/date/';
+_1960bet.prototype.day_bet_url_suffix = '/Odds/bets/date/';
 
 
 
