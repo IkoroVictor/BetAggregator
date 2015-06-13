@@ -914,10 +914,25 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
 
 
     });
+    var query = {'timestamp': game.timestamp,
+
+        $or:[
+            {'id': game.id},
+            {'sorted_id': game.sorted_id},
+            {'home': game.home},
+            {'away': game.away},
+
+            {'id': {$regex: ('/' +  game.id + '/')}},
+            {'sorted_id': {$regex: ('/' +  game.sorted_id + '/')}},
+            {'id': {$regex: ('/' +  helper.clean_symbols(game.home) + '/')}},
+            {'id': {$regex: ('/' +  helper.clean_symbols(game.away) + '/')}}
+
+        ]}
+
 
     process.nextTick(function()
     {
-        db.update({'id': game.id }, {$set: temp_data}, {upsert: true},
+        db.update(query, {$set: temp_data}, {upsert: true},
             function (err, count, status) {
                 if (err)
                     console.log(err);
@@ -928,6 +943,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
 
                 }
                 temp_data = null;
+                query = null;
             });
     })
 
