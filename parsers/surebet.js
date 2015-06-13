@@ -962,6 +962,7 @@ SurebetParser.prototype.getGames = function ($, data) {
 
 
                 game.datetime = $('.home_event_start', this).eq(0).text();
+                game.timestamp = helper.getTimestamp(game.datetime);
                 game.expireAt =  new Date(game.timestamp);
 
                 //game.time = vars[3];

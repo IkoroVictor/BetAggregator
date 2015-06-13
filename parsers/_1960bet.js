@@ -982,16 +982,17 @@ _1960betParser.prototype.getGames = function ($, data) {
                         if (vars2 != undefined) {
                             game.url = vars2.split("'")[1];
                         }
-                        //game.date = game.datetime.split(" ")[0];
-                       // game.time = game.datetime.split(" ")[1];
+
 
 
                         if (current_cat != undefined)
                             game.category_key = current_cat.key;
 
-                        //game.datetime = $('.home_event_start', this).eq(0).text();
+                        game.date = data.short_date;
+                        game.time = $('.betsPanelEventName', this).prev().children().eq(1).text();
+                        game.datetime = game.date + ' ' + game.time;
 
-                        //game.timestamp = helper.getTimestamp(game.datetime);
+                        game.timestamp = helper.getTimestamp(game.datetime);
 
                         data.games.push(game);
                     }

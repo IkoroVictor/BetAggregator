@@ -972,8 +972,14 @@ StakersdenParser.prototype.getGames = function ($, data) {
         if (vars2.length) {
             game.url = vars2.attr('onclick').split("'")[1];
         }
-        ///game.date = game.datetime.split(" ")[0];
-        //game.time = game.datetime.split(" ")[1];
+        game.date =  data.short_date;
+        var dt = $('.bst_sell_ev_start', this).eq(0).text();
+
+        game.time = dt.split(" ")[2];
+
+
+        game.datetime = game.date + ' ' + game.time;
+        game.timestamp = helper.getTimestamp(game.datetime);
 
 
         if (typeof current_cat  != "undefined")

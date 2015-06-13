@@ -943,6 +943,127 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 }
 
 
+MerrybetParser.prototype.getGames = function ($, data) {
+
+    var nparser = require('../betobjects/merrybet').getMerrybetObject();
+
+    var helper = require('../helpers/misc');
+
+    var current_cat = undefined;
+
+    $('#betsTable').children().each(function (index, elem) {
+
+        if ($('#categoryTitlePanel', this).length) {
+            var child = $('#categoryTitlePanel', this).eq(0);
+            var category = { title: '', games: {}}
+
+            $('.header_links2', child).each(function (indx2, elem2) {
+                category.title += ($(this, child).text() + " | ")
+            });
+
+            category.key = helper.generateGameCategoryKey(category.title);
+            current_cat = category;
+            data.categories[current_cat.key] = current_cat;
+        }
+
+        else {
+
+            if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
+
+                var child = $('#betsPanel', this).eq(0);
+
+                var game_title= " - ";
+                var game = constants.newGame().game;
+
+
+                //=================METHOD 1 ==================
+                // TODO: Remember to get the team names when getting the odds because some team names might be incomplete
+
+                var game_title = $('#categoryText',child,  this).eq(0).text();
+
+
+
+
+                /*=================METHOD 2(Less Reliable)=================
+
+                 var vars = $('.outcome_odds_category',child, this).eq(0).attr('onclick');
+
+
+                 if(vars != undefined)
+                 {
+                 vars = vars.split("'");
+                 game_title = vars[3];
+                 }
+                 */
+
+
+
+                game.datetime = $('#betDateText',child,  this).eq(0).text();
+
+                game.timestamp = helper.getTimestamp(game.datetime);
+                game.expireAt =  new Date(game.timestamp);
+
+                game.title = game_title.trim();
+                game.id = helper.generateGameID(game.title)
+                game.sorted_id = helper.generateSortedGameID(game.title)
+
+
+                var sides = game_title.split('-');
+                game.home = sides[0].trim();
+                game.away = sides[1].trim();
+
+
+
+                //TODO  Please don't rely on structure of the website.. use IDs  or CLASS to get Game URLS
+
+
+                var  vars= $('#moreBetsPanel',child, this).eq(0).attr('onclick');
+                if(vars != undefined)
+                {
+                    vars = vars.split("'");
+                    var more_id = vars[1];  //Second Index
+                    var vars2 =  $('#moreBetsPanel',child, this).eq(0).attr('onclick');
+                    if (vars2 != undefined) {
+                        game.url = vars2.split("'")[1];
+                    }
+                }
+
+
+
+
+                /* ==================METHOD 2===========================
+
+                 var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
+
+                 if (vars2 != undefined) {
+                 game.url = vars2.split("'")[1];
+                 }
+
+                 */
+
+
+
+                game.date = game.datetime.split(" ")[0];
+                game.time = game.datetime.split(" ")[1];
+
+
+                if (current_cat != undefined)
+                    game.category_key = current_cat.key;
+
+                data.games.push(game);
+
+            }
+        }
+
+
+    });
+
+    nparser = null;
+    helper = null;
+    root = null;
+
+
+}
 MerrybetParser.prototype.getMatchDays = function ($, data) {
     $('#oddsByDateDropDown').children().each(function (index, elem) {
         var date = $(this).attr('value').trim();
