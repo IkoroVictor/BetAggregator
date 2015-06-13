@@ -909,17 +909,18 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
             {'home': game.home},
             {'away': game.away},
 
-            {'id': {$regex: ('/' +  game.id + '/')}},
-            {'sorted_id': {$regex: ('/' +  game.sorted_id + '/')}},
-            {'id': {$regex: ('/' +  helper.clean_symbols(game.home) + '/')}},
-            {'id': {$regex: ('/' +  helper.clean_symbols(game.away) + '/')}}
+            {'id': {$regex: (  game.id )}},
+            {'sorted_id': {$regex: (  game.sorted_id  )}},
+            {'id': {$regex: (  helper.clean_symbols(game.home)  )}},
+            {'id': {$regex: (  helper.clean_symbols(game.away) )}}
 
         ]}
 
 
+
     process.nextTick(function()
     {
-        db.update(query, {$set: temp_data}, {upsert: true},
+        db.update(query, {$set: temp_data},
             function (err, count, status) {
                 if (err)
                     console.log(err);
