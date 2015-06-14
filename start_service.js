@@ -178,12 +178,15 @@ MongoClient.connect(constants.MONGO_DB_URL, function (err, temp_db) {
 
 //Run garbage collector every minute
 rule = new scheduler.RecurrenceRule();
-rule.minute = new scheduler.Range(0, 59, 1);
+rule.minute = 60;
 
 gc_job = scheduler.scheduleJob(rule, function () {
     //console.log('running gc..');
 
-    global.gc();
+    cleardb(function () {
+        request(options, load_all).setMaxListeners(0);
+    });
+    global.gc()
     //console.log('ended running gc..');
 });
 
