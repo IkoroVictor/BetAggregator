@@ -2,7 +2,7 @@
  * Created by olaokenyi on 5/12/15.
  */
 
-require('newrelic');
+//require('newrelic');
 var request = require('request');
 var async = require('async');
 var constants = require('./constants').loadConstants();
@@ -178,7 +178,7 @@ MongoClient.connect(constants.MONGO_DB_URL, function (err, temp_db) {
 
 //Run garbage collector every minute
 rule = new scheduler.RecurrenceRule();
-rule.minute = 60;
+rule.minute = new scheduler.Range(0, 59, 59);
 
 gc_job = scheduler.scheduleJob(rule, function () {
     //console.log('running gc..');
