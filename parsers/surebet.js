@@ -926,7 +926,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
                     console.log(err);
                 else
                 {
-                    console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
+                    console.log('[DB SAVED] GAME-ID: '+ game.id +' COUNT: ' + count );
                     console.log('[DATA]: ' + JSON.stringify(temp_data));
 
                 }

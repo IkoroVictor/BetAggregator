@@ -933,7 +933,6 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                     console.log(err);
                 else
                 {
-                    console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
                     //console.log('[DATA]: ' + JSON.stringify(temp_data));
 
                 }
