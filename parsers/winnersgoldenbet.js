@@ -40,7 +40,7 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
         var game_code = '';
         var temp = $('.game-title', this);
 
-        if(temp.length)
+        if(temp.length > 0)
         {
             t = temp.text().split('(');
             tag = nparser.clean_symbols(t[0].toLowerCase());
