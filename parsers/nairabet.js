@@ -952,7 +952,7 @@ NairabetParser.prototype.getGames = function ($, data) {
 
     if ($(this).attr('id') == 'categoryTitlePanel') {
         var child = $(this);
-        var category = { title: '', key: '', games: {}}
+        var category = { title: '', key: ''}
 
         category.title = $('#categoryText', child).text().trim();
         category.key = helper.generateGameCategoryKey(category.title);
