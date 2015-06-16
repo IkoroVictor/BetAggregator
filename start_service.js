@@ -126,6 +126,7 @@ var load_all = function (error, response, body) {
                                                             if (err) {
                                                                 console.log(err);
                                                             }
+															bet_days.update({short_date: val.short_date}, {$set: {categories: val.categories}});
 
                                                         })
 
