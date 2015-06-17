@@ -1024,6 +1024,7 @@ NairabetParser.prototype.getMatchDays = function ($, data) {
             categories: {
 
             },
+			timestamp: helper.getTimestamp(date + " 00:00"),
             games: []
 
         };

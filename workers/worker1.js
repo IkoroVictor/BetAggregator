@@ -21,7 +21,7 @@ var start = function () {
 
     db.createCollection("days", function (err, bet_days) {
         if (!err) {
-            var cursor = bet_days.find();
+            var cursor = bet_days.find().sort({ timestamp: 1});
 
             db.createCollection('games',
 
