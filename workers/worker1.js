@@ -43,7 +43,7 @@ var start = function () {
 									
                                     services.startNoQueueBetParsingService(constants.winners_golden_bet_home, bet1_obj, bet1, val, games);
                                     services.startNoQueueBetParsingService(constants.stakersden_home, bet2_obj, bet2, val_clone, games);
-                                    console.log('[DOCUMENT COUNT]: ' + documents.length)
+                                    //console.log('[DOCUMENT COUNT]: ' + documents.length)
                                 })
 
 
