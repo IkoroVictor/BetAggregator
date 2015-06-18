@@ -17,6 +17,7 @@ var helper = require('../helpers/misc');
 var cheerio = require('cheerio');
 var MongoClient = require('mongodb').MongoClient;
 var services = require('../services')
+var extend = require('util')._extend;
 
 var db = null;
 
@@ -43,7 +44,7 @@ var start = function () {
 
                                     services.startNoQueueBetParsingService(constants.surebet_home, bet1_obj, bet1, val, games);
                                     services.startNoQueueBetParsingService(constants._1960bet_home, bet2_obj, bet2, val, games);
-                                    console.log('[DOCUMENT COUNT]: ' + documents.length)
+                                    //console.log('[DOCUMENT COUNT]: ' + documents.length)
                                 })
 
 
