@@ -958,7 +958,7 @@ NairabetParser.prototype.getGames = function ($, data) {
         category.key = helper.generateGameCategoryKey(category.title);
         //console.log(category.key);
         current_cat = category;
-        data.categories[current_cat.key] = current_cat;
+        data.categories.push(current_cat);
     }
     else {
         if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
@@ -1021,9 +1021,7 @@ NairabetParser.prototype.getMatchDays = function ($, data) {
             full_date: $(this).text(),
             short_date: date,
             sql_date: '',
-            categories: {
-
-            },
+            categories: [],
 			timestamp: helper.getTimestamp(date + " 00:00"),
             games: []
 
