@@ -1,4 +1,18 @@
 /**
+/**
+/**
+/**
+/**
+/**
+/**
+/**
+/**
+/**
+/**
+/**
+/**
+/**
+/**
  * Created by olaokenyi on 5/10/15.
  */
 
@@ -920,8 +934,8 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
 
             {'id': {$regex: (  game.id )}},
             {'sorted_id': {$regex: (  game.sorted_id  )}},
-            {'id': {$regex: (  helper.clean_symbols(game.home)  )}},
-            {'id': {$regex: (  helper.clean_symbols(game.away) )}}
+            {'id': {$regex: (  helper.clean_symbols(game.home).toLowerCase()  )}},
+            {'id': {$regex: (  helper.clean_symbols(game.away).toLowerCase() )}}
 
         ]}
 
