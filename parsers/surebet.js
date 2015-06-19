@@ -962,24 +962,28 @@ SurebetParser.prototype.getGames = function ($, data) {
 
 
 
-        if ($(this).attr('id') == 'categoryTitlePanel') {
-            var child = $(this);
+        if ($('#categoryTitlePanel', this).length) {
+            var child = $('#categoryTitlePanel', this);
             var category = { title: '', key: '', games: {}}
 
             category.title = $('#categoryText', child).text().trim();
             category.key = helper.generateGameCategoryKey(category.title);
 
             current_cat = category;
+
             data.categories[current_cat.key] = current_cat;
+
         }
         else {
-            if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
+            if ($('.category_bets',this).length > 0) {
 
                 var game = require('../constants').newGame().game;
-                var vars = $('#codePanel', this).eq(0).next().next().attr('onclick').replace(/'/g, '').split(',');
+                var vars = $('.category_outcome', this).eq(0).attr('onclick').replace(/'/g, '').split(',');
 
 
-                game.datetime = $('.home_event_start', this).eq(0).text();
+                game.datetime = $('#betDateText', this).eq(0).text() + " " + $('#betDateText', this).eq(1).text() ;
+
+
                 game.timestamp = helper.getTimestamp(game.datetime);
                 game.expireAt =  new Date(game.timestamp);
 
@@ -996,7 +1000,7 @@ SurebetParser.prototype.getGames = function ($, data) {
                 //console.log(game.datetime);
                 //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
 
-                var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
+                var vars2 = $('input[type="button"]', this).eq(0).attr('onclick');
 
                 if (vars2 != undefined) {
                     game.url = vars2.split("'")[1];
