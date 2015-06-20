@@ -180,7 +180,7 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
         else {
             console.log('Error updating game ' + day.short_date + ' : ' + e);
         }
-    }).setMaxListeners(0);;
+    }).setMaxListeners(0);
 
 
 }
