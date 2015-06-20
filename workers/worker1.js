@@ -41,8 +41,8 @@ var start = function () {
 									//Need to clone the day object if using more than one BetParser
 									var val_clone = extend({}, val);
 									
-                                    services.startNoQueueBetParsingService(constants.winners_golden_bet_home, bet1_obj, bet1, val, games);
-                                    //services.startNoQueueBetParsingService(constants.stakersden_home, bet2_obj, bet2, val_clone, games);
+                                    //services.startNoQueueBetParsingService(constants.winners_golden_bet_home, bet1_obj, bet1, val, games);
+                                    services.startNoQueueBetParsingService(constants.stakersden_home, bet2_obj, bet2, val_clone, games);
                                     //console.log('[DOCUMENT COUNT]: ' + documents.length)
                                 })
 
