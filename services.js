@@ -4,7 +4,7 @@
 
 
 
-var request = require('request');
+var request = require('request').defaults({maxRedirects:20});;
 var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
 var scheduler = require('node-schedule');

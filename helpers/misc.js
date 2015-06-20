@@ -64,10 +64,7 @@ exports.getDefaultRequestOption = function()
     return {
         uri: '',
         //proxy: 'http://127.0.0.1:8080',
-        headers: {
-
-            'User-Agent': 'request'
-        }
+       
     };
 }
 
