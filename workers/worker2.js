@@ -39,7 +39,7 @@ var start = function () {
                             if (documents.length > 0) {
 
 
-                              documents.forEach(function (val){
+                                async.each(documents, function (val, callback) {
 
 									//Need to clone the day object if using more than one BetParser
 									var val_clone = extend({}, val);
