@@ -145,7 +145,7 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
 
             console.log(' Games loaded for' + op.uri);
 
-            Object.keys(day.games).forEach(function (key) {
+            async.each(Object.keys(day.games), function (key, callback) {
 
                 var value = day.games[key];
                 if (value.url == '') //NO Game Options
