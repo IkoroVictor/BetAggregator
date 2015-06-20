@@ -3,7 +3,7 @@
  */
 
 
-var request = require('request');
+var request = require('request').defaults({maxRedirects:40});
 var async = require('async');
 var constants = require('../constants').loadConstants();
 var bet1 = require('../parsers/winnersgoldenbet').getWGBParser();
