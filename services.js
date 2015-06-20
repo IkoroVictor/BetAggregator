@@ -16,6 +16,7 @@ var queue = async.queue(function (task, callback) {
     callback();
 }, constants.QUEUE_CONCURRENCY)
 
+process.setMaxListeners(0); 
 
 exports.startBetParsingService = function (home_url, nb_object, nb_parser, games_queue, day, game_collection) {
 
@@ -157,7 +158,7 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
 
                 request(op, function (e3, r3, b3) {
                     if ((!e3 || (typeof b3 != 'undefined')) && r3.statusCode == 200 ) {
-                        this.setMaxListeners(0);
+                        
                         var root_obj = cheerio.load(b3);
                         try {
                             nb_parser.getGameOdds(root_obj, value, game_collection);
@@ -172,14 +173,14 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
                         console.log('Game odds for game : ' + op.uri + ' loaded');
 
                     }
-                })
+                }).setMaxListeners(0);
 
             })
         }
         else {
             console.log('Error updating game ' + day.short_date + ' : ' + e);
         }
-    });
+    }).setMaxListeners(0);;
 
 
 }
