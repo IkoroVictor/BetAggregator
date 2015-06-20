@@ -128,7 +128,7 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
 
             var root_obj = cheerio.load(b);
             try {
-			console.log(b);
+			//console.log(b);
                 nb_parser.getGames(root_obj, day);
             }
             catch (ex) {
