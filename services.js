@@ -261,7 +261,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
 
         if(current_index != (days.length - 1))
         {
-            console.log("[LENGTH] : "  + days.length);
+            console.log("[LENGTH]  : "  + days.length + ' [INDEX]: ' + current_index);
             self(home_url, nb_object,nb_parser, days, (current_index + 1), game_collection);
         }
 
