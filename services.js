@@ -259,8 +259,9 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
             console.log('Error updating game ' + day.short_date + ' : ' + e);
         }
 
-        if(current_index < (days.length))
+        if(current_index != (days.length - 1))
         {
+            console.log("[LENGTH] : "  + days.length);
             self(home_url, nb_object,nb_parser, days, (current_index + 1), game_collection);
         }
 
