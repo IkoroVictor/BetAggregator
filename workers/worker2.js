@@ -17,7 +17,7 @@ var helper = require('../helpers/misc');
 var cheerio = require('cheerio');
 var MongoClient = require('mongodb').MongoClient;
 var services = require('../services')
-var extend = require('util')._extend;
+
 
 var db = null;
 
@@ -41,10 +41,10 @@ var start = function () {
 
 
 									//Need to clone the day object if using more than one BetParser
-									var doc_clone = extend({}, documents);
+
 									
                                     //services.startNoQueueBetParsingService(constants.surebet_home, bet1_obj, bet1, documents,0, games);
-                                    services.startNoQueueBetParsingServiceSeries(constants._1960bet_home, bet2_obj, bet2, doc_clone,0, games);
+                                    services.startNoQueueBetParsingServiceSeries(constants._1960bet_home, bet2_obj, bet2, documents,0, games);
                                     //console.log('[DOCUMENT COUNT]: ' + documents.length)
 
 

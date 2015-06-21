@@ -11,6 +11,7 @@ var cheerio = require('cheerio');
 var scheduler = require('node-schedule');
 var constants = require('./constants').loadConstants();
 var async = require('async');
+var extend = require('util')._extend;
 
 var queue = async.queue(function (task, callback) {
     task.payload();
@@ -190,7 +191,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
 
 
     var op = helper.getDefaultRequestOption();
-    var day = days[current_index];
+    var day = extend({}, days[current_index]);
     op.uri = home_url + nb_object.day_bet_url_suffix + day.short_date;
     console.log('Begin loading games for' + op.uri);
     var self = exports.startNoQueueBetParsingServiceSeries;
