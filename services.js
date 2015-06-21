@@ -193,7 +193,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
     var day = days[current_index];
     op.uri = home_url + nb_object.day_bet_url_suffix + day.short_date;
     console.log('Begin loading games for' + op.uri);
-
+    var self = exports.startNoQueueBetParsingServiceSeries;
 
     request(op,function (e, r, b) {
         this.setMaxListeners(0);
@@ -261,7 +261,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
 
         if(current_index != (days.length - 1))
         {
-            this(home_url, nb_object,nb_parser, days, (current_index + 1), game_collection);
+            self(home_url, nb_object,nb_parser, days, (current_index + 1), game_collection);
         }
 
     }).setMaxListeners(0);
