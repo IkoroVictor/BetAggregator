@@ -4,7 +4,8 @@
 
 
 
-var request = require('request').defaults({maxRedirects:20});;
+var request = require('request').defaults({maxRedirects: 20});
+;
 var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
 var scheduler = require('node-schedule');
@@ -16,7 +17,7 @@ var queue = async.queue(function (task, callback) {
     callback();
 }, constants.QUEUE_CONCURRENCY)
 
-process.setMaxListeners(0); 
+process.setMaxListeners(0);
 
 exports.startBetParsingService = function (home_url, nb_object, nb_parser, games_queue, day, game_collection) {
 
@@ -121,14 +122,14 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
     console.log('Begin loading games for' + op.uri);
 
 
-    request(op, function (e, r, b) {
+    request(op,function (e, r, b) {
         this.setMaxListeners(0);
         if (!e) {
 
 
             var root_obj = cheerio.load(b);
             try {
-			//console.log(b);
+                //console.log(b);
                 nb_parser.getGames(root_obj, day);
             }
             catch (ex) {
@@ -157,9 +158,9 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
                 op.uri = home_url + value.url;
                 console.log('Loading game odds for game : ' + op.uri);
 
-                request(op, function (e3, r3, b3) {
-                    if ((!e3 || (typeof b3 != 'undefined')) && r3.statusCode == 200 ) {
-                        
+                request(op,function (e3, r3, b3) {
+                    if ((!e3 || (typeof b3 != 'undefined')) && r3.statusCode == 200) {
+
                         var root_obj = cheerio.load(b3);
                         try {
                             nb_parser.getGameOdds(root_obj, value, game_collection);
@@ -181,6 +182,88 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
         else {
             console.log('Error updating game ' + day.short_date + ' : ' + e);
         }
+    }).setMaxListeners(0);
+
+
+}
+exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_parser, days, current_index, game_collection) {
+
+
+    var op = helper.getDefaultRequestOption();
+    var day = days[current_index];
+    op.uri = home_url + nb_object.day_bet_url_suffix + day.short_date;
+    console.log('Begin loading games for' + op.uri);
+
+
+    request(op,function (e, r, b) {
+        this.setMaxListeners(0);
+        if (!e) {
+
+
+            var root_obj = cheerio.load(b);
+            try {
+                //console.log(b);
+                nb_parser.getGames(root_obj, day);
+            }
+            catch (ex) {
+                console.log("Could not parse games for  " + op.uri + ": " + ex);
+
+            }
+
+            root_obj = null;
+            b = null;
+            global.gc();
+
+            if (day.games.length < 1) {
+                console.log(' No games loaded for' + op.uri);
+
+            }
+            else {
+
+
+                console.log(' Games loaded for' + op.uri);
+
+                async.each(Object.keys(day.games), function (key, callback) {
+
+                    var value = day.games[key];
+                    if (value.url == '') //NO Game Options
+                        return;
+                    var op = helper.getDefaultRequestOption();
+
+                    op.uri = home_url + value.url;
+                    console.log('Loading game odds for game : ' + op.uri);
+
+                    request(op,function (e3, r3, b3) {
+                        if ((!e3 || (typeof b3 != 'undefined')) && r3.statusCode == 200) {
+
+                            var root_obj = cheerio.load(b3);
+                            try {
+                                nb_parser.getGameOdds(root_obj, value, game_collection);
+                            }
+                            catch (ex) {
+                                console.log(ex)
+                            }
+                            root_obj = null;
+                            b3 = null;
+                            global.gc();
+                            //console.log('[[===========]' + JSON.stringify(process.memoryUsage()))
+                            console.log('Game odds for game : ' + op.uri + ' loaded');
+
+                        }
+                    }).setMaxListeners(0);
+
+                })
+            }
+        }
+        else {
+            console.log('Error updating game ' + day.short_date + ' : ' + e);
+        }
+
+        if(current_index != (days.length - 1))
+        {
+            this(home_url, nb_object,nb_parser, days, (current_index + 1), game_collection);
+        }
+
     }).setMaxListeners(0);
 
 

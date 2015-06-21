@@ -25,7 +25,7 @@ var start = function () {
 
     db.createCollection("days", function (err, bet_days) {
         if (!err) {
-            var cursor = bet_days.find().sort({ timestamp: 1});
+            var cursor = bet_days.find({},  { categories: 0 }).sort({ timestamp: 1});
 
             db.createCollection('games',
 
@@ -39,15 +39,14 @@ var start = function () {
                             if (documents.length > 0) {
 
 
-                               documents.forEach( function (val) {
 
 									//Need to clone the day object if using more than one BetParser
-									var val_clone = extend({}, val);
+									var doc_clone = extend({}, documents);
 									
-                                    //services.startNoQueueBetParsingService(constants.surebet_home, bet1_obj, bet1, val, games);
-                                    services.startNoQueueBetParsingService(constants._1960bet_home, bet2_obj, bet2, val_clone, games);
+                                    //services.startNoQueueBetParsingService(constants.surebet_home, bet1_obj, bet1, documents,0, games);
+                                    services.startNoQueueBetParsingServiceSeries(constants._1960bet_home, bet2_obj, bet2, doc_clone,0, games);
                                     //console.log('[DOCUMENT COUNT]: ' + documents.length)
-                                })
+
 
 
                             }
