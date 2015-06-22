@@ -233,7 +233,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.first_goal_time_tag) {
             var val = nparser.parse_op_with_keys($(this), $);
             try {
-                temp_data = {};
+
                 for (var i = 0; i < val.odds.length; i++) {
                     temp_data['odds.first_goal_time.' + nparser.clean(val.keys[i]).toLowerCase() + '._1960.value'] = val.odds[i];
                 }

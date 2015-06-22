@@ -42,8 +42,10 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 3)) {
                 temp_data["odds.1.sb.value"] = odds[0];
+                console.log(temp_data);
                 temp_data["odds.x.sb.value"] = odds[1];
                 temp_data["odds.2.sb.value"] = odds[2];
+                console.log('passed straight tag')
             }
 
 
@@ -210,7 +212,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.first_goal_time_tag) {
             var val = nparser.parse_op_with_keys($(this).parent().next(), $);
             try {
-                temp_data = {};
+
                 for (var i = 0; i < val.odds.length; i++) {
                     temp_data['odds.first_goal_time.' + nparser.clean(val.keys[i]).toLowerCase() + '.sb.value'] = val.odds[i];
                 }
@@ -917,7 +919,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         ]}
 
 
-
+      //console.log(temp_data);
     process.nextTick(function()
     {
         db.update(query, {$set: temp_data},
