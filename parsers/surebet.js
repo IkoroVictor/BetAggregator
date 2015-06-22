@@ -42,10 +42,10 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 3)) {
                 temp_data["odds.1.sb.value"] = odds[0];
-                console.log(temp_data);
+
                 temp_data["odds.x.sb.value"] = odds[1];
                 temp_data["odds.2.sb.value"] = odds[2];
-                console.log('passed straight tag')
+              
             }
 
 
