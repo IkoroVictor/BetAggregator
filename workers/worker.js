@@ -9,8 +9,7 @@
 var request = require('request');
 var async = require('async');
 var constants = require('../constants').loadConstants();
-var bet1 = require('../parsers/surebet').getSurebetParser();
-var bet1_obj = require('../betobjects/surebet').getSurebetObject();
+
 
 var helper = require('../helpers/misc');
 var cheerio = require('cheerio');
