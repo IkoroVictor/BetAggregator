@@ -8,6 +8,8 @@
     <file url="file://$PROJECT_DIR$/testers/oddsloader_surebet.js" libraries="{Node.js v0.10.32 Core Modules}" />
     <file url="file://$PROJECT_DIR$/testers/oddsloader_surebet_net.js" libraries="{Node.js v0.12.4 Core Modules}" />
     <file url="file://$PROJECT_DIR$/testers/oddsloader_wgb.js" libraries="{Node.js v0.10.32 Core Modules}" />
+    <excludedPredefinedLibrary name="HTML" />
+    <excludedPredefinedLibrary name="HTML5 / EcmaScript 5" />
   </component>
 </project>
 

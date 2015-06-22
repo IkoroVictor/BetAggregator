@@ -963,40 +963,49 @@ NairabetParser.prototype.getGames = function ($, data) {
     else {
         if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
 
-            var game = require('../constants').newGame().game;
-            var vars = $('#codePanel', this).eq(0).next().next().attr('onclick').replace(/'/g, '').split(',');
+            try
+            {
+                var vars = $('.bst_button', '#betsPanel', this).eq(0).attr('onclick').replace(/'/g, '').split(',');
+                var game = require('../constants').newGame().game;
 
 
-            game.datetime = $('.home_event_start', this).eq(0).text();
+                game.datetime = $('.home_event_start', this).eq(0).text();
 
-            game.timestamp  = helper.getTimestamp(game.datetime);
-            game.expireAt =  new Date(game.timestamp);
+                game.timestamp  = helper.getTimestamp(game.datetime);
+                game.expireAt =  new Date(game.timestamp);
 
-            game.title = vars[2].trim();
-            game.id = helper.generateGameID(game.title)
-            game.sorted_id = helper.generateSortedGameID(game.title)
+                game.title = vars[2].trim();
+                game.id = helper.generateGameID(game.title)
+                game.sorted_id = helper.generateSortedGameID(game.title)
 
-            var sides = vars[2].split('-');
-            game.home = sides[0].trim();
-            game.away = sides[1].trim();
+                var sides = vars[2].split('-');
+                game.home = sides[0].trim();
+                game.away = sides[1].trim();
 
 
-            //console.log(game.datetime);
-            //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
+                //console.log(game.datetime);
+                //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
 
-            var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
+                var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
 
-            if (vars2 != undefined) {
-                game.url = vars2.split("'")[1];
+                if (vars2 != undefined) {
+                    game.url = vars2.split("'")[1];
+                }
+                game.date = game.datetime.split(" ")[0];
+                game.time = game.datetime.split(" ")[1];
+
+
+                if (current_cat != undefined)
+                    game.category_key = current_cat.key;
+
+                data.games.push(game)
             }
-            game.date = game.datetime.split(" ")[0];
-            game.time = game.datetime.split(" ")[1];
+            catch(ex)
+            {
+                //Parsing Error
+                console.log(ex);
+            }
 
-
-            if (current_cat != undefined)
-                game.category_key = current_cat.key;
-
-            data.games.push(game);
 
         }
     }
