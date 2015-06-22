@@ -945,8 +945,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
     //return game;
 
    
-     nparser = null;
-     helper = null;
+     //nparser = null;
+     //helper = null;
      root = null;
     //return game;
 }
