@@ -43,8 +43,8 @@ var start = function () {
 									//Need to clone the day object if using more than one BetParser
 
 									
-                                    //services.startNoQueueBetParsingService(constants.surebet_home, bet1_obj, bet1, documents,0, games);
-                                    services.startNoQueueBetParsingServiceSeries(constants._1960bet_home, bet2_obj, bet2, documents,0, games);
+                                    services.startNoQueueBetParsingService(constants.surebet_home, bet1_obj, bet1, documents,0, games);
+                                    //services.startNoQueueBetParsingServiceSeries(constants._1960bet_home, bet2_obj, bet2, documents,0, games);
                                     //console.log('[DOCUMENT COUNT]: ' + documents.length)
 
 
