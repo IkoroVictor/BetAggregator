@@ -45,7 +45,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
                 temp_data["odds.x.sb.value"] = odds[1];
                 temp_data["odds.2.sb.value"] = odds[2];
-              
+
             }
 
 
