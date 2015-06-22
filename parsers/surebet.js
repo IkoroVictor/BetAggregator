@@ -2,15 +2,15 @@
  * Created by olaokenyi on 5/10/15.
  */
 
-
+var nparser = require('../betobjects/surebet').getSurebetObject();
+var helper = require('../helpers/misc');
 function SurebetParser() {
 
 }
 
 SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
-    var nparser = require('../betobjects/surebet').getSurebetObject();
-    var helper = require('../helpers/misc');
+
     var root = $('#betsTable');
 
     var match_title = $('.column_middle_left', '#eventTitlePanel', root).text();
