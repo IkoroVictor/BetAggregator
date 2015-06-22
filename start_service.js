@@ -101,7 +101,7 @@ var load_all = function (error, response, body) {
                                                 nb.getGames(root_obj, val);
                                             }
                                             catch (ex) {
-                                                console.log(err);
+                                                console.log(ex);
                                                 return;
                                             }
                                             b = null;

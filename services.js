@@ -258,6 +258,11 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
         }
         else {
             console.log('Error updating game ' + day.short_date + ' : ' + e);
+            console.log('Retrying.... for ' + day.short_date);
+
+            //TODO: please review this code, might be volatile and blocking.
+            self(home_url, nb_object,nb_parser, days, (current_index), game_collection)
+            return;
         }
 
         if(current_index != (days.length - 1))
