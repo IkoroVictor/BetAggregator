@@ -40,7 +40,7 @@ var start = function () {
 
 									
                                     //services.startNoQueueBetParsingServiceSeries(constants.winners_golden_bet_home, bet1_obj, bet1, documents,0, games);
-                                    services.startNoQueueBetParsingService(constants.stakersden_home, bet2_obj, bet2, documents,0, games);
+                                    services.startNoQueueBetParsingServiceSeries(constants.stakersden_home, bet2_obj, bet2, documents,0, games);
                                     //console.log('[DOCUMENT COUNT]: ' + documents.length)
 
 
