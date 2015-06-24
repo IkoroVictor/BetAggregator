@@ -262,6 +262,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
             }
             else
             {
+                global.gc();
                 setTimeout(function()
                 {
                     global.gc();
