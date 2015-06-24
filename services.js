@@ -187,7 +187,7 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
 
 
 }
-exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_parser, days, current_index, game_collection) {
+exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_parser, days, current_index, game_collection, callback) {
 
 
     var op = helper.getDefaultRequestOption();
@@ -259,6 +259,10 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
             {
                 console.log("[LENGTH]  : "  + days.length + ' [INDEX]: ' + current_index);
                 self(home_url, nb_object,nb_parser, days, (current_index + 1), game_collection);
+            }
+            else
+            {
+                setTimeout(callback, constants.RECURRENT_JOB_INTERVAL);
             }
         }
         else {

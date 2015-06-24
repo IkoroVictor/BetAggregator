@@ -30,7 +30,7 @@ function Constants()
 
 
     //System Constants
-    this.RECURRENT_JOB_INTERVAL = 5; //in minutes
+    this.RECURRENT_JOB_INTERVAL = 120000; //in ms
     this.QUEUE_CONCURRENCY = 3;
     this.FUZZY_STRING_MATCH_THRESHOLD = 0.8; //
     this.TIMESTAMP_DIFFERENCE = 640000; //

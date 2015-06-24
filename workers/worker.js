@@ -49,32 +49,32 @@ var start = function () {
                                             case 1:
                                                 var bet1 = require('../parsers/nairabet').getNairabetParser();
                                                 var bet1_obj = require('../betobjects/nairabet').getNairabetObject();
-                                                services.startNoQueueBetParsingServiceSeries(constants.nairabet_home, bet1_obj, bet1, documents,0, games);
+                                                services.startNoQueueBetParsingServiceSeries(constants.nairabet_home, bet1_obj, bet1, documents,0, games, start);
                                                 break;
                                             case 2:
                                                 var bet1 = require('../parsers/merrybet').getMerrybetParser();
                                                 var bet1_obj = require('../betobjects/merrybet').getMerrybetObject();
-                                                services.startNoQueueBetParsingServiceSeries(constants.merrybet_home, bet1_obj, bet1, documents,0, games);
+                                                services.startNoQueueBetParsingServiceSeries(constants.merrybet_home, bet1_obj, bet1, documents,0, games, start);
                                                 break;
                                             case 3:
                                                 var bet1 = require('../parsers/surebet').getSurebetParser();
                                                 var bet1_obj = require('../betobjects/surebet').getSurebetObject();
-                                                services.startNoQueueBetParsingServiceSeries(constants.surebet_home, bet1_obj, bet1, documents,0, games);
+                                                services.startNoQueueBetParsingServiceSeries(constants.surebet_home, bet1_obj, bet1, documents,0, games, start);
                                                 break;
                                             case 4:
                                                 var bet1 = require('../parsers/_1960bet').get_1960betParser();
                                                 var bet1_obj = require('../betobjects/_1960bet').get_1960betObject();
-                                                services.startNoQueueBetParsingServiceSeries(constants._1960bet_home, bet1_obj, bet1, documents,0, games);
+                                                services.startNoQueueBetParsingServiceSeries(constants._1960bet_home, bet1_obj, bet1, documents,0, games, start);
                                                 break;
                                             case 5:
                                                 var bet1 = require('../parsers/stakersden').getStakersdenParser();
                                                 var bet1_obj = require('../betobjects/stakersden').getStakersdenObject();
-                                                services.startNoQueueBetParsingServiceSeries(constants.stakersden_home, bet1_obj, bet1, documents,0, games);
+                                                services.startNoQueueBetParsingServiceSeries(constants.stakersden_home, bet1_obj, bet1, documents,0, games, start);
                                                 break;
                                             case 6:
                                                 var bet1 = require('../parsers/winnersgoldenbet').getWGBParser();
                                                 var bet1_obj = require('../betobjects/winnersgoldenbet').getWGBObject();
-                                                services.startNoQueueBetParsingServiceSeries(constants.winners_golden_bet_home, bet1_obj, bet1, documents,0, games);
+                                                services.startNoQueueBetParsingServiceSeries(constants.winners_golden_bet_home, bet1_obj, bet1, documents,0, games, start);
                                                 break;
 
                                         }
