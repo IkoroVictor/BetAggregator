@@ -258,7 +258,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
             if(current_index != (days.length - 1))
             {
                 console.log("[LENGTH]  : "  + days.length + ' [INDEX]: ' + current_index);
-                self(home_url, nb_object,nb_parser, days, (current_index + 1), game_collection);
+                self(home_url, nb_object,nb_parser, days, (current_index + 1), game_collection, callback);
             }
             else
             {
@@ -275,7 +275,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
             console.log('Retrying.... for ' + day.short_date);
 
             //TODO: please review this code, might be volatile and blocking.
-            self(home_url, nb_object,nb_parser, days, (current_index), game_collection)
+            self(home_url, nb_object,nb_parser, days, (current_index), game_collection, callback)
 
         }
 
