@@ -263,11 +263,11 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
             else
             {
                 global.gc();
-                setTimeout(function()
+                /*setTimeout(function()
                 {
                     global.gc();
                     callback();
-                }, constants.RECURRENT_JOB_INTERVAL);
+                }, constants.RECURRENT_JOB_INTERVAL);*/
             }
         }
         else {
