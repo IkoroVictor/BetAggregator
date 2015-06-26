@@ -968,8 +968,8 @@ MerrybetParser.prototype.getGames = function ($, data) {
 
     $('#betsTable').children().each(function (index, elem) {
 
-        if ($('#categoryTitlePanel', this).length) {
-            var child = $('#categoryTitlePanel', this).eq(0);
+        if ($(this).attr('id') == 'categoryTitlePanel') {
+            var child = $(this);
             var category = { title: '', games: {}}
 
             $('.header_links2', child).each(function (indx2, elem2) {
@@ -983,7 +983,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
 
         else {
 
-            if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
+            if (($('.category_bets_odd', this).length) || ($('.category_bets_even', this).length)) {
 
                 var child = $('#betsPanel', this).eq(0);
 
@@ -994,7 +994,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
                 //=================METHOD 1 ==================
                 // TODO: Remember to get the team names when getting the odds because some team names might be incomplete
 
-                var game_title = $('#categoryText',child,  this).eq(0).text();
+                var game_title = $('.betsPanelEventName-text',this).text();
 
 
 
@@ -1013,7 +1013,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
 
 
 
-                game.datetime = $('#betDateText',child,  this).eq(0).text();
+                game.datetime = $('.betsPage-evenStart',  this).eq(0).text();
 
                 game.timestamp = helper.getTimestamp(game.datetime);
                 game.expireAt =  new Date(game.timestamp);
@@ -1031,16 +1031,12 @@ MerrybetParser.prototype.getGames = function ($, data) {
 
                 //TODO  Please don't rely on structure of the website.. use IDs  or CLASS to get Game URLS
 
-
-                var  vars= $('#moreBetsPanel',child, this).eq(0).attr('onclick');
+                //YOU CAN STILL USE THE 'onclick' available at the game title
+                var  vars= $('#moreBetsPanel', this).attr('onclick');
                 if(vars != undefined)
                 {
-                    vars = vars.split("'");
-                    var more_id = vars[1];  //Second Index
-                    var vars2 =  $('#moreBetsPanel',child, this).eq(0).attr('onclick');
-                    if (vars2 != undefined) {
-                        game.url = vars2.split("'")[1];
-                    }
+                    game.url = vars.split("'")[1];
+
                 }
 
 
