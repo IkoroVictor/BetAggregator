@@ -959,12 +959,12 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
 
 StakersdenParser.prototype.getGames = function ($, data) {
 
-    var game = constants.newGame().game;
+
 
     $('.bst_seller_row_even, .bst_seller_row_odd', '#betsTable').each( function(index, elem)
     {
 
-
+        var game = constants.newGame().game;
         var vars = $('#categoryText', this).eq(0).text();
 
 

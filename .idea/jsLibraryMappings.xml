@@ -4,7 +4,7 @@
     <file url="file://$PROJECT_DIR$" libraries="{Node.js Dependencies for BetAggregator}" />
     <file url="file://$PROJECT_DIR$/testers/oddsloader_1960.js" libraries="{Node.js v0.10.32 Core Modules}" />
     <file url="file://$PROJECT_DIR$/testers/oddsloader_net.js" libraries="{Node.js v0.12.4 Core Modules}" />
-    <file url="file://$PROJECT_DIR$/testers/oddsloader_stakers.js" libraries="{Node.js v0.10.32 Core Modules}" />
+    <file url="file://$PROJECT_DIR$/testers/oddsloader_stakers.js" libraries="{Node.js v0.10.32 Core Modules, Node.js v0.12.4 Core Modules}" />
     <file url="file://$PROJECT_DIR$/testers/oddsloader_surebet.js" libraries="{Node.js v0.10.32 Core Modules}" />
     <file url="file://$PROJECT_DIR$/testers/oddsloader_surebet_net.js" libraries="{Node.js v0.12.4 Core Modules}" />
     <file url="file://$PROJECT_DIR$/testers/oddsloader_wgb.js" libraries="{Node.js v0.10.32 Core Modules}" />
