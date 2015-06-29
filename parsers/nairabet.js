@@ -952,11 +952,12 @@ NairabetParser.prototype.getGames = function ($, data) {
 
     if ($(this).attr('id') == 'categoryTitlePanel') {
         var child = $(this);
-        var category = { title: '', key: ''}
+        var category = { title: '', key: '', type:''}
 
         category.title = $('#categoryText', child).text().trim();
         category.key = helper.generateGameCategoryKey(category.title);
         //console.log(category.key);
+		category.type = category.title.split('-')[0].toLowerCase().trim();
         current_cat = category;
         data.categories.push(current_cat);
     }
@@ -996,7 +997,10 @@ NairabetParser.prototype.getGames = function ($, data) {
 
 
                 if (current_cat != undefined)
+				{
                     game.category_key = current_cat.key;
+                    game.type = current_cat.type;
+				}
 
                 data.games.push(game)
             }
