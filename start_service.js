@@ -47,15 +47,20 @@ var options = helper.getDefaultRequestOption();
 options.uri = constants.nairabet_home;
 
 
-var cleardb = function (callback) {
+var indexdb = function (callback) {
     db.createCollection("days", function (err, bet_days) {
-        bet_days.remove({});
+        //bet_days.remove({});
+        bet_days.ensureIndex({timestamp: 1}, {unique: true})
+        bet_days.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
         console.log('Days Cleared');
 
         db.createCollection("games", function (err, games) {
-            games.remove({});
+            //games.remove({});
+            games.ensureIndex({id: 1, timestamp: 1}, {unique: true});
+			games.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
             console.log('Games Cleared');
         })
+		console.log(new Date(Date.now()).toString());
         callback()
     })
 
@@ -162,7 +167,7 @@ MongoClient.connect(constants.MONGO_DB_URL, function (err, temp_db) {
         GLOBAL.db_conn_status = 1;
         db = temp_db;
 
-        cleardb(function () {
+        indexdb(function () {
             request(options, load_all).setMaxListeners(0);
         });
 
