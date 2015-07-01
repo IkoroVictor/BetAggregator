@@ -83,7 +83,7 @@ var load_all = function (error, response, body) {
                 helper.exec_db(db, function () {
                     db.createCollection("days", function (err, bet_days) {
                         if (!err) {
-						bet_days.ensureIndex({timestamp: 1}, {unique: true})
+						bet_days.ensureIndex({timestamp: 1}, {unique: true, dropDups: true })
 						bet_days.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
 
                             bet_days.insert([val], function (err, res) {
@@ -127,7 +127,7 @@ var load_all = function (error, response, body) {
 
                                                 function (er2, games) {
                                                     if (!er2) {
-													games.ensureIndex({id: 1, timestamp: 1}, {unique: true});
+													games.ensureIndex({id: 1, timestamp: 1}, {unique: true, dropDups: true });
 													games.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
 
                                                         games.insert(val.games, function (err, res) {
