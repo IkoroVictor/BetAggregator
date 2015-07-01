@@ -87,13 +87,13 @@ var load_all = function (error, response, body) {
                                 if (!error) {
                                     bet_days.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0}, function (error2) {
                                         if (!error2) {
-                                            bet_days.insert([val], function (err, res) {
+                                            bet_days.insert([val], {keepGoing:true},function (err, res) {
                                                 if (err) {
-                                                    console.log(val);
-                                                    console.log(err);
+                                                    if(err.code !=  11000)
+                                                        console.log(err);
                                                 }
 
-                                                else {
+
 
 
                                                     var op = helper.getDefaultRequestOption();
@@ -137,7 +137,7 @@ var load_all = function (error, response, body) {
                                                                                     console.log(error)
                                                                                     if (!error2) {
 
-                                                                                        games.insert(val.games, function (err, res) {
+                                                                                        games.insert(val.games, {keepGoing:true},function (err, res) {
                                                                                             if (err) {
                                                                                                 console.log(err);
                                                                                             }
@@ -162,7 +162,7 @@ var load_all = function (error, response, body) {
                                                             console.log('Error updating game ' + val.short_date)
                                                         }
                                                     })
-                                                }
+
                                             });
 
                                         }
