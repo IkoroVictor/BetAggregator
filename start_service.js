@@ -130,18 +130,17 @@ var load_all = function (error, response, body) {
                                                                 function (er2, games) {
                                                                     if (!er2) {
                                                                         games.ensureIndex({id: 1, timestamp: 1}, {unique: true, dropDups: true }, function (error) {
-                                                                            console.log(error)
                                                                             if (!error) {
                                                                                 games.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0}, function (error2) {
 
-                                                                                    console.log(error)
+
                                                                                     if (!error2) {
 
                                                                                         games.insert(val.games, {keepGoing:true},function (err, res) {
                                                                                             if (err) {
                                                                                                 console.log(err);
                                                                                             }
-                                                                                            else
+
                                                                                                 bet_days.update({short_date: val.short_date}, {$set: {categories: val.categories}});
                                                                                         });
 

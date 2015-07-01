@@ -978,6 +978,8 @@ NairabetParser.prototype.getGames = function ($, data) {
 
                 game.timestamp  = helper.getTimestamp(game.datetime);
                 game.expireAt =  new Date(game.timestamp);
+                game.expireAt.setHours(game.expireAt.getHours() - 1)
+                game.expireAt.setMinutes(game.expireAt.getMinutes() - 5)
 
                 game.title = vars[2].trim();
                 game.id = helper.generateGameID(game.title)
