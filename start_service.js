@@ -49,13 +49,13 @@ options.uri = constants.nairabet_home;
 
 var cleardb = function (callback) {
     db.createCollection("days", function (err, bet_days) {
-        bet_days.remove({});
+        //bet_days.remove({});
         //bet_days.ensureIndex({timestamp: 1}, {unique: true})
         //bet_days.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
         console.log('Days Indexed');
 
         db.createCollection("games", function (err, games) {
-            games.remove({});
+            //games.remove({});
 
             console.log('Games Indexed');
         })
