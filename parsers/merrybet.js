@@ -973,7 +973,11 @@ MerrybetParser.prototype.getGames = function ($, data) {
             var category = { title: '', games: {}}
 
             $('.header_links2', child).each(function (indx2, elem2) {
-                category.title += ($(this, child).text() + " | ")
+               var txt = $(this, child).text();
+               if(indx2 == 0)
+                    category.type = txt.trim.toLowerCase();
+
+               category.title += (txt + " | ")
             });
 
             category.key = helper.generateGameCategoryKey(category.title);
@@ -982,7 +986,8 @@ MerrybetParser.prototype.getGames = function ($, data) {
         }
 
         else {
-
+            if(current_cat != undefined && !helper.is_allowed_type(current_cat.type))
+                                return;
             if (($('.category_bets_odd', this).length) || ($('.category_bets_even', this).length)) {
 
                 var child = $('#betsPanel', this).eq(0);

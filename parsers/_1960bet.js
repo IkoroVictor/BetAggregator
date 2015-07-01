@@ -977,6 +977,7 @@ _1960betParser.prototype.getGames = function ($, data) {
             var category = { title: '', key: '', games: {}}
 
             category.title = $(child).children().eq(0).text().trim();
+            category.type = category.title.split('-').trim().toLowerCase();
             category.key = helper.generateGameCategoryKey(category.title);
             //console.log(category.key);
             current_cat = category;

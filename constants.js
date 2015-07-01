@@ -35,6 +35,8 @@ function Constants()
     this.FUZZY_STRING_MATCH_THRESHOLD = 0.8; //
     this.TIMESTAMP_DIFFERENCE = 640000; //
 
+    this.ALLOWED_GAME_TYPES = [/soccer/gi];
+
 
 
    //Heroku/PaaS Constants

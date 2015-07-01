@@ -2,7 +2,7 @@
  * Created by olaokenyi on 5/11/15.
  */
 
-
+var constants = require('../constants').loadConstants();
 
 exports.generateGameCategoryKey = function(val)
 {
@@ -135,7 +135,7 @@ exports.getTimestamp = function(date_time)
 exports.validate_date = function(timestamp)
 {
 
-    var constants = require('../constants').loadConstants();
+
     if((Date.now() - timestamp )< constants.TIMESTAMP_DIFFERENCE)
     {
         constants = null;
@@ -143,5 +143,17 @@ exports.validate_date = function(timestamp)
     }
     constants = null;
     return true;
+}
+
+exports.is_allowed_type = function(key)
+{
+    var x = false;
+    constants.ALLOWED_GAME_TYPES.forEach( function(val)
+    {
+        if(key.match(val) != null)
+            x=true;
+    });
+    return x;
+
 }
 

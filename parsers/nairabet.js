@@ -962,6 +962,10 @@ NairabetParser.prototype.getGames = function ($, data) {
         data.categories.push(current_cat);
     }
     else {
+        if(current_cat != undefined && !helper.is_allowed_type(current_cat.type))
+                    return;
+
+
         if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
 
             try

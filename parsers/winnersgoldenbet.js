@@ -965,6 +965,14 @@ WGBParser.prototype.getGames = function ($, data) {
     $('.event-panel').each( function(index, elem)
     {
 
+        var x =  $('.outcome', this)
+        if(x.length)
+        {
+            x = x.eq(0).attr('data-gamename');
+            if(x != '1X2')
+            return;
+
+        }
         var game = require('../constants').newGame().game;
         var vars = $('.event-name', this).eq(0).text();
 
@@ -991,6 +999,12 @@ WGBParser.prototype.getGames = function ($, data) {
         }
         game.date = game.datetime.split(" ")[0];
         game.time = game.datetime.split(" ")[1];
+
+
+        if (typeof current_cat  != "undefined")
+            game.category_key = current_cat.key;
+
+
 
 
         if (typeof current_cat  != "undefined")
