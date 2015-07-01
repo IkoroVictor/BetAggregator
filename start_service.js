@@ -47,17 +47,16 @@ var options = helper.getDefaultRequestOption();
 options.uri = constants.nairabet_home;
 
 
-var indexdb = function (callback) {
+var cleardb = function (callback) {
     db.createCollection("days", function (err, bet_days) {
         bet_days.remove({});
-        bet_days.ensureIndex({timestamp: 1}, {unique: true})
-        bet_days.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
+        //bet_days.ensureIndex({timestamp: 1}, {unique: true})
+        //bet_days.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
         console.log('Days Indexed');
 
         db.createCollection("games", function (err, games) {
             games.remove({});
-            games.ensureIndex({id: 1, timestamp: 1}, {unique: true});
-			games.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
+            
             console.log('Games Indexed');
         })
 		console.log(new Date(Date.now()).toString());
@@ -84,6 +83,8 @@ var load_all = function (error, response, body) {
                 helper.exec_db(db, function () {
                     db.createCollection("days", function (err, bet_days) {
                         if (!err) {
+						bet_days.ensureIndex({timestamp: 1}, {unique: true})
+						bet_days.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
 
                             bet_days.insert([val], function (err, res) {
                                 if (err) {
@@ -126,6 +127,8 @@ var load_all = function (error, response, body) {
 
                                                 function (er2, games) {
                                                     if (!er2) {
+													games.ensureIndex({id: 1, timestamp: 1}, {unique: true});
+													games.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
 
                                                         games.insert(val.games, function (err, res) {
                                                             if (err) {
@@ -167,7 +170,7 @@ MongoClient.connect(constants.MONGO_DB_URL, function (err, temp_db) {
         GLOBAL.db_conn_status = 1;
         db = temp_db;
 
-        indexdb(function () {
+        cleardb(function () {
             request(options, load_all).setMaxListeners(0);
         });
 
