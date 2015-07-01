@@ -56,10 +56,10 @@ var cleardb = function (callback) {
 
         db.createCollection("games", function (err, games) {
             games.remove({});
-            
+
             console.log('Games Indexed');
         })
-		console.log(new Date(Date.now()).toString());
+        console.log(new Date(Date.now()).toString());
         callback()
     })
 
@@ -83,70 +83,95 @@ var load_all = function (error, response, body) {
                 helper.exec_db(db, function () {
                     db.createCollection("days", function (err, bet_days) {
                         if (!err) {
-						bet_days.ensureIndex({timestamp: 1}, {unique: true, dropDups: true })
-						bet_days.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
+                            bet_days.ensureIndex({timestamp: 1}, {unique: true, dropDups: true }, function(error)
+                            {
+                                if(!error)
+                                {
+                                    bet_days.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0}, function(error2)
+                                    {
+                                        if(!error2)
+                                        {
+                                            bet_days.insert([val], function (err, res) {
+                                                if (err) {
+                                                    console.log(val);
+                                                    console.log(err);
+                                                }
 
-                            bet_days.insert([val], function (err, res) {
-                                if (err) {
-                                    console.log(val);
-                                    console.log(err);
-                                }
+                                                else {
 
-                                else {
-
-                                    var op = helper.getDefaultRequestOption();
-                                    op.uri = constants.nairabet_home + nb_obj.day_bet_url_suffix + val.short_date;
-                                    console.log('Begin loading games for' + op.uri);
-                                    request(op, function (e, r, b) {
-                                        this.setMaxListeners(0);
-                                        if (!e) {
-
-
-                                            var root_obj = cheerio.load(b);
-                                            try {
-                                                nb.getGames(root_obj, val);
-                                            }
-                                            catch (ex) {
-                                                console.log(ex);
-                                                return;
-                                            }
-                                            b = null;
-                                            $ = null;
-                                            global.gc();
+                                                    var op = helper.getDefaultRequestOption();
+                                                    op.uri = constants.nairabet_home + nb_obj.day_bet_url_suffix + val.short_date;
+                                                    console.log('Begin loading games for' + op.uri);
+                                                    request(op, function (e, r, b) {
+                                                        this.setMaxListeners(0);
+                                                        if (!e) {
 
 
-                                            if (val.games.length < 1) {
-                                                console.log(' No games loaded for' + op.uri);
-                                                return;
-                                            }
-                                            console.log(' Games loaded for' + op.uri);
-                                            db.createCollection('games',
-
-                                                /*{short_date: val.short_date },
-                                                 { $set: {games: val.games, categories: val.categories}},*/
-
-                                                function (er2, games) {
-                                                    if (!er2) {
-													games.ensureIndex({id: 1, timestamp: 1}, {unique: true, dropDups: true });
-													games.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0})
-
-                                                        games.insert(val.games, function (err, res) {
-                                                            if (err) {
-                                                                console.log(err);
+                                                            var root_obj = cheerio.load(b);
+                                                            try {
+                                                                nb.getGames(root_obj, val);
                                                             }
-															bet_days.update({short_date: val.short_date}, {$set: {categories: val.categories}});
+                                                            catch (ex) {
+                                                                console.log(ex);
+                                                                return;
+                                                            }
+                                                            b = null;
+                                                            $ = null;
+                                                            global.gc();
 
-                                                        })
 
-                                                    } else {
-                                                        console.log('Error updating game ' + val.short_date)
-                                                    }
-                                                })
+                                                            if (val.games.length < 1) {
+                                                                console.log(' No games loaded for' + op.uri);
+                                                                return;
+                                                            }
+                                                            console.log(' Games loaded for' + op.uri);
+                                                            db.createCollection('games',
+
+                                                                /*{short_date: val.short_date },
+                                                                 { $set: {games: val.games, categories: val.categories}},*/
+
+                                                                function (er2, games) {
+                                                                    if (!er2) {
+                                                                        games.ensureIndex({id: 1, timestamp: 1}, {unique: true, dropDups: true }, function (error) {
+                                                                            if (!error) {
+                                                                                games.ensureIndex({'expireAt': 1}, {expireAfterSeconds: 0}, function(error)
+                                                                                {
+                                                                                    if(!error)
+                                                                                    {
+                                                                                        games.insert(val.games, function (err, res) {
+                                                                                            if (err) {
+                                                                                                console.log(err);
+                                                                                            }
+                                                                                            bet_days.update({short_date: val.short_date}, {$set: {categories: val.categories}});
+
+                                                                                        })
+                                                                                    }
+                                                                                })
+                                                                            }
+                                                                            else {
+                                                                                console.log(error);
+                                                                            }
+                                                                        });
+
+
+
+
+                                                                    } else {
+                                                                        console.log('Error updating game ' + val.short_date)
+                                                                    }
+                                                                })
+                                                        }
+                                                    });
+
+                                                }
+                                            });
                                         }
                                     });
-
                                 }
-                            });
+                            })
+
+
+
                         }
 
                         else {
