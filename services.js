@@ -207,7 +207,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
                 nb_parser.getGames(root_obj, day);
             }
             catch (ex) {
-                console.log("Could not parse games for  " + op.uri + ": " + ex);
+                console.log("Could not parse games for  " + op.uri + ": " + ex.stack);
 
             }
 

@@ -979,6 +979,10 @@ SurebetParser.prototype.getGames = function ($, data) {
 
         }
         else {
+
+            if(current_cat != undefined && !helper.is_allowed_type(current_cat.type))
+                return;
+
             if ($('.category_bets',this).length > 0) {
 
                 var game = require('../constants').newGame().game;

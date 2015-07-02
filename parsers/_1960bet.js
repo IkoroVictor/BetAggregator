@@ -986,6 +986,9 @@ _1960betParser.prototype.getGames = function ($, data) {
             data.categories[current_cat.key] = current_cat;
         }
         else {
+            if(current_cat != undefined && !helper.is_allowed_type(current_cat.type))
+                return;
+
             if($(this).attr('class') == 'bets_page_categoryContainer')
                 $(this).children().each(function(i,e)
                 {
