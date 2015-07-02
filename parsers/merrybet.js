@@ -977,7 +977,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
             $('.header_links2', child).each(function (indx2, elem2) {
                var txt = $(this, child).text();
                if(indx2 == 0)
-                    category.type = txt.trim.toLowerCase();
+                    category.type = txt.trim().toLowerCase();
 
                category.title += (txt + " | ")
             });

@@ -972,8 +972,8 @@ SurebetParser.prototype.getGames = function ($, data) {
 
             category.title = $('#categoryText', child).text().trim();
             category.key = helper.generateGameCategoryKey(category.title);
-            console.log(category.title)
-            category.type = category.title.split('-').trim().toLowerCase();
+
+            category.type = category.title.split('-')[0].trim().toLowerCase();
             current_cat = category;
 
             data.categories[current_cat.key] = current_cat;
