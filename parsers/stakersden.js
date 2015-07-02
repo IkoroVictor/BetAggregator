@@ -923,6 +923,8 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
             {'away': game.away},
 
             {'id': {$regex: (  game.id )}},
+            {'home': {$regex: (  game.home_key )}},
+            {'away': {$regex: (  game.away_key )}},
             {'sorted_id': {$regex: (  game.sorted_id  )}},
             {'id': {$regex: (  helper.clean_symbols(game.home).toLowerCase()  )}},
             {'id': {$regex: (  helper.clean_symbols(game.away).toLowerCase() )}}
@@ -978,6 +980,8 @@ StakersdenParser.prototype.getGames = function ($, data) {
         var sides = vars.split('-');
         game.home = sides[0].trim();
         game.away = sides[1].trim();
+        game.home_key = helper.getSignificantKey(game.home);
+        game.away_key = helper.getSignificantKey(game.away);
 
 
         //console.log(game.datetime);

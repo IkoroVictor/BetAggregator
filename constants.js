@@ -63,7 +63,9 @@ function GameContainer()
         date:'',
         timestamp:0,
         home:'',
+        home_key:'',
         away: '',
+        away_key: '',
         url: '',
         play_codes: {},
         odds: {}

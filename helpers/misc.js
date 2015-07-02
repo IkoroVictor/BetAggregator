@@ -30,6 +30,20 @@ exports.clean = function(val)
 {
     return val.trim().replace(/ /g, '');
 }
+exports.getSignificantKey = function(val)
+{
+    var x = '';
+    val.split(' ').forEach(function (key)
+    {
+        if(key.trim().length >= x.length )
+        {
+            x = key.trim();
+        }
+
+    })
+
+    return x.toLowerCase();
+}
 
 
 exports.clean_symbols = function(val)
