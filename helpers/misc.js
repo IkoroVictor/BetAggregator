@@ -35,7 +35,7 @@ exports.getSignificantKey = function(val)
     var x = '';
     val.split(' ').forEach(function (key)
     {
-        if(key.trim().length >= x.length )
+        if(key.trim().length > x.length )
         {
             x = key.trim();
         }

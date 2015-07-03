@@ -18,7 +18,12 @@ function Constants()
 
     //DB constants
     //this.MONGO_DB_URL= 'mongodb://localhost:27017/naijaodds';
-    this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@ds031962.mongolab.com:31962/naijaodds';
+
+    //MONGOLAB
+    //this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@ds031962.mongolab.com:31962/naijaodds';
+
+    //OBJECTROCKET
+    this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@iad-c11-1.objectrocket.com:48074/naijaodds';
 
 
     //this.MONGO_DB_HOST = 'ds012345.mongolab.com';
