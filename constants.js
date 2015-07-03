@@ -20,10 +20,10 @@ function Constants()
     //this.MONGO_DB_URL= 'mongodb://localhost:27017/naijaodds';
 
     //MONGOLAB
-    //this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@ds031962.mongolab.com:31962/naijaodds';
+    this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@ds031962.mongolab.com:31962/naijaodds';
 
     //OBJECTROCKET
-    this.MONGO_DB_URL= '2db6c70605a36497764d214c2a7b8347/iad-c11-0.objectrocket.com:48074,iad-c11-1.objectrocket.com:48074/naijaodds';
+    //this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus@iad-c11-1.objectrocket.com:48074/naijaodds';
 
 
     //this.MONGO_DB_HOST = 'ds012345.mongolab.com';
