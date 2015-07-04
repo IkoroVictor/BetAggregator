@@ -30,6 +30,7 @@ Nairabet.prototype.parse_outcomes = function( cheerio_object, root)
         outcomes.push(outcome);
 
     });
+    console.log(outcomes);
 
     return outcomes;
 }
