@@ -26,7 +26,7 @@ Nairabet.prototype.parse_outcomes = function( cheerio_object, root)
     var outcomes = [];
     root('.category_outcome', cheerio_object).each(function(i, e)
     {
-        var outcome = cherrio_object(this).attr('onclick').split(",")[7];
+        var outcome = cheerio_object(this).attr('onclick').split(",")[7];
         outcomes.push(outcome);
 
     });

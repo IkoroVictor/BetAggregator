@@ -14,21 +14,19 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
     var root = $('#betsTable');
 
     var match_title = $('#eventTitleText', root).text();
-    var match_time = $('#eventStartText',  root).text();
+    var match_time = $('#eventStartText', root).text();
 
 
     game.time = match_time;
     game.title = match_title;
 
-    try
-    {
+    try {
         game.id = helper.generateGameID(game.title)
         game.sorted_id = helper.generateSortedGameID(game.title)
         game.home = match_title.split('-')[0].trim();
         game.away = match_title.split('-')[1].trim();
     }
-    catch(ex)
-    {
+    catch (ex) {
         console.log(ex);
     }
 
@@ -40,11 +38,10 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
         var game_code = '';
         var temp = $('#gameNameText', this);
 
-        if(temp.length)
-        {
-             t = temp.text().split('(');
-             tag = nparser.clean_symbols(t[0].toLowerCase());
-             game_code = t[1].split(')')[0];
+        if (temp.length) {
+            t = temp.text().split('(');
+            tag = nparser.clean_symbols(t[0].toLowerCase());
+            game_code = t[1].split(')')[0];
         }
 
 
@@ -698,7 +695,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.correct_score_first_half_tag )) {
             var val = nparser.parse_op_with_keys($(this).next(), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i])+'.mb.value']  = val.odds[i];
+                temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i]) + '.mb.value'] = val.odds[i];
 
                 if (obj != undefined) {
                     //obj.mb.value = val.odds[i];                 }
@@ -711,7 +708,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.correct_score_second_half_tag )) {
             var val = nparser.parse_op_with_keys($(this).next(), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i])+'.mb.value']  = val.odds[i];
+                temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i]) + '.mb.value'] = val.odds[i];
 
                 if (obj != undefined) {
                     //obj.mb.value = val.odds[i];                 }
@@ -896,26 +893,23 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.number_of_goals_tag )) {
             var val = nparser.parse_op_with_keys($(this).next(), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i])+'.mb.value']  = val.odds[i];
+                temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i]) + '.mb.value'] = val.odds[i];
 
                 if (obj != undefined) {
                     //obj.mb.value = val.odds[i];                 }
                 }
             }
         }
-        if(tag.trim() != '')
-        {
-            temp_data['play_codes.'+ tag + '.mb'] = game_code;
+        if (tag.trim() != '') {
+            temp_data['play_codes.' + tag + '.mb'] = game_code;
         }
-
-
 
 
     });
 
     var query = {'timestamp': game.timestamp,
 
-        $or:[
+        $or: [
             {'id': game.id},
             {'sorted_id': game.sorted_id},
             {'home': game.home},
@@ -930,25 +924,19 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
         ]}
 
-    process.nextTick(function()
-    {
+    process.nextTick(function () {
         db.update(query, {$set: temp_data},
             function (err, count, status) {
                 if (err)
                     console.log(err);
-                else
-                {
-                    console.log('[DB SAVED] GAME-ID: '+ game.id+' COUNT: ' + count );
+                else {
+                    console.log('[DB SAVED] GAME-ID: ' + game.id + ' COUNT: ' + count);
                     //console.log('[DATA]: ' + JSON.stringify(temp_data));
 
                 }
                 temp_data = null;
             });
     })
-
-
-    
-
 
 
     nparser = null;
@@ -975,11 +963,11 @@ MerrybetParser.prototype.getGames = function ($, data) {
             var category = { title: '', games: {}}
 
             $('.header_links2', child).each(function (indx2, elem2) {
-               var txt = $(this, child).text();
-               if(indx2 == 0)
+                var txt = $(this, child).text();
+                if (indx2 == 0)
                     category.type = txt.trim().toLowerCase();
 
-               category.title += (txt + " | ")
+                category.title += (txt + " | ")
             });
 
             category.key = helper.generateGameCategoryKey(category.title);
@@ -988,16 +976,18 @@ MerrybetParser.prototype.getGames = function ($, data) {
         }
 
         else {
-            if(current_cat != undefined && !helper.is_allowed_type(current_cat.type))
-                                return;
+            if (current_cat != undefined && !helper.is_allowed_type(current_cat.type))
+                return;
 
-            if (($(this).attr('class') != 'bets-page-categoryContainer'))
-                        return;
+            //if (($(this).attr('class') != 'bets-page-categoryContainer'))
+            if (($('.category_bets_odd', this).length ==0) || ($('.category_bets_even', this).length ==0))
+                    return;
 
-            $(this).children().each(function(indx, elem)
-            {
-                try { //if (($('.category_bets_odd', this).length) || ($('.category_bets_even', this).length)) {
-                    if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
+            $(this).children().each(function (indx, elem) {
+                try {
+
+                //if (($('.category_bets_odd', this).length) || ($('.category_bets_even', this).length)) {
+                 if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
 
                         //var child = $('#betsPanel', this).eq(0);
                         var child = $(this);
@@ -1013,15 +1003,15 @@ MerrybetParser.prototype.getGames = function ($, data) {
                         //var game_title = $('#categoryText',this).text();
                         /*=================METHOD 2(Less Reliable)=================
 
-                     var vars = $('.outcome_odds_category',child, this).eq(0).attr('onclick');
+                         var vars = $('.outcome_odds_category',child, this).eq(0).attr('onclick');
 
 
-                     if(vars != undefined)
-                     {
-                     vars = vars.split("'");
-                     game_title = vars[3];
-                     }
-                     */
+                         if(vars != undefined)
+                         {
+                         vars = vars.split("'");
+                         game_title = vars[3];
+                         }
+                         */
                         game.datetime = $(
 
                             '.betsPage-evenStart', this).eq(0).text();
@@ -1044,34 +1034,32 @@ MerrybetParser.prototype.getGames = function ($, data) {
                         //TODO  Please don't rely on structure of the website.. use IDs  or CLASS to get Game URLS
 
                         //YOU CAN STILL USE THE 'onclick' available at the game title
-                        var vars= $('#moreBetsPanel', this).attr('onclick');
-                    if(
-                        vars != undefined)
-                    {
-                        game.url = vars.split("'")[1];
+                        var vars = $('#moreBetsPanel', this).attr('onclick');
+                        if (
+                            vars != undefined) {
+                            game.url = vars.split("'")[1];
 
+                        }
+
+                        game.date = game.datetime.split(" ")[0];
+                        game.time = game.datetime.split(" ")[1];
+
+
+                        if (current_cat != undefined)
+                            game.category_key = current_cat.key;
+
+                        data.games.push(game)
+                        ;
                     }
-
-                    game.date = game.datetime.split(" ")[0];
-                    game.time = game.datetime.split(" ")[1];
-
-
-                    if (current_cat != undefined)
-                        game.category_key = current_cat.key;
-
-                    data.games.push(game)
-                    ;
-                }
                 } catch (e) {
-                        console.log(e);
+                    console.log(e);
                 }
 
 
             })
 
 
-            }
-
+        }
 
 
     });
