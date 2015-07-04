@@ -29,7 +29,9 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
     $('.event_game_title_tr').each(function (indx, elem) {
         var tag = nparser.clean_symbols($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
         game_code = '';
+
         var outcomes_ids =  nparser.parse_outcomes($(this).next(), $);
+
         obj = undefined;
         //parse straight_win
         if (tag == nparser.straight_win_tag) {
@@ -56,7 +58,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.handicap_0_1_1.nb.value'] = odds[0];
                 temp_data['odds.handicap_0_1_x.nb.value'] = odds[1];
                 temp_data['odds.handicap_0_1_2.nb.value'] = odds[2]
-                
+
             }
 
         }

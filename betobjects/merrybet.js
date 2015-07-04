@@ -29,6 +29,19 @@ Merrybet.prototype.parse_basic_op = function( cheerio_object, root)
     return odds;
 }
 
+Merrybet.prototype.parse_outcomes = function( cheerio_object, root)
+{
+    var outcomes = [];
+    root('.eoo_p', cheerio_object).each(function(i, e)
+    {
+        outcomes.push(parseFloat(root(this).text().trim()));
+
+
+    });
+
+    return odds;
+}
+
 
 
 Merrybet.prototype.parse_op_with_keys = function( cheerio_object, root)

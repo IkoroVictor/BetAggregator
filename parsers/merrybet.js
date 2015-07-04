@@ -990,90 +990,102 @@ MerrybetParser.prototype.getGames = function ($, data) {
         else {
             if(current_cat != undefined && !helper.is_allowed_type(current_cat.type))
                                 return;
-            if (($('.category_bets_odd', this).length) || ($('.category_bets_even', this).length)) {
 
-                var child = $('#betsPanel', this).eq(0);
+            if (($(this).attr('class') != 'bets-page-categoryContainer')
+                        return;
 
-                var game_title= " - ";
-                var game = constants.newGame().game;
+            $(this).children().each(function(indx, elem)
+            {
+                //if (($('.category_bets_odd', this).length) || ($('.category_bets_even', this).length)) {
+                    if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
 
+                    //var child = $('#betsPanel', this).eq(0);
+                    var child = $(this);
 
-                //=================METHOD 1 ==================
-                // TODO: Remember to get the team names when getting the odds because some team names might be incomplete
-
-                var game_title = $('.betsPanelEventName-text',this).text();
-
-
-
-
-                /*=================METHOD 2(Less Reliable)=================
-
-                 var vars = $('.outcome_odds_category',child, this).eq(0).attr('onclick');
+                    var game_title= " - ";
+                    var game = constants.newGame().game;
 
 
-                 if(vars != undefined)
-                 {
-                 vars = vars.split("'");
-                 game_title = vars[3];
-                 }
-                 */
+                    //=================METHOD 1 ==================
+                    // TODO: Remember to get the team names when getting the odds because some team names might be incomplete
+
+                    var game_title = $('.betsPanelEventName-text',this).text();
+                    //var game_title = $('#categoryText',this).text();
 
 
 
-                game.datetime = $('.betsPage-evenStart',  this).eq(0).text();
 
-                game.timestamp = helper.getTimestamp(game.datetime);
-                game.expireAt =  new Date(game.timestamp);
+                    /*=================METHOD 2(Less Reliable)=================
 
-                game.title = game_title.trim();
-                game.id = helper.generateGameID(game.title)
-                game.sorted_id = helper.generateSortedGameID(game.title)
+                     var vars = $('.outcome_odds_category',child, this).eq(0).attr('onclick');
 
 
-                var sides = game_title.split('-');
-                game.home = sides[0].trim();
-                game.away = sides[1].trim();
-                game.home_key = helper.getSignificantKey(game.home);
-                game.away_key = helper.getSignificantKey(game.away);
+                     if(vars != undefined)
+                     {
+                     vars = vars.split("'");
+                     game_title = vars[3];
+                     }
+                     */
 
 
 
-                //TODO  Please don't rely on structure of the website.. use IDs  or CLASS to get Game URLS
+                    game.datetime = $('.betsPage-evenStart',  this).eq(0).text();
 
-                //YOU CAN STILL USE THE 'onclick' available at the game title
-                var  vars= $('#moreBetsPanel', this).attr('onclick');
-                if(vars != undefined)
-                {
-                    game.url = vars.split("'")[1];
+                    game.timestamp = helper.getTimestamp(game.datetime);
+                    game.expireAt =  new Date(game.timestamp);
 
+                    game.title = game_title.trim();
+                    game.id = helper.generateGameID(game.title)
+                    game.sorted_id = helper.generateSortedGameID(game.title)
+
+
+                    var sides = game_title.split('-');
+                    game.home = sides[0].trim();
+                    game.away = sides[1].trim();
+                    game.home_key = helper.getSignificantKey(game.home);
+                    game.away_key = helper.getSignificantKey(game.away);
+
+
+
+                    //TODO  Please don't rely on structure of the website.. use IDs  or CLASS to get Game URLS
+
+                    //YOU CAN STILL USE THE 'onclick' available at the game title
+                    var  vars= $('#moreBetsPanel', this).attr('onclick');
+                    if(vars != undefined)
+                    {
+                        game.url = vars.split("'")[1];
+
+                    }
+
+
+
+
+                    /* ==================METHOD 2===========================
+
+                     var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
+
+                     if (vars2 != undefined) {
+                     game.url = vars2.split("'")[1];
+                     }
+
+                     */
+
+
+
+                    game.date = game.datetime.split(" ")[0];
+                    game.time = game.datetime.split(" ")[1];
+
+
+                    if (current_cat != undefined)
+                        game.category_key = current_cat.key;
+
+                    data.games.push(game);
                 }
+            })
 
-
-
-
-                /* ==================METHOD 2===========================
-
-                 var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
-
-                 if (vars2 != undefined) {
-                 game.url = vars2.split("'")[1];
-                 }
-
-                 */
-
-
-
-                game.date = game.datetime.split(" ")[0];
-                game.time = game.datetime.split(" ")[1];
-
-
-                if (current_cat != undefined)
-                    game.category_key = current_cat.key;
-
-                data.games.push(game);
 
             }
-        }
+
 
 
     });
