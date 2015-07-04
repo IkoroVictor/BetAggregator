@@ -991,7 +991,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
             if(current_cat != undefined && !helper.is_allowed_type(current_cat.type))
                                 return;
 
-            if (($(this).attr('class') != 'bets-page-categoryContainer')
+            if (($(this).attr('class') != 'bets-page-categoryContainer'))
                         return;
 
             $(this).children().each(function(indx, elem)
