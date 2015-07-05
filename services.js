@@ -53,7 +53,7 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
                     return;
                 }
 
-                console.log(' Games loaded for' + op.uri);
+                //console.log(' Games loaded for' + op.uri);
 
                 async.each(Object.keys(day.games), function (key) {
 
@@ -63,7 +63,7 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
                     var op = helper.getDefaultRequestOption();
 
                     op.uri = home_url + value.url;
-                    console.log('Loading game odds for game : ' + op.uri);
+                    //console.log('Loading game odds for game : ' + op.uri);
 
                     var rule = new scheduler.RecurrenceRule();
                     rule.minute = new scheduler.Range(0, 59, constants.RECURRENT_JOB_INTERVAL);
@@ -90,7 +90,7 @@ exports.startBetParsingService = function (home_url, nb_object, nb_parser, games
                                     b3 = null;
                                     global.gc();
                                     //console.log('[[===========]' + JSON.stringify(process.memoryUsage()))
-                                    console.log('Game odds for game : ' + op.uri + ' loaded');
+                                    //console.log('Game odds for game : ' + op.uri + ' loaded');
 
                                 }
                             })
@@ -223,7 +223,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
             else {
 
 
-                console.log(' Games loaded for' + op.uri);
+                //console.log(' Games loaded for' + op.uri);
 
                 async.each(Object.keys(day.games), function (key, callback) {
 
@@ -233,7 +233,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
                     var op = helper.getDefaultRequestOption();
 
                     op.uri = home_url + value.url;
-                    console.log('Loading game odds for game : ' + op.uri);
+                    //console.log('Loading game odds for game : ' + op.uri);
 
                     request(op,function (e3, r3, b3) {
                         if ((!e3 || (typeof b3 != 'undefined')) && r3.statusCode == 200) {
@@ -249,7 +249,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
                             b3 = null;
                             global.gc();
                             //console.log('[[===========]' + JSON.stringify(process.memoryUsage()))
-                            console.log('Game odds for game : ' + op.uri + ' loaded');
+                           // console.log('Game odds for game : ' + op.uri + ' loaded');
 
                         }
                     }).setMaxListeners(0);
@@ -258,7 +258,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
             }
             if(current_index != (days.length - 1))
             {
-                console.log("[LENGTH]  : "  + days.length + ' [INDEX]: ' + current_index);
+                //console.log("[LENGTH]  : "  + days.length + ' [INDEX]: ' + current_index);
                 self(home_url, nb_object,nb_parser, days, (current_index + 1), game_collection, callback);
             }
             else
