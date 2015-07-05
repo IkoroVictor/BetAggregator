@@ -19,7 +19,7 @@ var queue = async.queue(function (task, callback) {
 }, constants.QUEUE_CONCURRENCY)
 
 process.setMaxListeners(0);
-
+console.time("Worker");
 exports.startBetParsingService = function (home_url, nb_object, nb_parser, games_queue, day, game_collection) {
 
 
@@ -190,7 +190,7 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
 exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_parser, days, current_index, game_collection, callback) {
 
 
-    console.time("Worker");
+
     var op = helper.getDefaultRequestOption();
     var day = extend({}, days[current_index]);
     op.uri = home_url + nb_object.day_bet_url_suffix + day.short_date;
