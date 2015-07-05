@@ -22,6 +22,27 @@ function _1960bet()
 
 _1960bet.prototype = nb.getNairabetObject();
 
+_1960bet.prototype.parse_outcome_ids = function( cheerio_object, root)
+{
+    var outcomes = [];
+    root('.eventBetPage_oo_p', cheerio_object).each(function(i, e)
+    {
+        try {
+            var outcomes_temp  = root(this, cheerio_object).parent().attr('onclick').split(",");
+            var outcome = outcomes_temp[outcomes_temp.length - 4]
+            outcomes.push(outcome);
+
+        } catch (e) {
+            console.log(ex);
+            outcomes.push(-1)
+        }
+
+
+    });
+
+    return outcomes;
+}
+
 _1960bet.prototype.parse_basic_op = function( cheerio_object, root)
 {
     var odds = [];

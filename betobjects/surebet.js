@@ -18,6 +18,27 @@ Surebet.prototype = nb.getNairabetObject();
 
 Surebet.prototype.parse_basic_op = function( cheerio_object, root)
 {
+    var outcomes = [];
+    root('.event_outcome', cheerio_object).each(function(i, e)
+    {
+        try {
+            var outcomes_temp  = root(this, cheerio_object).attr('onclick').split(",");
+            var outcome = outcomes_temp[outcomes_temp.length - 3]
+            outcomes.push(outcome);
+
+        } catch (e) {
+            console.log(ex);
+            outcomes.push(-1)
+        }
+
+    });
+    //console.log(outcomes);
+
+    return outcomes;
+}
+
+Surebet.prototype.parse_basic_op = function( cheerio_object, root)
+{
     var odds = [];
 
     root('.event_outcome', cheerio_object).each(function(i, e)

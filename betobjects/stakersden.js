@@ -17,6 +17,29 @@ Stakersden.prototype = nb.getNairabetObject();
 
 
 
+Stakersden.prototype.parse_outcome_ids = function( cheerio_object, root)
+{
+
+    var outcomes = [];
+    root('.eoo_p', cheerio_object).each(function(i, e)
+    {
+        try {
+            var outcomes_temp  = root(this, cheerio_object).parent().attr('onclick').split(",");
+            var outcome = outcomes_temp[outcomes_temp.length - 3]
+            outcomes.push(outcome);
+
+        } catch (e) {
+            console.log(ex);
+            outcomes.push(-1)
+        }
+
+    });
+
+    return outcomes;
+
+
+}
+
 Stakersden.prototype.parse_basic_op = function( cheerio_object, root)
 {
 

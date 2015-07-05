@@ -21,14 +21,20 @@ function Nairabet()
 }
 
 
-Nairabet.prototype.parse_outcomes = function( cheerio_object, root)
+Nairabet.prototype.parse_outcome_ids = function( cheerio_object, root)
 {
     var outcomes = [];
     root('.category_outcome', cheerio_object).each(function(i, e)
     {
-        var outcome = root(this, cheerio_object).attr('onclick').split(",")[6];
-        outcomes.push(outcome);
+        try {
+            var outcomes_temp  = root(this, cheerio_object).attr('onclick').split(",");
+            var outcome = outcomes_temp[outcomes_temp.length - 4]
+            outcomes.push(outcome);
 
+        } catch (e) {
+            console.log(ex);
+            outcomes.push(-1)
+        }
     });
     //console.log(outcomes);
 

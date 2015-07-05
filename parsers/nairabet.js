@@ -30,7 +30,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         var tag = nparser.clean_symbols($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
         game_code = '';
 
-        var outcomes_ids =  nparser.parse_outcomes($(this).next(), $);
+        var outcomes_ids =  nparser.parse_outcome_ids($(this).next(), $);
 
         obj = undefined;
         //parse straight_win

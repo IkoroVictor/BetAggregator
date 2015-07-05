@@ -19,6 +19,25 @@ function WGB()
 WGB.prototype = nb.getNairabetObject();
 
 
+WGB.prototype.parse_outcome_ids = function( cheerio_object, root)
+{
+    var outcomes = [];
+    root('.outcome', cheerio_object).each(function(i, e)
+    {
+        try {
+
+            outcomes.push(root(this, cheerio_object).attr('data-outcomeid'));
+
+        } catch (e) {
+            console.log(ex);
+            outcomes.push(-1)
+        }
+
+    });
+    //console.log(outcomes);
+
+    return outcomes;
+}
 WGB.prototype.parse_basic_op = function( cheerio_object, root)
 {
     var odds = [];

@@ -41,6 +41,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
         var tag = ''
         //var game_code = '';
         var temp = $('#gameNameText', this);
+        var outcomes_ids =  nparser.parse_outcome_ids($(this).next(), $);
 
         if(temp.length)
         {
@@ -57,6 +58,9 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data["odds.1.sd.value"] = odds[0];
                 temp_data["odds.x.sd.value"] = odds[1];
                 temp_data["odds.2.sd.value"] = odds[2];
+                temp_data["odds.1.sd.outcome_id"] = outcomes_ids[0];
+                temp_data["odds.x.sd.outcome_id"] = outcomes_ids[1];
+                temp_data["odds.2.sd.outcome_id"] = outcomes_ids[2];
             }
 
 

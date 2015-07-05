@@ -58,6 +58,8 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
         var tag = nparser.clean_symbols($('.eventBetPage_gameName_text', this).text().trim()).toLowerCase();
         var game_code =$('.eventBetPage_gameCode_text', this).text().trim();
 
+        var outcomes_ids =  nparser.parse_outcome_ids($(this), $);
+
         obj = undefined;
         //parse straight_win
         if (tag == nparser.straight_win_tag) {
@@ -67,6 +69,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data["odds.1._1960.value"] = odds[0];
                 temp_data["odds.x._1960.value"] = odds[1];
                 temp_data["odds.2._1960.value"] = odds[2];
+                temp_data["odds.1._1960.outcome_id"] = outcomes_ids[0];
+                temp_data["odds.x._1960.outcome_id"] = outcomes_ids[1];
+                temp_data["odds.2._1960.outcome_id"] = outcomes_ids[2];
             }
 
 

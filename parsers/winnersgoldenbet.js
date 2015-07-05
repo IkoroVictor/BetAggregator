@@ -46,6 +46,7 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
             tag = nparser.clean_symbols(t[0].toLowerCase());
             game_code = t[1].split(')')[0];
         }
+        var outcomes_ids =  nparser.parse_outcome_ids($(this), $);
 
         obj = undefined;
         //parse straight_win
@@ -56,6 +57,9 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data["odds.1.wgb.value"] = odds[0];
                 temp_data["odds.x.wgb.value"] = odds[1];
                 temp_data["odds.2.wgb.value"] = odds[2];
+                temp_data["odds.1.wgb.outcome_id"] = outcomes_ids[0];
+                temp_data["odds.x.wgb.outcome_id"] = outcomes_ids[1];
+                temp_data["odds.2.wgb.outcome_id"] = outcomes_ids[2];
             }
 
 

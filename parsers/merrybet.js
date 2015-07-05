@@ -38,6 +38,8 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
         var game_code = '';
         var temp = $('#gameNameText', this);
 
+        var outcomes_ids =  nparser.parse_outcome_ids($(this).next(), $);
+
         if (temp.length) {
             t = temp.text().split('(');
             tag = nparser.clean_symbols(t[0].toLowerCase());
@@ -53,6 +55,9 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data["odds.1.mb.value"] = odds[0];
                 temp_data["odds.x.mb.value"] = odds[1];
                 temp_data["odds.2.mb.value"] = odds[2];
+                temp_data["odds.1.mb.outcome_id"] = outcomes_ids[0];
+                temp_data["odds.x.mb.outcome_id"] = outcomes_ids[1];
+                temp_data["odds.2.mb.outcome_id"] = outcomes_ids[2];
             }
 
 

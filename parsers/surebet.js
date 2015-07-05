@@ -36,6 +36,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         tag = tag_temp[0];
         game_code = tag_temp[1];
 
+        var outcomes_ids =  nparser.parse_outcome_ids($(this).parent().next(), $);
 
         if (tag == nparser.straight_win_tag) {
             var odds = nparser.parse_basic_op($(this).parent().next(), $);
@@ -45,6 +46,10 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
                 temp_data["odds.x.sb.value"] = odds[1];
                 temp_data["odds.2.sb.value"] = odds[2];
+
+                temp_data["odds.1.sb.outcome_id"] = outcomes_ids[0];
+                temp_data["odds.x.sb.outcome_id"] = outcomes_ids[1];
+                temp_data["odds.2.sb.outcome_id"] = outcomes_ids[2];
 
             }
 
