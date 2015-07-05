@@ -190,6 +190,7 @@ exports.startNoQueueBetParsingService = function (home_url, nb_object, nb_parser
 exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_parser, days, current_index, game_collection, callback) {
 
 
+    console.time("Worker");
     var op = helper.getDefaultRequestOption();
     var day = extend({}, days[current_index]);
     op.uri = home_url + nb_object.day_bet_url_suffix + day.short_date;
@@ -263,6 +264,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
             else
             {
                 global.gc();
+                console.timeEnd("Worker");
                 /*setTimeout(function()
                 {
                     global.gc();
