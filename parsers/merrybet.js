@@ -978,7 +978,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
             category.key = helper.generateGameCategoryKey(category.title);
             current_cat = category;
             data.categories[current_cat.key] = current_cat;
-			console.log(category.type);
+			
         }
 
         else {
@@ -989,7 +989,8 @@ MerrybetParser.prototype.getGames = function ($, data) {
             if (($('.category_bets_odd', this).length ==0) || ($('.category_bets_even', this).length ==0))
                     return;
 
-            $(this).children().each(function (indx, elem) {
+			console.log($(this).attr('class'));
+		   $(this).children().each(function (indx, elem) {
                 try {
 
                 //if (($('.category_bets_odd', this).length) || ($('.category_bets_even', this).length)) {
@@ -1018,9 +1019,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
                          game_title = vars[3];
                          }
                          */
-                        game.datetime = $(
-
-                            '.betsPage-evenStart', this).eq(0).text();
+                        game.datetime = $('.betsPage-evenStart', this).eq(0).text();
 
                         game.timestamp = helper.getTimestamp(game.datetime);
                         game.expireAt = new Date(game.timestamp);
