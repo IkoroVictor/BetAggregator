@@ -997,7 +997,8 @@ _1960betParser.prototype.getGames = function ($, data) {
             if($(this).attr('class') == 'bets_page_categoryContainer')
                 $(this).children().each(function(i,e)
                 {
-                    if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
+                    try{
+					if (($(this).attr('class') == 'category_bets_odd') || ($(this).attr('class') == 'category_bets_even')) {
 
                         var game = require('../constants').newGame().game;
                         var vars = $('.betsPanelEventName-text', this).text().trim();
@@ -1037,6 +1038,10 @@ _1960betParser.prototype.getGames = function ($, data) {
 
                         data.games.push(game);
                     }
+					
+					 } catch (e) {
+                    console.log(e);
+                }
                 });
 
         }

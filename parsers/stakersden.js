@@ -970,7 +970,8 @@ StakersdenParser.prototype.getGames = function ($, data) {
     $('.bst_seller_row_even, .bst_seller_row_odd', '#betsTable').each( function(index, elem)
     {
 
-        var game = constants.newGame().game;
+        try{
+		var game = constants.newGame().game;
         var vars = $('#categoryText', this).eq(0).text();
 
 
@@ -1010,6 +1011,10 @@ StakersdenParser.prototype.getGames = function ($, data) {
             game.category_key = current_cat.key;
 
         data.games.push(game);
+		
+		 } catch (e) {
+                    console.log(e);
+                }
 
 
 

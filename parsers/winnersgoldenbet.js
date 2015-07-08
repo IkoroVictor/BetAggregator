@@ -971,7 +971,8 @@ WGBParser.prototype.getGames = function ($, data) {
     $('.event-panel').each( function(index, elem)
     {
 
-        var x =  $('.outcome', this)
+        try{
+		var x =  $('.outcome', this)
         if(x.length)
         {
             x = x.eq(0).attr('data-gamename');
@@ -1019,6 +1020,9 @@ WGBParser.prototype.getGames = function ($, data) {
             game.category_key = current_cat.key;
 
         data.games.push(game);
+		 } catch (e) {
+                    console.log(e);
+                }
 
 
 
