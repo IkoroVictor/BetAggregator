@@ -990,6 +990,8 @@ SurebetParser.prototype.getGames = function ($, data) {
                 return;
 
             if ($('.category_bets',this).length > 0) {
+			
+			try{
 
                 var game = require('../constants').newGame().game;
                 var vars = $('.category_outcome', this).eq(0).attr('onclick').replace(/'/g, '').split(',');
@@ -1029,6 +1031,9 @@ SurebetParser.prototype.getGames = function ($, data) {
                     game.category_key = current_cat.key;
 
                 data.games.push(game);
+				 } catch (e) {
+                    console.log(e);
+                }
 
             }
         }
@@ -1039,6 +1044,7 @@ SurebetParser.prototype.getGames = function ($, data) {
     nparser = null;
     helper = null;
     root = null;
+	console.log(data.games.length);
 
 
 }
