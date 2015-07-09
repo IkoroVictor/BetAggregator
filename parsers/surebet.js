@@ -980,14 +980,14 @@ SurebetParser.prototype.getGames = function ($, data) {
 
             category.type = category.title.split('-')[0].trim().toLowerCase();
             current_cat = category;
-
+			console.log(category.type);
             data.categories[current_cat.key] = current_cat;
 
         }
         else {
 
-            if(current_cat != undefined && !helper.is_allowed_type(current_cat.type))
-                return;
+           		//if(current_cat != undefined && !helper.is_allowed_type(current_cat.type))
+                //return;
 
             if ($('.category_bets',this).length > 0) {
 			
