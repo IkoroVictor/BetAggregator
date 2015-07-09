@@ -1016,7 +1016,7 @@ SurebetParser.prototype.getGames = function ($, data) {
                 game.away_key = helper.getSignificantKey(game.away);
 
 
-                //console.log(game.datetime);
+               
                 //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
 
                 var vars2 = $('input[type="button"]', this).eq(0).attr('onclick');
@@ -1024,6 +1024,8 @@ SurebetParser.prototype.getGames = function ($, data) {
                 if (vars2 != undefined) {
                     game.url = vars2.split("'")[1];
                 }
+				
+				 console.log(game.id + " : " + game.date + " : " + game.url);
                 game.date = game.datetime.split(" ")[0];
                 game.time = game.datetime.split(" ")[1];
 
@@ -1045,7 +1047,7 @@ SurebetParser.prototype.getGames = function ($, data) {
     nparser = null;
     helper = null;
     root = null;
-	 console.log(data.games.length);
+	
 
 
 }
