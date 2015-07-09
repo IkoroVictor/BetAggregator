@@ -944,6 +944,7 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
                 else
                 {
                     //console.log('[DB SAVED] GAME-ID: '+ game.id+' COUNT: ' + count );
+					console.log(game.title + " : " + game.date + " : " + JSON.stringify(query));
                     //console.log('[DATA]: ' + JSON.stringify(temp_data));
 
                 }
