@@ -43,7 +43,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 3)) {
 			
-				console.log(game.title + ' : ' game.date + ' : ' + odds);
+				console.log(game.title + ' : ' + game.date + ' : ' + odds);
                 temp_data["odds.1.sb.value"] = odds[0];
 
                 temp_data["odds.x.sb.value"] = odds[1];
