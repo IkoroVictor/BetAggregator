@@ -43,7 +43,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 3)) {
 			
-				console.log(game.title + " : " + game.date + " : " +  odds);
+				
                 temp_data["odds.1.sb.value"] = odds[0];
 
                 temp_data["odds.x.sb.value"] = odds[1];
@@ -933,12 +933,14 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
     {
         db.update(query, {$set: temp_data},
             function (err, count, status) {
+			
                 if (err)
                     console.log(err);
                 else
                 {
                     //console.log('[DB SAVED] GAME-ID: '+ game.id +' COUNT: ' + count );
-                    //console.log('[DATA]: ' + JSON.stringify(temp_data));
+                    console.log(game.title + " : " + game.date + " : " + '[DATA]: ' + JSON.stringify(temp_data));
+					//console.log('[DATA]: ' + JSON.stringify(temp_data));
 
                 }
                 temp_data = null;
