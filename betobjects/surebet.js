@@ -16,7 +16,7 @@ function Surebet()
 Surebet.prototype = nb.getNairabetObject();
 
 
-Surebet.prototype.parse_basic_op = function( cheerio_object, root)
+Surebet.prototype.parse_outcome_ids = function( cheerio_object, root)
 {
     var outcomes = [];
     root('.event_outcome', cheerio_object).each(function(i, e)
