@@ -975,7 +975,8 @@ MerrybetParser.prototype.getGames = function ($, data) {
                 category.title += (txt + " | ")
             });
 
-            category.key = helper.generateGameCategoryKey(category.title);
+            console.log(category.type);
+			category.key = helper.generateGameCategoryKey(category.title);
             current_cat = category;
             data.categories[current_cat.key] = current_cat;
 			
