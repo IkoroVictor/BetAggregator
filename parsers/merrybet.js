@@ -975,7 +975,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
                 category.title += (txt + " | ")
             });
 
-            console.log(category.type + " : " + data.short_date);
+            //console.log(category.type + " : " + data.short_date);
 			category.key = helper.generateGameCategoryKey(category.title);
             current_cat = category;
             data.categories[current_cat.key] = current_cat;
@@ -987,10 +987,10 @@ MerrybetParser.prototype.getGames = function ($, data) {
                 return;
 
             //if (($(this).attr('class') != 'bets-page-categoryContainer'))
-            if (($('.category_bets_odd', this).length ==0) || ($('.category_bets_even', this).length ==0))
+            if (($('.category_bets_odd', this).length ==0) && ($('.category_bets_even', this).length ==0))
                     return;
 
-			console.log($(this).attr('class') + " : " + data.short_date);
+			//console.log($(this).attr('class') + " : " + data.short_date);
 		   $(this).children().each(function (indx, elem) {
                 try {
 
