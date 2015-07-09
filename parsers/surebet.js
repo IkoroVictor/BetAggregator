@@ -42,6 +42,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
             var odds = nparser.parse_basic_op($(this).parent().next(), $);
 
             if (helper.validate_odds(odds, 3)) {
+			
+				console.log(game.id + ' : ' game.date + ' : ' + odds);
                 temp_data["odds.1.sb.value"] = odds[0];
 
                 temp_data["odds.x.sb.value"] = odds[1];
@@ -1029,7 +1031,7 @@ SurebetParser.prototype.getGames = function ($, data) {
                 game.date = game.datetime.split(" ")[0];
                 game.time = game.datetime.split(" ")[1];
 				
-				console.log(game.id + " : " + game.date + " : " + game.url);
+				
 
 
                 if (current_cat != undefined)
