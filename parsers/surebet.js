@@ -1025,9 +1025,11 @@ SurebetParser.prototype.getGames = function ($, data) {
                     game.url = vars2.split("'")[1];
                 }
 				
-				 console.log(game.id + " : " + game.date + " : " + game.url);
+				 
                 game.date = game.datetime.split(" ")[0];
                 game.time = game.datetime.split(" ")[1];
+				
+				console.log(game.id + " : " + game.date + " : " + game.url);
 
 
                 if (current_cat != undefined)
