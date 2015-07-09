@@ -1012,7 +1012,7 @@ SurebetParser.prototype.getGames = function ($, data) {
 
                 game.title = vars[2].trim();
                 game.id = helper.generateGameID(game.title)
-                game.sorted_id = helper.generateGameID(game.sorted_id)
+                game.sorted_id = helper.generateSortedGameID(game.title)
 
                 var sides = vars[2].split('-');
                 game.home = sides[0].trim();
