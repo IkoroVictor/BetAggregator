@@ -43,7 +43,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 3)) {
 			
-				console.log(game.title + ' : ' + game.date + ' : ' + odds);
+				
                 temp_data["odds.1.sb.value"] = odds[0];
 
                 temp_data["odds.x.sb.value"] = odds[1];
@@ -513,8 +513,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
 
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under0_5_card.sb.value'] = odds[0];
-                temp_data['odds.odds.over0_5_card.sb.value'] = odds[1]
+                temp_data['odds.under0_5_card.sb.value'] = odds[0];
+                temp_data['odds.over0_5_card.sb.value'] = odds[1]
 
             }
 
@@ -525,8 +525,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_1_5_cards_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under_5_card.sb.value'] = odds[0];
-                temp_data['odds.odds.over1_5_card.sb.value'] = odds[1]
+                temp_data['odds.under_5_card.sb.value'] = odds[0];
+                temp_data['odds.over1_5_card.sb.value'] = odds[1]
 
             }
 
@@ -536,8 +536,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_2_5_cards_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under2_5_card.sb.value'] = odds[0];
-                temp_data['odds.odds.over2_5_card.sb.value'] = odds[1]
+                temp_data['odds.under2_5_card.sb.value'] = odds[0];
+                temp_data['odds.over2_5_card.sb.value'] = odds[1]
 
             }
 
@@ -546,8 +546,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_3_5_cards_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under3_5_card.sb.value'] = odds[0];
-                temp_data['odds.odds.over3_5_card.sb.value'] = odds[1]
+                temp_data['odds.under3_5_card.sb.value'] = odds[0];
+                temp_data['odds.over3_5_card.sb.value'] = odds[1]
 
             }
 
@@ -557,8 +557,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_4_5_cards_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under4_5_card.sb.value'] = odds[0];
-                temp_data['odds.odds.over4_5_card.sb.value'] = odds[1]
+                temp_data['odds.under4_5_card.sb.value'] = odds[0];
+                temp_data['odds.over4_5_card.sb.value'] = odds[1]
 
             }
 
@@ -568,8 +568,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_5_5_cards_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under5_5_card.sb.value'] = odds[0];
-                temp_data['odds.odds.over5_5_card.sb.value'] = odds[1]
+                temp_data['odds.under5_5_card.sb.value'] = odds[0];
+                temp_data['odds.over5_5_card.sb.value'] = odds[1]
 
             }
 
@@ -578,8 +578,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_6_5_cards_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under6_5_card.sb.value'] = odds[0];
-                temp_data['odds.odds.over6_5_card.sb.value'] = odds[1]
+                temp_data['odds.under6_5_card.sb.value'] = odds[0];
+                temp_data['odds.over6_5_card.sb.value'] = odds[1]
 
             }
 
@@ -590,8 +590,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_0_5_cards_first_half_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under0_5_card_half.sb.value'] = odds[0];
-                temp_data['odds.odds.over0_5_card_half.sb.value'] = odds[1]
+                temp_data['odds.under0_5_card_half.sb.value'] = odds[0];
+                temp_data['odds.over0_5_card_half.sb.value'] = odds[1]
 
             }
 
@@ -601,8 +601,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_1_5_cards_first_half_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under1_5_card_half.sb.value'] = odds[0];
-                temp_data['odds.odds.over1_5_card_half.sb.value'] = odds[1]
+                temp_data['odds.under1_5_card_half.sb.value'] = odds[0];
+                temp_data['odds.over1_5_card_half.sb.value'] = odds[1]
 
             }
 
@@ -612,8 +612,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_2_5_cards_first_half_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under2_5_card_half.sb.value'] = odds[0];
-                temp_data['odds.odds.over2_5_card_half.sb.value'] = odds[1]
+                temp_data['odds.under2_5_card_half.sb.value'] = odds[0];
+                temp_data['odds.over2_5_card_half.sb.value'] = odds[1]
 
             }
 
@@ -623,8 +623,8 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_3_5_cards_first_half_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under3_5_card_half.sb.value'] = odds[0];
-                temp_data['odds.odds.over3_5_card_half.sb.value'] = odds[1]
+                temp_data['odds.under3_5_card_half.sb.value'] = odds[0];
+                temp_data['odds.over3_5_card_half.sb.value'] = odds[1]
 
             }
 
@@ -937,7 +937,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
                     console.log(err);
                 else
                 {
-                    //console.log('[DB SAVED] GAME-ID: '+ game.id +' COUNT: ' + count );
+                    console.log('[DB SAVED] GAME-ID: '+ game.id +' COUNT: ' + count );
                     //console.log('[DATA]: ' + JSON.stringify(temp_data));
 
                 }
