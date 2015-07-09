@@ -988,6 +988,7 @@ SurebetParser.prototype.getGames = function ($, data) {
 
            		//if(current_cat != undefined && !helper.is_allowed_type(current_cat.type))
                 //return;
+				
 
             if ($('.category_bets',this).length > 0) {
 			
