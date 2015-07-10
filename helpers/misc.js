@@ -51,6 +51,19 @@ exports.clean_symbols = function(val)
     return val.trim().replace(/ |-|\.|\?|\/|\\|:|,|\|/g, '');
 }
 
+exports.fix_scorers = function (val)
+{
+    var names = val.split(' ');
+    var names_fixed = [];
+
+    names.forEach(function( key )
+    {
+        names_fixed.push(exports.clean_symbols(key.toLowerCase()));
+    })
+    return names_fixed.join('_');
+
+}
+
 exports.exec_db= function(db, callback)
 {
     if(GLOBAL.db_conn_status == 0) //TODO  Please FIX. Determine if the connection to MongoDB is still alive else Reconnect and execute the callback

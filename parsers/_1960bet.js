@@ -1,18 +1,4 @@
 /**
-/**
-/**
-/**
-/**
-/**
-/**
-/**
-/**
-/**
-/**
-/**
-/**
-/**
-/**
  * Created by olaokenyi on 5/10/15.
  */
 
@@ -58,7 +44,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
         var tag = nparser.clean_symbols($('.eventBetPage_gameName_text', this).text().trim()).toLowerCase();
         var game_code =$('.eventBetPage_gameCode_text', this).text().trim();
 
-        var outcomes_ids =  nparser.parse_outcome_ids($(this), $);
+        var outcome_ids =  nparser.parse_outcome_ids($(this), $);
 
         obj = undefined;
         //parse straight_win
@@ -69,9 +55,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data["odds.1._1960.value"] = odds[0];
                 temp_data["odds.x._1960.value"] = odds[1];
                 temp_data["odds.2._1960.value"] = odds[2];
-                temp_data["odds.1._1960.outcome_id"] = outcomes_ids[0];
-                temp_data["odds.x._1960.outcome_id"] = outcomes_ids[1];
-                temp_data["odds.2._1960.outcome_id"] = outcomes_ids[2];
+
+                temp_data["odds.1._1960.outcome_id"] = outcome_ids[0];
+                temp_data["odds.x._1960.outcome_id"] = outcome_ids[1];
+                temp_data["odds.2._1960.outcome_id"] = outcome_ids[2];
             }
 
 
@@ -85,6 +72,12 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.handicap_0_1_1._1960.value'] = odds[0];
                 temp_data['odds.handicap_0_1_x._1960.value'] = odds[1];
                 temp_data['odds.handicap_0_1_2._1960.value'] = odds[2]
+
+
+                temp_data['odds.handicap_0_1_1._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.handicap_0_1_x._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.handicap_0_1_2._1960.outcome_id'] = outcome_ids[2]
+
             }
 
         }
@@ -96,6 +89,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.handicap_0_2_1._1960.value'] = odds[0];
                 temp_data['odds.handicap_0_2_x._1960.value'] = odds[1];
                 temp_data['odds.handicap_0_2_2._1960.value'] = odds[2]
+
+                temp_data['odds.handicap_0_2_1._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.handicap_0_2_x._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.handicap_0_2_2._1960.outcome_id'] = outcome_ids[2]
             }
 
 
@@ -108,6 +105,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.handicap_1_0_1._1960.value'] = odds[0];
                 temp_data['odds.handicap_1_0_x._1960.value'] = odds[1];
                 temp_data['odds.handicap_1_0_2._1960.value'] = odds[2]
+
+                temp_data['odds.handicap_1_0_1._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.handicap_1_0_x._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.handicap_1_0_2._1960.outcome_id'] = outcome_ids[2]
             }
 
 
@@ -123,6 +124,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.handicap_2_0_x._1960.value'] = odds[1];
                 temp_data['odds.handicap_2_0_2._1960.value'] = odds[2]
 
+                temp_data['odds.handicap_2_0_1._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.handicap_2_0_x._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.handicap_2_0_2._1960.outcome_id'] = outcome_ids[2]
+
             }
 
 
@@ -137,6 +142,11 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.12._1960.value'] = odds[1];
                 temp_data['odds.x2._1960.value'] = odds[2]
 
+
+                temp_data['odds.1x._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.12._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.x2._1960.outcome_id'] = outcome_ids[2]
+
             }
 
         }
@@ -149,6 +159,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.1x_half._1960.value'] = odds[0];
                 temp_data['odds.12_half._1960.value'] = odds[1];
                 temp_data['odds.x2_half._1960.value'] = odds[2]
+
+                temp_data['odds.1x_half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.12_half._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.x2_half._1960.outcome_id'] = outcome_ids[2]
 
 
             }
@@ -163,6 +177,12 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.12_half_2._1960.value'] = odds[1];
                 temp_data['odds.x2_half_2._1960.value'] = odds[2]
 
+
+                temp_data['odds.1x_half_2._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.12_half_2._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.x2_half_2._1960.outcome_id'] = outcome_ids[2]
+
+
             }
 
 
@@ -176,7 +196,13 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
 
                 temp_data['odds.1_half._1960.value'] = odds[0];
                 temp_data['odds.x_half._1960.value'] = odds[1];
-                temp_data['odds.2_half._1960.value'] = odds[2]
+                temp_data['odds.2_half._1960.value'] = odds[2];
+
+                temp_data['odds.1_half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.x_half._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.2_half._1960.outcome_id'] = outcome_ids[2]
+
+
 
             }
 
@@ -191,6 +217,11 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.1_half_2._1960.value'] = odds[0];
                 temp_data['odds.x_half_2._1960.value'] = odds[1];
                 temp_data['odds.2_half_2._1960.value'] = odds[2]
+
+
+                temp_data['odds.1_half_2._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.x_half_2._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.2_half_2._1960.outcome_id'] = outcome_ids[2]
             }
 
         }
@@ -205,6 +236,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.most_scoring_half.half_2._1960.value'] = odds[2];
                 temp_data['odds.most_scoring_half.equal._1960.value'] = odds[1]
 
+                temp_data['odds.most_scoring_half.half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.most_scoring_half.half_2._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.most_scoring_half.equal._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -216,6 +251,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.first_goal.home._1960.value'] = odds[0];
                 temp_data['odds.first_goal.away._1960.value'] = odds[2];
                 temp_data['odds.first_goal.no_goal._1960.value'] = odds[1]
+
+                temp_data['odds.first_goal.home._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.first_goal.away._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.first_goal.no_goal._1960.outcome_id'] = outcome_ids[1]
             }
 
         }
@@ -229,6 +268,11 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.last_goal.home._1960.value'] = odds[0];
                 temp_data['odds.last_goal.away._1960.value'] = odds[2];
                 temp_data['odds.last_goal.no_goal._1960.value'] = odds[1]
+
+
+                temp_data['odds.last_goal.home._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.last_goal.away._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.last_goal.no_goal._1960.outcome_id'] = outcome_ids[1]
             }
 
         }
@@ -241,6 +285,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
 
                 for (var i = 0; i < val.odds.length; i++) {
                     temp_data['odds.first_goal_time.' + nparser.clean(val.keys[i]).toLowerCase() + '._1960.value'] = val.odds[i];
+                    temp_data['odds.first_goal_time.' + nparser.clean(val.keys[i]).toLowerCase() + '._1960.outcome_id'] = outcome_ids[i];
                 }
 
             }
@@ -259,6 +304,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.draw_no_bet.home._1960.value'] = odds[0];
                 temp_data['odds.draw_no_bet.away._1960.value'] = odds[1]
 
+                temp_data['odds.draw_no_bet.home._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.draw_no_bet.away._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -273,6 +321,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.draw_no_bet_half.home._1960.value'] = odds[0];
                 temp_data['odds.draw_no_bet_half.away._1960.value'] = odds[1]
 
+                temp_data['odds.draw_no_bet_half.home._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.draw_no_bet_half.away._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -285,6 +336,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.draw_no_bet_half_2.home._1960.value'] = odds[0];
                 temp_data['odds.draw_no_bet_half_2.away._1960.value'] = odds[1]
+
+                temp_data['odds.draw_no_bet_half_2.home._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.draw_no_bet_half_2.away._1960.outcome_id'] = outcome_ids[1]
+
 
             }
             //console.log(err);
@@ -299,6 +354,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.under0_5_half._1960.value'] = odds[0];
                 temp_data['odds.over0_5_half._1960.value'] = odds[1]
+
+                temp_data['odds.under0_5_half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over0_5_half._1960.outcome_id'] = outcome_ids[1]
             }
 
 
@@ -312,6 +370,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.under1_5_half._1960.value'] = odds[0];
                 temp_data['odds.over1_5_half._1960.value'] = odds[1]
 
+                temp_data['odds.under1_5_half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over1_5_half._1960.outcome_id'] = outcome_ids[1]
+
             }
 
         }
@@ -323,6 +384,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.under2_5_half._1960.value'] = odds[0];
                 temp_data['odds.over2_5_half._1960.value'] = odds[1]
+
+                temp_data['odds.under2_5_half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over2_5_half._1960.outcome_id'] = outcome_ids[1]
 
             }
 
@@ -337,6 +401,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.under0_5_half_2._1960.value'] = odds[0];
                 temp_data['odds.over0_5_half_2._1960.value'] = odds[1]
 
+                temp_data['odds.under0_5_half_2._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over0_5_half_2._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -350,6 +417,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.under1_5_half_2._1960.value'] = odds[0];
                 temp_data['odds.over1_5_half_2._1960.value'] = odds[1]
 
+                temp_data['odds.under1_5_half_2._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over1_5_half_2._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -362,6 +432,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.under2_5_half_2._1960.value'] = odds[0];
                 temp_data['odds.over2_5_half_2._1960.value'] = odds[1]
 
+                temp_data['odds.under2_5_half_2._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over2_5_half_2._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -372,7 +445,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             odds = nparser.parse_basic_op($(this), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.under0_5._1960.value'] = odds[0];
-                temp_data['odds.over0_5._1960.value'] = odds[1]
+                temp_data['odds.over0_5._1960.value'] = odds[1];
+
+                temp_data['odds.under0_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over0_5._1960.outcome_id'] = outcome_ids[1]
 
             }
 
@@ -385,6 +461,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.under1_5._1960.value'] = odds[0];
                 temp_data['odds.over1_5._1960.value'] = odds[1]
 
+                temp_data['odds.under1_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over1_5._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -395,6 +474,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.under2_5._1960.value'] = odds[0];
                 temp_data['odds.over2_5._1960.value'] = odds[1]
+
+                temp_data['odds.under2_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over2_5._1960.outcome_id'] = outcome_ids[1]
 
             }
 
@@ -407,6 +489,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.under3_5._1960.value'] = odds[0];
                 temp_data['odds.over3_5._1960.value'] = odds[1]
 
+                temp_data['odds.under3_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over3_5._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -418,6 +503,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.under4_5._1960.value'] = odds[0];
                 temp_data['odds.over4_5._1960.value'] = odds[1]
 
+                temp_data['odds.under4_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over4_5._1960.outcome_id'] = outcome_ids[1]
+
             }
 
         }
@@ -427,6 +515,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.under5_5._1960.value'] = odds[0];
                 temp_data['odds.over5_5._1960.value'] = odds[1]
+
+                temp_data['odds.under5_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over5_5._1960.outcome_id'] = outcome_ids[1]
 
             }
 
@@ -439,6 +530,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.under6_5._1960.value'] = odds[0];
                 temp_data['odds.over6_5._1960.value'] = odds[1]
 
+                temp_data['odds.under6_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over6_5._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -449,6 +543,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.under7_5._1960.value'] = odds[0];
                 temp_data['odds.over7_5._1960.value'] = odds[1]
+
+                temp_data['odds.under7_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over7_5._1960.outcome_id'] = outcome_ids[1]
 
             }
 
@@ -463,6 +560,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.bts.yes._1960.value'] = odds[0];
                 temp_data['odds.bts.no._1960.value'] = odds[1]
 
+                temp_data['odds.bts.yes._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.bts.no._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -474,6 +574,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.bts_half.yes._1960.value'] = odds[0];
                 temp_data['odds.bts_half.no._1960.value'] = odds[1]
+
+                temp_data['odds.bts_half.yes._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.bts_half.no._1960.outcome_id'] = outcome_ids[1]
 
             }
 
@@ -487,6 +590,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.bts_half_2.yes._1960.value'] = odds[0];
                 temp_data['odds.bts_half_2.no._1960.value'] = odds[1]
 
+                temp_data['odds.bts_half_2.yes._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.bts_half_2.no._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -499,6 +605,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.total_goals.odd._1960.value'] = odds[0];
                 temp_data['odds.total_goals.even._1960.value'] = odds[1]
 
+                temp_data['odds.total_goals.odd._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.total_goals.even._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -509,6 +618,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.total_goals_half.odd._1960.value'] = odds[0];
                 temp_data['odds.total_goals_half.even._1960.value'] = odds[1]
+
+                temp_data['odds.total_goals_half.odd._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.total_goals_half.even._1960.outcome_id'] = outcome_ids[1]
 
             }
 
@@ -521,6 +633,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.total_goals_half_2.odd._1960.value'] = odds[0];
                 temp_data['odds.total_goals_half_2.even._1960.value'] = odds[1]
+
+                temp_data['odds.total_goals_half_2.odd._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.total_goals_half_2.even._1960.outcome_id'] = outcome_ids[1]
 
             }
 
@@ -535,6 +650,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.odds.under0_5_card._1960.value'] = odds[0];
                 temp_data['odds.odds.over0_5_card._1960.value'] = odds[1]
 
+                temp_data['odds.under0_5_card._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over0_5_card._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -544,8 +662,13 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == nparser.under_over_1_5_cards_tag) {
             odds = nparser.parse_basic_op($(this), $);
             if (helper.validate_odds(odds, 2)) {
-                temp_data['odds.odds.under_5_card._1960.value'] = odds[0];
+                temp_data['odds.odds.under1_5_card._1960.value'] = odds[0];
                 temp_data['odds.odds.over1_5_card._1960.value'] = odds[1]
+
+
+                temp_data['odds.under1_5_card._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over1_5_card._1960.outcome_id'] = outcome_ids[1]
+
 
             }
 
@@ -558,6 +681,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.odds.under2_5_card._1960.value'] = odds[0];
                 temp_data['odds.odds.over2_5_card._1960.value'] = odds[1]
 
+                temp_data['odds.under2_5_card._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over2_5_card._1960.outcome_id'] = outcome_ids[1]
+
+
             }
 
         }
@@ -567,6 +694,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.odds.under3_5_card._1960.value'] = odds[0];
                 temp_data['odds.odds.over3_5_card._1960.value'] = odds[1]
+
+                temp_data['odds.under3_5_card._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over3_5_card._1960.outcome_id'] = outcome_ids[1]
+
 
             }
 
@@ -579,6 +710,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.odds.under4_5_card._1960.value'] = odds[0];
                 temp_data['odds.odds.over4_5_card._1960.value'] = odds[1]
 
+                temp_data['odds.under4_5_card._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over4_5_card._1960.outcome_id'] = outcome_ids[1]
+
+
             }
 
 
@@ -590,6 +725,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.odds.under5_5_card._1960.value'] = odds[0];
                 temp_data['odds.odds.over5_5_card._1960.value'] = odds[1]
 
+                temp_data['odds.under5_5_card._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over5_5_card._1960.outcome_id'] = outcome_ids[1]
+
+
             }
 
         }
@@ -599,6 +738,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.odds.under6_5_card._1960.value'] = odds[0];
                 temp_data['odds.odds.over6_5_card._1960.value'] = odds[1]
+
+                temp_data['odds.under6_5_card._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over6_5_card._1960.outcome_id'] = outcome_ids[1]
+
 
             }
 
@@ -612,6 +755,11 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.odds.under0_5_card_half._1960.value'] = odds[0];
                 temp_data['odds.odds.over0_5_card_half._1960.value'] = odds[1]
 
+
+                temp_data['odds.under0_5_card_half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over0_5_card_half._1960.outcome_id'] = outcome_ids[1]
+
+
             }
 
         }
@@ -623,6 +771,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.odds.under1_5_card_half._1960.value'] = odds[0];
                 temp_data['odds.odds.over1_5_card_half._1960.value'] = odds[1]
 
+                temp_data['odds.under1_5_card_half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over1_5_card_half._1960.outcome_id'] = outcome_ids[1]
+
             }
 
 
@@ -632,7 +783,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             odds = nparser.parse_basic_op($(this), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.odds.under2_5_card_half._1960.value'] = odds[0];
-                temp_data['odds.odds.over2_5_card_half._1960.value'] = odds[1]
+                temp_data['odds.odds.over2_5_card_half._1960.value'] = odds[1];
+
+                temp_data['odds.under2_5_card_half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over2_5_card_half._1960.outcome_id'] = outcome_ids[1]
 
             }
 
@@ -644,6 +798,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.odds.under3_5_card_half._1960.value'] = odds[0];
                 temp_data['odds.odds.over3_5_card_half._1960.value'] = odds[1]
+
+                temp_data['odds.under3_5_card_half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over3_5_card_half._1960.outcome_id'] = outcome_ids[1]
 
             }
 
@@ -664,6 +821,17 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.halftime_fulltime.away_x._1960.value'] = odds[7];
                 temp_data['odds.halftime_fulltime.away_away._1960.value'] = odds[8]
 
+
+                temp_data['odds.halftime_fulltime.home_home._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.halftime_fulltime.home_x._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.halftime_fulltime.home_away._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.halftime_fulltime.x_home._1960.outcome_id'] = outcome_ids[3];
+                temp_data['odds.halftime_fulltime.x_x._1960.outcome_id'] = outcome_ids[4];
+                temp_data['odds.halftime_fulltime.x_away._1960.outcome_id'] = outcome_ids[5];
+                temp_data['odds.halftime_fulltime.away_home._1960.outcome_id'] = outcome_ids[6];
+                temp_data['odds.halftime_fulltime.away_x._1960.outcome_id'] = outcome_ids[7];
+                temp_data['odds.halftime_fulltime.away_away._1960.outcome_id'] = outcome_ids[8]
+
             }
 
 
@@ -677,6 +845,11 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.team_total_goals.home.1._1960.value'] = odds[1];
                 temp_data['odds.team_total_goals.home.2._1960.value'] = odds[2];
                 temp_data['odds.team_total_goals.home.3+._1960.value'] = odds[3]
+
+                temp_data['odds.team_total_goals.home.0._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.team_total_goals.home.1._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.team_total_goals.home.2._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.team_total_goals.home.3+._1960.outcome_id'] = outcome_ids[3]
 
 
             }
@@ -694,6 +867,12 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.team_total_goals.away.2._1960.value'] = odds[2];
                 temp_data['odds.team_total_goals.away.3+._1960.value'] = odds[3]
 
+                temp_data['odds.team_total_goals.away.0._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.team_total_goals.away.1._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.team_total_goals.away.2._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.team_total_goals.away.3+._1960.outcome_id'] = outcome_ids[3]
+
+
 
             }
 
@@ -706,6 +885,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
 
             for (var i = 0; i < val.odds.length; i++) {
                 temp_data['odds.correct_score.' + nparser.clean_symbols(val.keys[i]) + '._1960.value'] = val.odds[i];
+                temp_data['odds.correct_score.' + nparser.clean_symbols(val.keys[i]) + '._1960.outcome_id'] = outcome_ids[i];
             }
 
         }
@@ -715,6 +895,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             var val = nparser.parse_op_with_keys($(this), $);
             for (var i = 0; i < val.odds.length; i++) {
                 temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i])+'._1960.value']  = val.odds[i];
+                temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i]) + '._1960.outcome_id'] = outcome_ids[i];
 
                 if (obj != undefined) {
                     //obj._1960.value = val.odds[i];                 }
@@ -728,6 +909,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             var val = nparser.parse_op_with_keys($(this), $);
             for (var i = 0; i < val.odds.length; i++) {
                 temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i])+'._1960.value']  = val.odds[i];
+                temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i]) + '._1960.outcome_id'] = outcome_ids[i];
 
                 if (obj != undefined) {
                     //obj._1960.value = val.odds[i];                 }
@@ -744,6 +926,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.ten_mins.x._1960.value'] = odds[1];
                 temp_data['odds.ten_mins.2._1960.value'] = odds[2]
 
+                temp_data['odds.ten_mins.1._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.ten_mins.x._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.ten_mins.2._1960.outcome_id'] = outcome_ids[2]
+
 
             }
 
@@ -759,6 +945,11 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.home_most_scoring_half.half_2._1960.value'] = odds[1];
                 temp_data['odds.home_most_scoring_half.equal._1960.value'] = odds[2]
 
+                temp_data['odds.home_most_scoring_half.half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_most_scoring_half.half_2._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.home_most_scoring_half.equal._1960.outcome_id'] = outcome_ids[2]
+
+
 
             }
 
@@ -771,6 +962,10 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.away_most_scoring_half.half._1960.value'] = odds[0];
                 temp_data['odds.away_most_scoring_half.half_2._1960.value'] = odds[1];
                 temp_data['odds.away_most_scoring_half.equal._1960.value'] = odds[2]
+
+                temp_data['odds.away_most_scoring_half.half._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.away_most_scoring_half.half_2._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.away_most_scoring_half.equal._1960.outcome_id'] = outcome_ids[2]
 
 
             }
@@ -786,6 +981,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.home_clean_sheet.yes._1960.value'] = odds[0];
                 temp_data['odds.home_clean_sheet.no._1960.value'] = odds[1]
 
+                temp_data['odds.home_clean_sheet.yes._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_clean_sheet.no._1960.outcome_id'] = outcome_ids[1]
+
 
             }
 
@@ -798,6 +996,9 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.away_clean_sheet.yes._1960.value'] = odds[0];
                 temp_data['odds.away_clean_sheet.no._1960.value'] = odds[1]
+
+                temp_data['odds.away_clean_sheet.yes._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.away_clean_sheet.no._1960.outcome_id'] = outcome_ids[1]
 
 
             }
@@ -817,6 +1018,14 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.win_margin.away_2._1960.value'] = odds[4];
                 temp_data['odds.win_margin.away_3+._1960.value'] = odds[5];
                 temp_data['odds.win_margin.x._1960.value'] = odds[6]
+
+                temp_data['odds.win_margin.home_1._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.win_margin.home_2._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.win_margin.home_3+._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.win_margin.away_1._1960.outcome_id'] = outcome_ids[3];
+                temp_data['odds.win_margin.away_2._1960.outcome_id'] = outcome_ids[4];
+                temp_data['odds.win_margin.away_3+._1960.outcome_id'] = outcome_ids[5];
+                temp_data['odds.win_margin.x._1960.outcome_id'] = outcome_ids[6]
 
 
             }
@@ -838,6 +1047,14 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.away_win_over0_5._1960.value'] = odds[5]
 
 
+                temp_data['odds.home_win_under0_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_win_over0_5._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.draw_under0_5._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.draw_over0_5._1960.outcome_id'] = outcome_ids[3];
+                temp_data['odds.away_win_under0_5._1960.outcome_id'] = outcome_ids[4];
+                temp_data['odds.away_win_over0_5._1960.outcome_id'] = outcome_ids[5]
+
+
             }
 
 
@@ -854,6 +1071,14 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.away_win_over1_5._1960.value'] = odds[5]
 
 
+                temp_data['odds.home_win_under1_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_win_over1_5._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.draw_under1_5._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.draw_over1_5._1960.outcome_id'] = outcome_ids[3];
+                temp_data['odds.away_win_under1_5._1960.outcome_id'] = outcome_ids[4];
+                temp_data['odds.away_win_over1_5._1960.outcome_id'] = outcome_ids[5]
+
+
             }
 
 
@@ -868,6 +1093,13 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.draw_over2_5._1960.value'] = odds[3];
                 temp_data['odds.away_win_under2_5._1960.value'] = odds[4];
                 temp_data['odds.away_win_over2_5._1960.value'] = odds[5]
+
+                temp_data['odds.home_win_under2_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_win_over2_5._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.draw_under2_5._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.draw_over2_5._1960.outcome_id'] = outcome_ids[3];
+                temp_data['odds.away_win_under2_5._1960.outcome_id'] = outcome_ids[4];
+                temp_data['odds.away_win_over2_5._1960.outcome_id'] = outcome_ids[5]
 
 
             }
@@ -886,12 +1118,18 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.away_win_under3_5._1960.value'] = odds[4];
                 temp_data['odds.away_win_over3_5._1960.value'] = odds[5]
 
+                temp_data['odds.home_win_under3_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_win_over3_5._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.draw_under3_5._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.draw_over3_5._1960.outcome_id'] = outcome_ids[3];
+                temp_data['odds.away_win_under3_5._1960.outcome_id'] = outcome_ids[4];
+                temp_data['odds.away_win_over3_5._1960.outcome_id'] = outcome_ids[5]
+
 
             }
 
 
         }
-        //1X2 and Under/Over 4.5
         //1X2 and Under/Over 4.5
         if (tag == nparser.result_and_under_over_4_5_tag) {
             odds = nparser.parse_basic_op($(this), $);
@@ -902,6 +1140,13 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.draw_over4_5._1960.value'] = odds[3];
                 temp_data['odds.away_win_under4_5._1960.value'] = odds[4];
                 temp_data['odds.away_win_over4_5._1960.value'] = odds[5]
+
+                temp_data['odds.home_win_under4_5._1960.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_win_over4_5._1960.outcome_id'] = outcome_ids[1];
+                temp_data['odds.draw_under4_5._1960.outcome_id'] = outcome_ids[2];
+                temp_data['odds.draw_over4_5._1960.outcome_id'] = outcome_ids[3];
+                temp_data['odds.away_win_under4_5._1960.outcome_id'] = outcome_ids[4];
+                temp_data['odds.away_win_over4_5._1960.outcome_id'] = outcome_ids[5]
 
 
             }
@@ -914,6 +1159,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             var val = nparser.parse_op_with_keys($(this), $);
             for (var i = 0; i < val.odds.length; i++) {
                 temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i])+'._1960.value']  = val.odds[i];
+                temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i])+'._1960.outcome_id']  = outcome_ids[i];
 
                 if (obj != undefined) {
                     //obj._1960.value = val.odds[i];                 }
@@ -921,6 +1167,66 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
             }
         }
 
+        //Number of Goals in First half
+        if (tag == (nparser.number_of_goals_first_half_tag )) {
+            var val = nparser.parse_op_with_keys($(this), $);
+            for (var i = 0; i < val.odds.length; i++) {
+                temp_data['odds.number_of_goals_half.' + nparser.clean(val.keys[i])+'._1960.value']  = val.odds[i];
+                temp_data['odds.number_of_goals_half.' + nparser.clean(val.keys[i])+'._1960.outcome_id']  = outcome_ids[i];
+
+                if (obj != undefined) {
+                    //obj._1960.value = val.odds[i];                 }
+                }
+            }
+        }
+
+        //Number of Goals in Second half
+        if (tag == (nparser.number_of_goals_second_half_tag )) {
+            var val = nparser.parse_op_with_keys($(this), $);
+            for (var i = 0; i < val.odds.length; i++) {
+                temp_data['odds.number_of_goals_half_2.' + nparser.clean(val.keys[i])+'._1960.value']  = val.odds[i];
+                temp_data['odds.number_of_goals_half_2.' + nparser.clean(val.keys[i])+'._1960.outcome_id']  = outcome_ids[i];
+
+                if (obj != undefined) {
+                    //obj._1960.value = val.odds[i];                 }
+                }
+            }
+        }
+
+
+        //First Scorer
+        if (tag == nparser.first_scorer_tag) {
+            var val = nparser.parse_op_with_keys($(this), $);
+            try {
+
+                for (var i = 0; i < val.odds.length; i++) {
+                    temp_data['odds.first_scorer.' + helper.fix_scorers(val.keys[i]).toLowerCase() + '._1960.value'] = val.odds[i];
+                    temp_data['odds.first_scorer.' + helper.fix_scorers(val.keys[i]).toLowerCase() + '._1960.outcome_id'] = outcome_ids[i];
+                }
+
+            }
+            catch (ex) {
+                console.log(ex);
+            }
+
+        }
+
+        //Last Scorer
+        if (tag == nparser.last_scorer_tag) {
+            var val = nparser.parse_op_with_keys($(this), $);
+            try {
+
+                for (var i = 0; i < val.odds.length; i++) {
+                    temp_data['odds.last_scorer.' + helper.fix_scorers(val.keys[i]).toLowerCase() + '._1960.value'] = val.odds[i];
+                    temp_data['odds.last_scorer.' + helper.fix_scorers(val.keys[i]).toLowerCase() + '._1960.outcome_id'] = outcome_ids[i];
+                }
+
+            }
+            catch (ex) {
+                console.log(ex);
+            }
+
+        }
 
         if(tag.trim() != '')
         {
