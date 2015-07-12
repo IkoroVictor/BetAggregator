@@ -110,8 +110,8 @@ Nairabet.prototype.first_half_result_tag = '1sthalfresult';
 Nairabet.prototype.second_half_result_tag = '2ndhalfresult';
 
 Nairabet.prototype.double_chance_tag = 'doublechance';
-Nairabet.prototype.double_chance_first_half_tag = 'doublechance';
-Nairabet.prototype.double_chance_second_half_tag = 'doublechance';
+Nairabet.prototype.double_chance_first_half_tag = 'doublechancein1sthalf';
+Nairabet.prototype.double_chance_second_half_tag = 'doublechancein2ndhalf';
 
 Nairabet.prototype.handicap_0_1_tag = 'handicap01';
 Nairabet.prototype.handicap_0_2_tag = 'handicap02';
@@ -173,6 +173,8 @@ Nairabet.prototype.ten_minutes_tag = '110minresult';
 Nairabet.prototype.clean_sheet_tag = 'cleansheet';
 Nairabet.prototype.winning_margin_tag = 'winningmargin';
 Nairabet.prototype.first_goal_time_tag = 'firstgoaltimeinterval';
+Nairabet.prototype.first_scorer_tag = '1stscorer';
+Nairabet.prototype.last_scorer_tag = 'playertoscorelastgoal';
 
 
 

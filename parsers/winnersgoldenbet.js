@@ -49,7 +49,8 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
         var outcome_ids =  nparser.parse_outcome_ids($(this), $);
 
         obj = undefined;
-//parse straight_win
+
+        //parse straight_win
         if (tag == nparser.straight_win_tag) {
             var odds = nparser.parse_basic_op($(this), $);
 
