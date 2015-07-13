@@ -1029,7 +1029,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Total goals (Home)
-        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean(game.home.toLowerCase()) + ')' )) {
+        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean_symbols(game.home.toLowerCase()) + ')' )) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 4)) {
                 temp_data['odds.team_total_goals.home.0.nb.value'] = odds[0];
@@ -1050,7 +1050,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Total goals (Away)
-        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean(game.away.toLowerCase()) + ')' )) {
+        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean_symbols(game.away.toLowerCase()) + ')' )) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 4)) {
                 temp_data['odds.team_total_goals.away.0.nb.value'] = odds[0];
@@ -1139,7 +1139,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Most Scoring Half (Home)
-        if (tag == ( nparser.clean(game.home.toLowerCase()) + nparser.most_scoring_half_tag)) {
+        if (tag == ( nparser.clean_symbols(game.home.toLowerCase()) + nparser.most_scoring_half_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
 
             if (helper.validate_odds(odds, 3)) {
@@ -1158,7 +1158,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
         }
         //Most Scoring Half (Away)
-        if (tag == ( nparser.clean(game.away.toLowerCase()) + nparser.most_scoring_half_tag)) {
+        if (tag == ( nparser.clean_symbols(game.away.toLowerCase()) + nparser.most_scoring_half_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 3)) {
                 temp_data['odds.away_most_scoring_half.half.nb.value'] = odds[0];
@@ -1176,7 +1176,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Home clean sheet
-        if (tag == ( nparser.clean(game.home.toLowerCase()) + nparser.clean_sheet_tag)) {
+        if (tag == ( nparser.clean_symbols(game.home.toLowerCase()) + nparser.clean_sheet_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
 
             if (helper.validate_odds(odds, 2)) {
@@ -1193,7 +1193,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Away clean sheet
-        if (tag == ( nparser.clean(game.away.toLowerCase()) + nparser.clean_sheet_tag)) {
+        if (tag == ( nparser.clean_symbols(game.away.toLowerCase()) + nparser.clean_sheet_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.away_clean_sheet.yes.nb.value'] = odds[0];
@@ -1207,7 +1207,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
         }
         //Home clean sheet First half
-        if (tag == ( nparser.clean(game.home.toLowerCase()) + nparser.clean_sheet_half_tag)) {
+        if (tag == ( nparser.clean_symbols(game.home.toLowerCase()) + nparser.clean_sheet_half_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
 
             if (helper.validate_odds(odds, 2)) {
@@ -1224,7 +1224,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Away clean sheet First half
-        if (tag == ( nparser.clean(game.away.toLowerCase()) + nparser.clean_sheet_half_tag)) {
+        if (tag == ( nparser.clean_symbols(game.away.toLowerCase()) + nparser.clean_sheet_half_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.away_clean_sheet_half.yes.nb.value'] = odds[0];
@@ -1240,7 +1240,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 		
 		
 		//Home clean sheet Second half
-        if (tag == ( nparser.clean(game.home.toLowerCase()) + nparser.clean_sheet_half_2_tag)) {
+        if (tag == ( nparser.clean_symbols(game.home.toLowerCase()) + nparser.clean_sheet_half_2_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
 
             if (helper.validate_odds(odds, 2)) {

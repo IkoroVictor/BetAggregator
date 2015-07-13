@@ -286,6 +286,40 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
         }
 
+        //Home No Bet
+        if (tag == nparser.home_no_bet_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+
+            if (helper.validate_odds(odds, 2)) {
+
+                temp_data['odds.home_no_bet.x.sb.value'] = odds[0];
+                temp_data['odds.home_no_bet.away.sb.value'] = odds[1]
+
+                temp_data['odds.home_no_bet.x.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_no_bet.away.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+
+        }
+
+        //Away No Bet
+        if (tag == nparser.away_no_bet_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+
+            if (helper.validate_odds(odds, 2)) {
+
+                temp_data['odds.away_no_bet.home.sb.value'] = odds[0];
+                temp_data['odds.away_no_bet.x.sb.value'] = odds[1]
+
+                temp_data['odds.away_no_bet.home.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.away_no_bet.x.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+
+        }
+
         //Draw No Bet
         if (tag == nparser.draw_no_bet_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
@@ -544,6 +578,118 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
 
+        //Home under/over0.5
+        if (tag == nparser.clean_symbols(game.home.toLowerCase()) + nparser.under_over_0_5_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.home_under0_5.sb.value'] = odds[0];
+                temp_data['odds.home_over0_5.sb.value'] = odds[1];
+
+                temp_data['odds.home_under0_5.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_over0_5.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+        }
+
+        //Home under/over1.5
+        if (tag == nparser.clean_symbols(game.home.toLowerCase()) + nparser.under_over_1_5_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.home_under1_5.sb.value'] = odds[0];
+                temp_data['odds.home_over1_5.sb.value'] = odds[1];
+
+                temp_data['odds.home_under1_5.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_over1_5.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+        }
+
+        //Home under/over2.5
+        if (tag == nparser.clean_symbols(game.home.toLowerCase()) + nparser.under_over_2_5_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.home_under2_5.sb.value'] = odds[0];
+                temp_data['odds.home_over2_5.sb.value'] = odds[1];
+
+                temp_data['odds.home_under2_5.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_over2_5.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+        }
+        //Home under/over3.5
+        if (tag == nparser.clean_symbols(game.home.toLowerCase()) + nparser.under_over_3_5_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.home_under3_5.sb.value'] = odds[0];
+                temp_data['odds.home_over3_5.sb.value'] = odds[1];
+
+                temp_data['odds.home_under3_5.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_over3_5.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+        }
+        //Away under/over0.5
+        if (tag == nparser.clean_symbols(game.away.toLowerCase()) + nparser.under_over_0_5_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.away_under0_5.sb.value'] = odds[0];
+                temp_data['odds.away_over0_5.sb.value'] = odds[1];
+
+                temp_data['odds.away_under0_5.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.away_over0_5.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+        }
+
+        //Away under/over1.5
+        if (tag == nparser.clean_symbols(game.away.toLowerCase()) + nparser.under_over_1_5_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.away_under1_5.sb.value'] = odds[0];
+                temp_data['odds.away_over1_5.sb.value'] = odds[1];
+
+                temp_data['odds.away_under1_5.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.away_over1_5.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+        }
+
+        //Away under/over2.5
+        if (tag == nparser.clean_symbols(game.away.toLowerCase()) + nparser.under_over_2_5_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.away_under2_5.sb.value'] = odds[0];
+                temp_data['odds.away_over2_5.sb.value'] = odds[1];
+
+                temp_data['odds.away_under2_5.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.away_over2_5.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+        }
+        //Away under/over3.5
+        if (tag == nparser.clean_symbols(game.away.toLowerCase()) + nparser.under_over_3_5_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.away_under3_5.sb.value'] = odds[0];
+                temp_data['odds.away_over3_5.sb.value'] = odds[1];
+
+                temp_data['odds.away_under3_5.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.away_over3_5.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+        }
+
+
+
+
         //Both teams to score
         if (tag == nparser.both_teams_to_score_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
@@ -798,6 +944,65 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
         }
 
+        //under/over0.5 Cards Second Half
+        if (tag == nparser.under_over_0_5_cards_second_half_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under0_5_card_half_2.sb.value'] = odds[0];
+                temp_data['odds.odds.over0_5_card_half_2.sb.value'] = odds[1]
+
+
+                temp_data['odds.under0_5_card_half_2.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over0_5_card_half_2.sb.outcome_id'] = outcome_ids[1]
+
+
+            }
+
+        }
+
+        //under/over1.5 Cards Second Half
+        if (tag == nparser.under_over_1_5_cards_second_half_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under1_5_card_half_2.sb.value'] = odds[0];
+                temp_data['odds.odds.over1_5_card_half_2.sb.value'] = odds[1]
+
+                temp_data['odds.under1_5_card_half_2.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over1_5_card_half_2.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+
+        }
+        //under/over2.5 Cards Second Half
+        if (tag == nparser.under_over_2_5_cards_second_half_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under2_5_card_half_2.sb.value'] = odds[0];
+                temp_data['odds.odds.over2_5_card_half_2.sb.value'] = odds[1];
+
+                temp_data['odds.under2_5_card_half_2.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over2_5_card_half_2.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+        }
+
+        //under/over3.5 Cards Second Half
+        if (tag == nparser.under_over_3_5_cards_second_half_tag) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.odds.under3_5_card_half_2.sb.value'] = odds[0];
+                temp_data['odds.odds.over3_5_card_half_2.sb.value'] = odds[1]
+
+                temp_data['odds.under3_5_card_half_2.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.over3_5_card_half_2.sb.outcome_id'] = outcome_ids[1]
+
+            }
+
+
+        }
+
         //Halftime/Fulltime
         if (tag == nparser.halftime_fulltime_tag) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
@@ -829,7 +1034,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Total goals (Home)
-        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean(game.home.toLowerCase()) + ')' )) {
+        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean_symbols(game.home.toLowerCase()) + ')' )) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 4)) {
                 temp_data['odds.team_total_goals.home.0.sb.value'] = odds[0];
@@ -850,7 +1055,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Total goals (Away)
-        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean(game.away.toLowerCase()) + ')' )) {
+        if (tag == (nparser.total_goals_tag + '(.' + nparser.clean_symbols(game.away.toLowerCase()) + ')' )) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 4)) {
                 temp_data['odds.team_total_goals.away.0.sb.value'] = odds[0];
@@ -877,6 +1082,17 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
             for (var i = 0; i < val.odds.length; i++) {
                 temp_data['odds.correct_score.' + nparser.clean_symbols(val.keys[i]) + '.sb.value'] = val.odds[i];
                 temp_data['odds.correct_score.' + nparser.clean_symbols(val.keys[i]) + '.sb.outcome_id'] = outcome_ids[i];
+            }
+
+        }
+
+        //Correct Score including Others
+        if (tag == (nparser.correct_score_others_tag )) {
+            var val = nparser.parse_op_with_keys($(this).parent().next(), $);
+
+            for (var i = 0; i < val.odds.length; i++) {
+                temp_data['odds.correct_score_others.' + nparser.clean_symbols(val.keys[i]) + '.sb.value'] = val.odds[i];
+                temp_data['odds.correct_score_others.' + nparser.clean_symbols(val.keys[i]) + '.sb.outcome_id'] = outcome_ids[i];
             }
 
         }
@@ -928,7 +1144,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Most Scoring Half (Home)
-        if (tag == ( nparser.clean(game.home.toLowerCase()) + nparser.most_scoring_half_tag)) {
+        if (tag == ( nparser.clean_symbols(game.home.toLowerCase()) + nparser.most_scoring_half_tag)) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
 
             if (helper.validate_odds(odds, 3)) {
@@ -947,7 +1163,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
         }
         //Most Scoring Half (Away)
-        if (tag == ( nparser.clean(game.away.toLowerCase()) + nparser.most_scoring_half_tag)) {
+        if (tag == ( nparser.clean_symbols(game.away.toLowerCase()) + nparser.most_scoring_half_tag)) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 3)) {
                 temp_data['odds.away_most_scoring_half.half.sb.value'] = odds[0];
@@ -965,7 +1181,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Home clean sheet
-        if (tag == ( nparser.clean(game.home.toLowerCase()) + nparser.clean_sheet_tag)) {
+        if (tag == ( nparser.clean_symbols(game.home.toLowerCase()) + nparser.clean_sheet_tag)) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
 
             if (helper.validate_odds(odds, 2)) {
@@ -982,7 +1198,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Away clean sheet
-        if (tag == ( nparser.clean(game.away.toLowerCase()) + nparser.clean_sheet_tag)) {
+        if (tag == ( nparser.clean_symbols(game.away.toLowerCase()) + nparser.clean_sheet_tag)) {
             odds = nparser.parse_basic_op($(this).parent().next(), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.away_clean_sheet.yes.sb.value'] = odds[0];
@@ -990,6 +1206,70 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
                 temp_data['odds.away_clean_sheet.yes.sb.outcome_id'] = outcome_ids[0];
                 temp_data['odds.away_clean_sheet.no.sb.outcome_id'] = outcome_ids[1]
+
+
+            }
+
+        }
+        //Home clean sheet First half
+        if (tag == ( nparser.clean_symbols(game.home.toLowerCase()) + nparser.clean_sheet_half_tag)) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.home_clean_sheet_half.yes.sb.value'] = odds[0];
+                temp_data['odds.home_clean_sheet.no.sb.value'] = odds[1]
+
+                temp_data['odds.home_clean_sheet_half.yes.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_clean_sheet_half.no.sb.outcome_id'] = outcome_ids[1]
+
+
+            }
+
+
+        }
+
+        //Away clean sheet First half
+        if (tag == ( nparser.clean_symbols(game.away.toLowerCase()) + nparser.clean_sheet_half_tag)) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.away_clean_sheet_half.yes.sb.value'] = odds[0];
+                temp_data['odds.away_clean_sheet_half.no.sb.value'] = odds[1]
+
+                temp_data['odds.away_clean_sheet_half.yes.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.away_clean_sheet_half.no.sb.outcome_id'] = outcome_ids[1]
+
+
+            }
+
+        }
+
+
+        //Home clean sheet Second half
+        if (tag == ( nparser.clean_symbols(game.home.toLowerCase()) + nparser.clean_sheet_half_2_tag)) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.home_clean_sheet_half_2.yes.sb.value'] = odds[0];
+                temp_data['odds.home_clean_sheet_half_2.no.sb.value'] = odds[1]
+
+                temp_data['odds.home_clean_sheet_half_2.yes.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.home_clean_sheet_half_2.no.sb.outcome_id'] = outcome_ids[1]
+
+
+            }
+
+
+        }
+
+        //Away clean sheet Second half
+        if (tag == ( nparser.clean(game.away.toLowerCase()) + nparser.clean_sheet_half_2_tag)) {
+            odds = nparser.parse_basic_op($(this).parent().next(), $);
+            if (helper.validate_odds(odds, 2)) {
+                temp_data['odds.away_clean_sheet_half_2.yes.sb.value'] = odds[0];
+                temp_data['odds.away_clean_sheet_half_2.no.sb.value'] = odds[1]
+
+                temp_data['odds.away_clean_sheet_half_2.yes.sb.outcome_id'] = outcome_ids[0];
+                temp_data['odds.away_clean_sheet_half_2.no.sb.outcome_id'] = outcome_ids[1]
 
 
             }
@@ -1218,6 +1498,24 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
             }
 
         }
+
+        //Who to score in match
+        if (tag == nparser.scorer_tag) {
+            var val = nparser.parse_op_with_keys($(this).parent().next(), $);
+            try {
+
+                for (var i = 0; i < val.odds.length; i++) {
+                    temp_data['odds.scorer.' + helper.fix_scorers(val.keys[i]).toLowerCase() + '.sb.value'] = val.odds[i];
+                    temp_data['odds.scorer.' + helper.fix_scorers(val.keys[i]).toLowerCase() + '.sb.outcome_id'] = outcome_ids[i];
+                }
+
+            }
+            catch (ex) {
+                console.log(ex);
+            }
+
+        }
+
         if(tag.trim() != '')
         {
             temp_data['play_codes.'+ tag + '.sb'] = game_code;
