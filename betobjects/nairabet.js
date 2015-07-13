@@ -166,6 +166,9 @@ Nairabet.prototype.draw_no_bet_tag = 'drawnobet';
 Nairabet.prototype.draw_no_bet_first_half_tag = 'drawnobetin1sthalf';
 Nairabet.prototype.draw_no_bet_second_half_tag = 'drawnobetin2ndhalf';
 
+Nairabet.prototype.home_no_bet_tag = 'homenobet';
+Nairabet.prototype.away_no_bet_tag = 'awaynobet';
+
 
 Nairabet.prototype.most_scoring_half_tag = 'mostscoringhalf';
 Nairabet.prototype.halftime_fulltime_tag = 'halftimefulltime';
@@ -175,10 +178,12 @@ Nairabet.prototype.winning_margin_tag = 'winningmargin';
 Nairabet.prototype.first_goal_time_tag = 'firstgoaltimeinterval';
 Nairabet.prototype.first_scorer_tag = '1stscorer';
 Nairabet.prototype.last_scorer_tag = 'playertoscorelastgoal';
+Nairabet.prototype.scorer_tag = 'whowillscoregoalinthematch';
 
 
 
 Nairabet.prototype.correct_score_tag = 'correctscore';
+Nairabet.prototype.correct_score_others_tag = 'correctscoreincludingother';
 Nairabet.prototype.correct_score_first_half_tag = 'correctscorein1sthalf';
 Nairabet.prototype.correct_score_second_half_tag = 'correctscorein2ndhalf';
 
@@ -207,9 +212,19 @@ Nairabet.prototype.under_over_7_5_cards_tag = 'underover75cards';
 Nairabet.prototype.under_over_0_5_cards_first_half_tag = 'firsthalfcards05';
 Nairabet.prototype.under_over_1_5_cards_first_half_tag = 'firsthalfcards15';
 Nairabet.prototype.under_over_2_5_cards_first_half_tag = 'firsthalfcards25';
-Nairabet.prototype.under_over_3_5_cards_first_half_tag = 'firsthalfcards35';
+Nairabet.prototype.under_over_3_5_cards_first_half_tag = 'firsthalfcards35'
+
+Nairabet.prototype.under_over_0_5_cards_second_half_tag = 'secondhalfcards05';
+Nairabet.prototype.under_over_1_5_cards_second_half_tag = 'secondhalfcards15';
+Nairabet.prototype.under_over_2_5_cards_second_half_tag = 'secondhalfcards25';
+Nairabet.prototype.under_over_3_5_cards_second_half_tag = 'secondhalfcards35';
 
 Nairabet.prototype.number_of_goals_tag = 'numberofgoals';
+Nairabet.prototype.number_of_goals_first_half_tag = 'numberofgoalsin1sthalf';
+Nairabet.prototype.number_of_goals_second_half_tag = 'numberofgoalsin2ndhalf ';
+
+
+
 
 
 
