@@ -282,7 +282,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
 			setTimeout(function()
                 {
                      self(home_url, nb_object,nb_parser, days, (current_index), game_collection, callback);
-                }, 5000);*/
+                }, 5000);
            
 
         }
