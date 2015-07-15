@@ -1212,7 +1212,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
 
         //Away clean sheet
 		//TODO Use "Away Team" in place of the team name(game.away). Applicable to merrybet
-        if (tag == ("awayteam") + nparser.clean_sheet_tag)) {
+        if (tag == ("awayteam" + nparser.clean_sheet_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.away_clean_sheet.yes.sd.value'] = odds[0];
@@ -1226,7 +1226,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
 
         }
         //Home clean sheet First half
-        if (tag == ("firstteam") + nparser.clean_sheet_half_tag) {
+        if (tag == ("firstteam" + nparser.clean_sheet_half_tag) {
             odds = nparser.parse_basic_op($(this).next(), $);
 
             if (helper.validate_odds(odds, 2)) {
@@ -1243,7 +1243,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Away clean sheet First half
-        if (tag == ("awayteam") + nparser.clean_sheet_half_tag)) {
+        if (tag == ("awayteam" + nparser.clean_sheet_half_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.away_clean_sheet_half.yes.sd.value'] = odds[0];
@@ -1259,7 +1259,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Home clean sheet Second half
-        if (tag == ("hometeam") + nparser.clean_sheet_half_2_tag)) {
+        if (tag == ("firstteam" + nparser.clean_sheet_half_2_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
 
             if (helper.validate_odds(odds, 2)) {
@@ -1276,7 +1276,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Away clean sheet Second half
-        if (tag == ("awayteam") + nparser.clean_sheet_half_2_tag)) {
+        if (tag == ("awayteam" + nparser.clean_sheet_half_2_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.away_clean_sheet_half_2.yes.sd.value'] = odds[0];

@@ -1210,7 +1210,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
         //Away clean sheet
 		//TODO Use "Away Team" in place of the team name(game.away). Applicable to merrybet|winnersgoldenbet|stakersden
-        if (tag == ("awayteam") + nparser.clean_sheet_tag)) {
+        if (tag == ("awayteam" + nparser.clean_sheet_tag)) {
             odds = nparser.parse_basic_op($(this), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.away_clean_sheet.yes.mb.value'] = odds[0];
@@ -1224,7 +1224,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
         }
         //Home clean sheet First half
-        if (tag == ( "firstteam") + nparser.clean_sheet_half_tag)) {
+        if (tag == ( "firstteam" + nparser.clean_sheet_half_tag)) {
             odds = nparser.parse_basic_op($(this), $);
 
             if (helper.validate_odds(odds, 2)) {
@@ -1241,7 +1241,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Away clean sheet First half
-        if (tag == ( "awayteam") + nparser.clean_sheet_half_tag)) {
+        if (tag == ( "awayteam" + nparser.clean_sheet_half_tag)) {
             odds = nparser.parse_basic_op($(this), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.away_clean_sheet_half.yes.mb.value'] = odds[0];
@@ -1274,7 +1274,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Away clean sheet Second half
-        if (tag == ( "awayteam") + nparser.clean_sheet_half_2_tag)) {
+        if (tag == ( "awayteam" + nparser.clean_sheet_half_2_tag)) {
             odds = nparser.parse_basic_op($(this), $);
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.away_clean_sheet_half_2.yes.mb.value'] = odds[0];
