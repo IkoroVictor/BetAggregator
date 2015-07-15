@@ -1226,7 +1226,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.home_clean_sheet_half.yes.mb.value'] = odds[0];
-                temp_data['odds.home_clean_sheet.no.mb.value'] = odds[1]
+                temp_data['odds.home_clean_sheet_half.no.mb.value'] = odds[1]
 
                 temp_data['odds.home_clean_sheet_half.yes.mb.outcome_id'] = outcome_ids[0];
                 temp_data['odds.home_clean_sheet_half.no.mb.outcome_id'] = outcome_ids[1]

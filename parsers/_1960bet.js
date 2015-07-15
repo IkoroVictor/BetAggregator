@@ -1226,7 +1226,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.home_clean_sheet_half.yes._1960.value'] = odds[0];
-                temp_data['odds.home_clean_sheet.no._1960.value'] = odds[1]
+                temp_data['odds.home_clean_sheet_half.no._1960.value'] = odds[1]
 
                 temp_data['odds.home_clean_sheet_half.yes._1960.outcome_id'] = outcome_ids[0];
                 temp_data['odds.home_clean_sheet_half.no._1960.outcome_id'] = outcome_ids[1]

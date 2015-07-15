@@ -1212,7 +1212,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.home_clean_sheet_half.yes.nb.value'] = odds[0];
-                temp_data['odds.home_clean_sheet.no.nb.value'] = odds[1]
+                temp_data['odds.home_clean_sheet_half.no.nb.value'] = odds[1]
 
                 temp_data['odds.home_clean_sheet_half.yes.nb.outcome_id'] = outcome_ids[0];
                 temp_data['odds.home_clean_sheet_half.no.nb.outcome_id'] = outcome_ids[1]
