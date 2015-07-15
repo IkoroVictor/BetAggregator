@@ -158,7 +158,7 @@ Nairabet.prototype.under_over_3_5_second_half_tag = 'underover35goalsin2ndhalf';
 
 
 Nairabet.prototype.to_score_first_tag =  'toscorefirstgoal'
-Nairabet.prototype.to_score_last_tag =  'toscorelastgoal'  //TODO Filter the question mark in the "clean" method, then remove it from here
+Nairabet.prototype.to_score_last_tag =  'toscorelastgoal'  
 
 
 
