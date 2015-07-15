@@ -1226,7 +1226,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
 
         }
         //Home clean sheet First half
-        if (tag == ("firstteam" + nparser.clean_sheet_half_tag) {
+        if (tag == ("firstteam" + nparser.clean_sheet_half_tag)) {
             odds = nparser.parse_basic_op($(this).next(), $);
 
             if (helper.validate_odds(odds, 2)) {
