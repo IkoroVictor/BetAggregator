@@ -1701,7 +1701,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
 
 
     });
-    console.log(nparser.double_chance_first_half_tag);
+    
     nparser = null;
     helper = null;
     root = null;
