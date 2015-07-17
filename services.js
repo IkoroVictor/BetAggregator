@@ -243,7 +243,7 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
                                 nb_parser.getGameOdds(root_obj, value, game_collection);
                             }
                             catch (ex) {
-                                console.log(ex)
+                                console.log(ex.stack)
                             }
                             root_obj = null;
                             b3 = null;
