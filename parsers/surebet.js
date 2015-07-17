@@ -1104,9 +1104,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i])+'.sb.value']  = val.odds[i];
                 temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i]) + '.sb.outcome_id'] = outcome_ids[i];
 
-                if (obj != undefined) {
-                    //obj.sb.value = val.odds[i];                 }
-                }
+
             }
         }
 
@@ -1118,9 +1116,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i])+'.sb.value']  = val.odds[i];
                 temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i]) + '.sb.outcome_id'] = outcome_ids[i];
 
-                if (obj != undefined) {
-                    //obj.sb.value = val.odds[i];                 }
-                }
+
             }
         }
 
@@ -1432,9 +1428,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i])+'.sb.value']  = val.odds[i];
                 temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i])+'.sb.outcome_id']  = outcome_ids[i];
 
-                if (obj != undefined) {
-                    //obj.sb.value = val.odds[i];                 }
-                }
+
             }
         }
 
@@ -1445,9 +1439,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.number_of_goals_half.' + nparser.clean(val.keys[i])+'.sb.value']  = val.odds[i];
                 temp_data['odds.number_of_goals_half.' + nparser.clean(val.keys[i])+'.sb.outcome_id']  = outcome_ids[i];
 
-                if (obj != undefined) {
-                    //obj.sb.value = val.odds[i];                 }
-                }
+
             }
         }
 
@@ -1458,9 +1450,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.number_of_goals_half_2.' + nparser.clean(val.keys[i])+'.sb.value']  = val.odds[i];
                 temp_data['odds.number_of_goals_half_2.' + nparser.clean(val.keys[i])+'.sb.outcome_id']  = outcome_ids[i];
 
-                if (obj != undefined) {
-                    //obj.sb.value = val.odds[i];                 }
-                }
+
             }
         }
 
