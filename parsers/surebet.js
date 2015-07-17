@@ -31,9 +31,9 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
 
     $('.event_game_title').each(function (indx, elem) {
 
-        tag_temp = nparser.clean_symbols($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase().split('*');
 
-        tag = tag_temp[0];
+        tag_temp = $(this).children().eq(0).children().eq(0).children().eq(0).text().split('*');
+        tag = nparser.clean_symbols(tag_temp[0]).toLowerCase();
         game_code = tag_temp[1];
 
         var outcome_ids =  nparser.parse_outcome_ids($(this).parent().next(), $);
