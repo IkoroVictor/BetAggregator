@@ -55,10 +55,10 @@ Surebet.prototype.parse_op_with_keys = function( cheerio_object, root)
 {
     var odds = [];
     var keys = []
-    root('.category_outcome', cheerio_object).each(function(i, e)
+    root('.event_outcome', cheerio_object).each(function(i, e)
     {
-        keys.push(root(this).children().eq(0).children().eq(0).children().eq(0).text().trim());
-        odds.push(parseFloat(root(this).children().eq(0).children().eq(0).children().eq(1).text().trim()));
+        keys.push(root('.column_middle_left', this).eq(0).text().trim());
+        odds.push(parseFloat(root('.column_middle_right',this).eq(0).text().trim()));
 
     });
 
