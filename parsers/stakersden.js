@@ -1156,7 +1156,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Most Scoring Half (Home)
-        if (tag == ( nparser.clean_symbols(game.home.toLowerCase()) + nparser.most_scoring_half_tag)) {
+        if (tag == (nparser.most_scoring_half_tag + "(firstteam)")) {
             odds = nparser.parse_basic_op($(this).next(), $);
 
             if (helper.validate_odds(odds, 3)) {
@@ -1175,7 +1175,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
 
         }
         //Most Scoring Half (Away)
-        if (tag == ( nparser.clean_symbols(game.away.toLowerCase()) + nparser.most_scoring_half_tag)) {
+        if (tag == (nparser.most_scoring_half_tag + "(awayteam)")) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 3)) {
                 temp_data['odds.away_most_scoring_half.half.sd.value'] = odds[0];

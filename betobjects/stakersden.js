@@ -92,6 +92,12 @@ Stakersden.prototype.clean_symbols = function(val)
 Stakersden.prototype.day_bet_url_suffix = '/Odds/bets/date/';
 Stakersden.prototype.short_name = 'SD';
 
+Stakersden.prototype.double_chance_first_half_tag = 'doublechanceinfirsthalf';
+Stakersden.prototype.double_chance_second_half_tag = 'doublechanceinsecondhalf';
+
+Stakersden.prototype.draw_no_bet_first_half_tag = 'firsthalfdrawnobet';
+Stakersden.prototype.draw_no_bet_second_half_tag = 'secondhalfdrawnobet';
+
 
 
 
