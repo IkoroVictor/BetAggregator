@@ -42,8 +42,16 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
         if (temp.length) {
             t = temp.text().split('(');
-            tag = nparser.clean_symbols(t[0].toLowerCase());
-            game_code = t[1].split(')')[0];
+            if(t.length <= 2)  //e.g 1X2 (Game Code: 59925)
+            {
+                tag = nparser.clean_symbols(t[0].toLowerCase());
+            }
+            else  //e.g. Most scoring half (First Team) (Game Code: 59925)
+            {
+                tag = nparser.clean_symbols(t[0].toLowerCase() + t[1].split(')')[0].toLowerCase())
+            }
+
+            game_code = t[t.length - 1].split(')')[0];
         }
 
 
@@ -1153,7 +1161,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Most Scoring Half (Home)
-        if (tag == ( nparser.clean_symbols(game.home.toLowerCase()) + nparser.most_scoring_half_tag)) {
+        if (tag == (nparser.most_scoring_half_tag + "firstteam") ) {
             odds = nparser.parse_basic_op($(this).next(), $);
 
             if (helper.validate_odds(odds, 3)) {
@@ -1172,7 +1180,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
 
         }
         //Most Scoring Half (Away)
-        if (tag == ( nparser.clean_symbols(game.away.toLowerCase()) + nparser.most_scoring_half_tag)) {
+        if (tag == ( (nparser.most_scoring_half_tag + "secondteam"))) {
             odds = nparser.parse_basic_op($(this).next(), $);
             if (helper.validate_odds(odds, 3)) {
                 temp_data['odds.away_most_scoring_half.half.mb.value'] = odds[0];

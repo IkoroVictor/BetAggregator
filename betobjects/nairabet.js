@@ -149,10 +149,10 @@ Nairabet.prototype.under_over_2_5_first_half_tag = 'underover25goalsin1sthalf';
 Nairabet.prototype.under_over_3_5_first_half_tag = 'underover35goalsin1sthalf';
 
 
-Nairabet.prototype.under_over_0_5_second_half_tag = 'underover05goalsin2ndhalf';
-Nairabet.prototype.under_over_1_5_second_half_tag = 'underover15goalsin2ndhalf';
-Nairabet.prototype.under_over_2_5_second_half_tag = 'underover25goalsin2ndhalf';
-Nairabet.prototype.under_over_3_5_second_half_tag = 'underover35goalsin2ndhalf';
+Nairabet.prototype.under_over_0_5_second_half_tag = 'goalsinsecondhalf05';
+Nairabet.prototype.under_over_1_5_second_half_tag = 'goalsinsecondhalf15';
+Nairabet.prototype.under_over_2_5_second_half_tag = 'goalsinsecondhalf25';
+Nairabet.prototype.under_over_3_5_second_half_tag = 'goalsinsecondhalf35';
 
 
 

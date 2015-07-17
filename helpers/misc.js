@@ -48,7 +48,7 @@ exports.getSignificantKey = function(val)
 
 exports.clean_symbols = function(val)
 {
-    return val.trim().replace(/ |-|\.|\?|\/|\\|:|,|\|/g, '');
+    return val.trim().replace(/ |\*|-|\.|\?|\/|\\|:|,|\|/g, '');
 }
 
 exports.fix_scorers = function (val)

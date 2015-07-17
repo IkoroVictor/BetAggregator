@@ -1,4 +1,6 @@
 #!/bin/bash
+
+cd ./naijaodds/naijaodds2
 echo "Stopping Dyno $1 ON Heroku"
 
 heroku ps:scale $1=0

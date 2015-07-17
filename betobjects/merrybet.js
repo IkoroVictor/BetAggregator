@@ -79,9 +79,11 @@ Merrybet.prototype.clean_symbols = function(val)
 
 
 Merrybet.prototype.day_bet_url_suffix = '/bets/date/';
+Merrybet.prototype.double_chance_first_half_tag = 'doublechanceinfirsthalf';
+Merrybet.prototype.double_chance_second_half_tag = 'doublechanceinsecondhalf';
 
-
-
+Merrybet.prototype.draw_no_bet_first_half_tag = 'firsthalfdrawnobet';
+Merrybet.prototype.draw_no_bet_second_half_tag = 'secondhalfdrawnobet';
 
 
 
