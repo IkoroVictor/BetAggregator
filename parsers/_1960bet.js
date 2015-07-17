@@ -1451,6 +1451,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.number_of_goals_first_half_tag )) {
             var val = nparser.parse_op_with_keys($(this), $);
             for (var i = 0; i < val.odds.length; i++) {
+			console.log(val);
                 temp_data['odds.number_of_goals_half.' + nparser.clean(val.keys[i])+'._1960.value']  = val.odds[i];
                 temp_data['odds.number_of_goals_half.' + nparser.clean(val.keys[i])+'._1960.outcome_id']  = outcome_ids[i];
 
