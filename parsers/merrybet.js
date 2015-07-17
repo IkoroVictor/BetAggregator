@@ -1541,6 +1541,8 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             temp_data['play_codes.' + tag + '.mb'] = game_code;
         }
 
+        console.log(tag);
+
 
     });
 
