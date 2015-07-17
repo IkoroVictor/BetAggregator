@@ -1089,7 +1089,7 @@ SurebetParser.prototype.getGameOdds = function ($, game, db) {
         //Correct Score including Others
         if (tag == (nparser.correct_score_others_tag )) {
             var val = nparser.parse_op_with_keys($(this).parent().next(), $);
-
+             console.log(val);
             for (var i = 0; i < val.odds.length; i++) {
                 temp_data['odds.correct_score_others.' + nparser.clean_symbols(val.keys[i]) + '.sb.value'] = val.odds[i];
                 temp_data['odds.correct_score_others.' + nparser.clean_symbols(val.keys[i]) + '.sb.outcome_id'] = outcome_ids[i];
