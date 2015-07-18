@@ -1637,7 +1637,8 @@ SurebetParser.prototype.getGames = function ($, data) {
                 game.home_key = helper.getSignificantKey(game.home);
                 game.away_key = helper.getSignificantKey(game.away);
 
-
+                console.log(game.home_alt);
+                console.log(game.away_alt);
                
                 //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
 
