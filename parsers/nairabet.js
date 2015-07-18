@@ -31,7 +31,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
         var tag = nparser.clean_symbols($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
         var game_code = $(this).children().eq(0).children().eq(1).text();
-        
+
         var outcome_ids =  nparser.parse_outcome_ids($(this).next(), $);
 
         obj = undefined;
@@ -1547,7 +1547,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         db.update(query, {$set: temp_data},
             function (err, count, status) {
                 if (err)
-                    console.log(err);
+                    console.log(game.title + " : " + err);
                 else
                 {
                     //console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
