@@ -1599,7 +1599,8 @@ NairabetParser.prototype.getGames = function ($, data) {
 
             try
             {
-                var vars = $('.bst_button', '#betsPanel', this).eq(0).attr('onclick').replace(/'/g, '').split(',');
+                var team_panels =  $('.bst_button', '#betsPanel', this);
+                var vars = team_panels.eq(0).attr('onclick').replace(/'/g, '').split(',');
                 var game = require('../constants').newGame().game;
 
 
@@ -1614,9 +1615,23 @@ NairabetParser.prototype.getGames = function ($, data) {
                 game.id = helper.generateGameID(game.title)
                 game.sorted_id = helper.generateSortedGameID(game.title)
 
+                game.home_alt = $('#outcome1Text', team_panels.eq(0)).children().eq(0).text()
+                game.away_alt = $('#outcome1Text', team_panels.eq(1)).children().eq(0).text()
+
                 var sides = vars[2].split('-');
-                game.home = sides[0].trim();
-                game.away = sides[1].trim();
+                if(sides.length == 2)
+                {
+                    game.home = sides[0].trim();
+                    game.away = sides[1].trim();
+                }
+                else
+                {
+                    game.home = game.home_alt;
+                    game.away = game.home_alt;
+                }
+                console.log(game.home_alt);
+                console.log(game.away_alt);
+
 
                 game.home_key = helper.getSignificantKey(game.home);
                 game.away_key = helper.getSignificantKey(game.away);
