@@ -1616,7 +1616,7 @@ NairabetParser.prototype.getGames = function ($, data) {
                 game.sorted_id = helper.generateSortedGameID(game.title)
 
                 game.home_alt = $('#outcome1Text', team_panels.eq(0)).children().eq(0).text()
-                game.away_alt = $('#outcome1Text', team_panels.eq(1)).children().eq(0).text()
+                game.away_alt = $('#outcome1Text', team_panels.eq(2)).children().eq(0).text()
 
                 var sides = vars[2].split('-');
                 if(sides.length == 2)
