@@ -1547,7 +1547,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
         db.update(query, {$set: temp_data},
             function (err, count, status) {
                 if (err)
-                    console.log(game.id + " : " + err);
+                    console.log(game.url + " : " + err);
                 else
                 {
                     //console.log('[DB SAVED] STATUS: '+ status+' COUNT: ' + count );
