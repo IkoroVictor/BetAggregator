@@ -1090,7 +1090,7 @@ StakersdenParser.prototype.getGameOdds = function ($, game, db) {
         //Correct Score
         if (tag == (nparser.correct_score_tag )) {
             var val = nparser.parse_op_with_keys($(this).next(), $);
-            console.log(val)
+            
             for (var i = 0; i < val.odds.length; i++) {
                 temp_data['odds.correct_score.' + nparser.clean_symbols(val.keys[i]) + '.sd.value'] = val.odds[i];
                 temp_data['odds.correct_score.' + nparser.clean_symbols(val.keys[i]) + '.sd.outcome_id'] = outcome_ids[i];

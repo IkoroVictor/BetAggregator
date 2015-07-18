@@ -60,7 +60,7 @@ Stakersden.prototype.parse_op_with_keys = function( cheerio_object, root)
 {
     var odds = [];
     var keys = []
-    
+
     root('#outcomePanel',cheerio_object).each(function(i2,e2)
     {
 
