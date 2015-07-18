@@ -60,13 +60,10 @@ Stakersden.prototype.parse_op_with_keys = function( cheerio_object, root)
 {
     var odds = [];
     var keys = []
-
-    console.log('here niggas');
-
+    console.log(root(this).html())
     root('#outcomePanel',this).each(function(i2,e2)
     {
 
-        
         root('#outcomeText',this).each( function(){
 
             keys.push(root(this).text().trim());
