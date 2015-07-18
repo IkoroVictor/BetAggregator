@@ -1667,14 +1667,20 @@ NairabetParser.prototype.getGames = function ($, data) {
 NairabetParser.prototype.getMatchDays = function ($, data) {
     $('#oddsByDateDropDown').children().each(function (index, elem) {
         var date = $(this).attr('value').trim();
+        var timestamp  = helper.getTimestamp(date + " 00:00")
+        var expireAt =  new Date(timestamp);
+        expireAt.setDate(expireAt.getDate() + 1)
+
         data[date] = {
 
             full_date: $(this).text(),
             short_date: date,
             sql_date: '',
             categories: [],
-			timestamp: helper.getTimestamp(date + " 00:00"),
-            games: []
+			timestamp: timestamp,
+            games: [],
+            expireAt: expireAt
+
 
         };
 
