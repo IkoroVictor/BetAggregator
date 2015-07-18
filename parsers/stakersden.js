@@ -1593,7 +1593,7 @@ StakersdenParser.prototype.getGames = function ($, data) {
         try{
 		var game = constants.newGame().game;
         var vars = $('#categoryText', this).eq(0).text();
-
+        var team_panels = $('.bst_button', this);
 
         //game.datetime = $('.event-date', this).eq(0).text();
 
@@ -1602,9 +1602,20 @@ StakersdenParser.prototype.getGames = function ($, data) {
         game.title = vars.trim();
         game.id = helper.generateGameID(game.title)
 
-        var sides = vars.split('-');
-        game.home = sides[0].trim();
-        game.away = sides[1].trim();
+            game.home_alt = team_panels.eq(0).eq(0).attr('onclick').replace(/'/g, '').split(',')[3].trim();
+            game.away_alt = team_panels.eq(2).eq(2).attr('onclick').replace(/'/g, '').split(',')[3].trim();
+
+            var sides = vars.split('-');
+            if(sides.length == 2)
+            {
+                game.home = sides[0].trim();
+                game.away = sides[1].trim();
+            }
+            else
+            {
+                game.home = game.home_alt;
+                game.away = game.away_alt;
+            }
         game.home_key = helper.getSignificantKey(game.home);
         game.away_key = helper.getSignificantKey(game.away);
 

@@ -12,7 +12,6 @@ function WGBParser() {
 WGBParser.prototype.getGameOdds = function ($, game, db) {
 
 
-
     var match_title = $('.event-name', '.event-wrap').text();
     var match_time = $('.event-start', '.event-wrap').text();
 
@@ -20,15 +19,13 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
     game.time = match_time;
     game.title = match_title;
 
-    try
-    {
+    try {
         game.id = helper.generateGameID(game.title)
         game.sorted_id = helper.generateSortedGameID(game.title)
         game.home = match_title.split('-')[0].trim();
         game.away = match_title.split('-')[1].trim();
     }
-    catch(ex)
-    {
+    catch (ex) {
         console.log(ex);
     }
 
@@ -40,10 +37,9 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
         var game_code = '';
         var temp = $('.game-title', this);
 
-        if(temp.length > 0)
-        {
+        if (temp.length > 0) {
             t = temp.text().split('(');
-            if(t.length <= 2)  //e.g 1X2 (Game Code: 59925)
+            if (t.length <= 2)  //e.g 1X2 (Game Code: 59925)
             {
                 tag = nparser.clean_symbols(t[0].toLowerCase());
             }
@@ -54,7 +50,7 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
 
             game_code = t[t.length - 1].split(')')[0];
         }
-        var outcome_ids =  nparser.parse_outcome_ids($(this), $);
+        var outcome_ids = nparser.parse_outcome_ids($(this), $);
 
         obj = undefined;
 
@@ -212,7 +208,6 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.1_half.wgb.outcome_id'] = outcome_ids[0];
                 temp_data['odds.x_half.wgb.outcome_id'] = outcome_ids[1];
                 temp_data['odds.2_half.wgb.outcome_id'] = outcome_ids[2]
-
 
 
             }
@@ -708,8 +703,6 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
         }
 
 
-
-
         //Both teams to score
         if (tag == nparser.both_teams_to_score_tag) {
             odds = nparser.parse_basic_op($(this), $);
@@ -1089,7 +1082,6 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.team_total_goals.away.3+.wgb.outcome_id'] = outcome_ids[3]
 
 
-
             }
 
 
@@ -1121,7 +1113,7 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.correct_score_first_half_tag )) {
             var val = nparser.parse_op_with_keys($(this), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i])+'.wgb.value']  = val.odds[i];
+                temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i]) + '.wgb.value'] = val.odds[i];
                 temp_data['odds.correct_score_half.' + nparser.clean_symbols(val.keys[i]) + '.wgb.outcome_id'] = outcome_ids[i];
 
                 if (obj != undefined) {
@@ -1135,7 +1127,7 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.correct_score_second_half_tag )) {
             var val = nparser.parse_op_with_keys($(this), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i])+'.wgb.value']  = val.odds[i];
+                temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i]) + '.wgb.value'] = val.odds[i];
                 temp_data['odds.correct_score_half_2.' + nparser.clean_symbols(val.keys[i]) + '.wgb.outcome_id'] = outcome_ids[i];
 
                 if (obj != undefined) {
@@ -1177,7 +1169,6 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
                 temp_data['odds.home_most_scoring_half.equal.wgb.outcome_id'] = outcome_ids[2]
 
 
-
             }
 
 
@@ -1201,10 +1192,10 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
 
 
         //Home clean sheet
-		//TODO Use "First Team" in place of the team name(game.home). Applicable to merrybet|winnersgoldenbet|stakersden
+        //TODO Use "First Team" in place of the team name(game.home). Applicable to merrybet|winnersgoldenbet|stakersden
         if (tag == ("firstteam" + nparser.clean_sheet_tag)) {
 
-				odds = nparser.parse_basic_op($(this), $);
+            odds = nparser.parse_basic_op($(this), $);
 
             if (helper.validate_odds(odds, 2)) {
                 temp_data['odds.home_clean_sheet.yes.wgb.value'] = odds[0];
@@ -1220,7 +1211,7 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
         }
 
         //Away clean sheet
-		//TODO Use "Away Team" in place of the team name(game.away). Applicable to merrybet|winnersgoldenbet|stakersden
+        //TODO Use "Away Team" in place of the team name(game.away). Applicable to merrybet|winnersgoldenbet|stakersden
         if (tag == ("awayteam" + nparser.clean_sheet_tag)) {
             odds = nparser.parse_basic_op($(this), $);
             if (helper.validate_odds(odds, 2)) {
@@ -1452,8 +1443,8 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.number_of_goals_tag )) {
             var val = nparser.parse_op_with_keys($(this), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i])+'.wgb.value']  = val.odds[i];
-                temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i])+'.wgb.outcome_id']  = outcome_ids[i];
+                temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i]) + '.wgb.value'] = val.odds[i];
+                temp_data['odds.number_of_goals.' + nparser.clean(val.keys[i]) + '.wgb.outcome_id'] = outcome_ids[i];
 
                 if (obj != undefined) {
                     //obj.wgb.value = val.odds[i];                 }
@@ -1465,8 +1456,8 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.number_of_goals_first_half_tag )) {
             var val = nparser.parse_op_with_keys($(this), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.number_of_goals_half.' + nparser.clean(val.keys[i])+'.wgb.value']  = val.odds[i];
-                temp_data['odds.number_of_goals_half.' + nparser.clean(val.keys[i])+'.wgb.outcome_id']  = outcome_ids[i];
+                temp_data['odds.number_of_goals_half.' + nparser.clean(val.keys[i]) + '.wgb.value'] = val.odds[i];
+                temp_data['odds.number_of_goals_half.' + nparser.clean(val.keys[i]) + '.wgb.outcome_id'] = outcome_ids[i];
 
                 if (obj != undefined) {
                     //obj.wgb.value = val.odds[i];                 }
@@ -1478,8 +1469,8 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
         if (tag == (nparser.number_of_goals_second_half_tag )) {
             var val = nparser.parse_op_with_keys($(this), $);
             for (var i = 0; i < val.odds.length; i++) {
-                temp_data['odds.number_of_goals_half_2.' + nparser.clean(val.keys[i])+'.wgb.value']  = val.odds[i];
-                temp_data['odds.number_of_goals_half_2.' + nparser.clean(val.keys[i])+'.wgb.outcome_id']  = outcome_ids[i];
+                temp_data['odds.number_of_goals_half_2.' + nparser.clean(val.keys[i]) + '.wgb.value'] = val.odds[i];
+                temp_data['odds.number_of_goals_half_2.' + nparser.clean(val.keys[i]) + '.wgb.outcome_id'] = outcome_ids[i];
 
                 if (obj != undefined) {
                     //obj.wgb.value = val.odds[i];                 }
@@ -1539,19 +1530,17 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
 
         }
 
-        if(tag.trim() != '')
-        {
-            temp_data['play_codes.'+ tag + '.wgb'] = game_code;
+        if (tag.trim() != '') {
+            temp_data['play_codes.' + tag + '.wgb'] = game_code;
         }
 
 
     });
 
 
+    var query = {'timestamp': game.timestamp,
 
-       var query = {'timestamp': game.timestamp,
-
-        $or:[
+        $or: [
             {'id': game.id},
             {'sorted_id': game.sorted_id},
             {'home': game.home},
@@ -1566,16 +1555,14 @@ WGBParser.prototype.getGameOdds = function ($, game, db) {
 
         ]}
 
-    process.nextTick(function()
-    {
+    process.nextTick(function () {
         db.update(query, {$set: temp_data},
             function (err, count, status) {
                 if (err)
                     console.log(err);
-                else
-                {
+                else {
                     //console.log('[DB SAVED] GAME-ID: '+ game.id+' COUNT: ' + count );
-					//console.log(game.title + " : " + game.date + " : " + JSON.stringify(query));
+                    //console.log(game.title + " : " + game.date + " : " + JSON.stringify(query));
                     //console.log('[DATA]: ' + JSON.stringify(temp_data));
 
                 }
@@ -1600,68 +1587,71 @@ WGBParser.prototype.getGames = function ($, data) {
 
     var current_cat = undefined;
 
-    $('.event-panel').each( function(index, elem)
-    {
+    $('.event-panel').each(function (index, elem) {
 
-        try{
-		var x =  $('.outcome', this)
-        if(x.length)
-        {
-            x = x.eq(0).attr('data-gamename');
-            if(x != '1X2')
-            return;
+        try {
+            var x = $('.outcome', this)
+            if (x.length) {
+                x = x.eq(0).attr('data-gamename');
+                if (x != '1X2')
+                    return;
 
+            }
+            var game = require('../constants').newGame().game;
+            var vars = $('.event-name', this).eq(0).text();
+            var team_panels = $('.outcome', this);
+
+
+            game.datetime = $('.event-date', this).eq(0).text();
+
+            game.timestamp = helper.getTimestamp(game.datetime);
+
+            game.title = vars.trim();
+            game.id = helper.generateGameID(game.title)
+            game.sorted_id = helper.generateSortedGameID(game.title)
+
+            game.home_alt = team_panels.eq(0).attr('data-outcomename');
+            game.away_alt = team_panels.eq(2).attr('data-outcomename');
+
+            var sides = vars.split('-');
+            if (sides.length == 2) {
+                game.home = sides[0].trim();
+                game.away = sides[1].trim();
+            }
+            else {
+                game.home = game.home_alt;
+                game.away = game.away_alt;
+            }
+            game.home_key = helper.getSignificantKey(game.home);
+            game.away_key = helper.getSignificantKey(game.away);
+
+
+            //console.log(game.datetime);
+            //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
+
+            var vars2 = $('.full-event-button', this).attr('onclick');
+
+            if (vars2 != undefined) {
+                game.url = vars2.split("'")[1];
+            }
+            game.date = game.datetime.split(" ")[0];
+            game.time = game.datetime.split(" ")[1];
+
+
+            if (typeof current_cat != "undefined")
+                game.category_key = current_cat.key;
+
+
+            if (typeof current_cat != "undefined")
+                game.category_key = current_cat.key;
+
+            data.games.push(game);
+        } catch (e) {
+            console.log(e);
         }
-        var game = require('../constants').newGame().game;
-        var vars = $('.event-name', this).eq(0).text();
-
-
-        game.datetime = $('.event-date', this).eq(0).text();
-
-        game.timestamp = helper.getTimestamp(game.datetime);
-
-        game.title = vars.trim();
-        game.id = helper.generateGameID(game.title)
-		game.sorted_id = helper.generateSortedGameID(game.title)
-
-        var sides = vars.split('-');
-        game.home = sides[0].trim();
-        game.away = sides[1].trim();
-        game.home_key = helper.getSignificantKey(game.home);
-        game.away_key = helper.getSignificantKey(game.away);
-
-
-        //console.log(game.datetime);
-        //TODO  Please don't rely on structure of the website.. use IDs  or ClASS to get Game URLS
-
-        var vars2 = $('.full-event-button', this).attr('onclick');
-
-        if (vars2 != undefined) {
-            game.url = vars2.split("'")[1];
-        }
-        game.date = game.datetime.split(" ")[0];
-        game.time = game.datetime.split(" ")[1];
-
-
-        if (typeof current_cat  != "undefined")
-            game.category_key = current_cat.key;
-
-
-
-
-        if (typeof current_cat  != "undefined")
-            game.category_key = current_cat.key;
-
-        data.games.push(game);
-		 } catch (e) {
-                    console.log(e);
-                }
-
 
 
     });
-
-
 
 
     root = null;

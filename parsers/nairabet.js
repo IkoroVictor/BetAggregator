@@ -1627,10 +1627,9 @@ NairabetParser.prototype.getGames = function ($, data) {
                 else
                 {
                     game.home = game.home_alt;
-                    game.away = game.home_alt;
+                    game.away = game.away_alt;
                 }
-                console.log(game.home_alt);
-                console.log(game.away_alt);
+
 
 
                 game.home_key = helper.getSignificantKey(game.home);

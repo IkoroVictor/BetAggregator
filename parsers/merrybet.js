@@ -1641,7 +1641,15 @@ MerrybetParser.prototype.getGames = function ($, data) {
                         //=================METHOD 1 ==================
                         // TODO: Remember to get the team names when getting the odds because some team names might be incomplete
 
-                        var game_title = $('.betsPanelEventName-text', this).text();
+                        var game_title = $('.betsPanelEventName', this).attr("title");
+                        if(!game_title)
+                        {
+                            game_title = $('.betsPanelEventName-text', this).text().trim();
+                        }
+
+
+                         var team_panels = $('.outcome_odds_category', this);
+
                         //var game_title = $('#categoryText',this).text();
                         /*=================METHOD 2(Less Reliable)=================
 
@@ -1664,12 +1672,20 @@ MerrybetParser.prototype.getGames = function ($, data) {
                         game.sorted_id = helper.generateSortedGameID(game.title)
 
 
-                        var sides = game_title.split('-');
-                        game.home = sides[0].trim();
-                        game.away = sides[1].trim();
-                        game.home_key = helper.getSignificantKey(game.home);
-                        game.away_key = helper.getSignificantKey(game.away);
+                         game.home_alt =  team_panels.eq(0).eq(0).attr('onclick').replace(/'/g, '').split(',')[3].trim();
+                         game.away_alt =  team_panels.eq(2).eq(2).attr('onclick').replace(/'/g, '').split(',')[3].trim();
 
+                         var sides = game_title.split('-');
+                         if(sides.length == 2)
+                         {
+                             game.home = sides[0].trim();
+                             game.away = sides[1].trim();
+                         }
+                         else
+                         {
+                             game.home = game.home_alt;
+                             game.away = game.away_alt;
+                         }
 
                         //TODO  Please don't rely on structure of the website.. use IDs  or CLASS to get Game URLS
 

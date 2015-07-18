@@ -1603,7 +1603,8 @@ SurebetParser.prototype.getGames = function ($, data) {
 			try{
 
                 var game = require('../constants').newGame().game;
-                var vars = $('.category_outcome', this).eq(0).attr('onclick').replace(/'/g, '').split(',');
+                var team_panels = $('.category_outcome', this);
+                var vars = team_panels.eq(0).attr('onclick').replace(/'/g, '').split(',');
 
 
                 game.datetime = $('#betDateText', this).eq(0).text() + " " + $('#betDateText', this).eq(1).text() ;
@@ -1618,9 +1619,21 @@ SurebetParser.prototype.getGames = function ($, data) {
                 game.id = helper.generateGameID(game.title)
                 game.sorted_id = helper.generateSortedGameID(game.title)
 
+                game.home_alt = vars[3].trim();
+                game.away_alt = team_panels.eq(2).attr('onclick').replace(/'/g, '').split(',')[3].trim();
+
                 var sides = vars[2].split('-');
-                game.home = sides[0].trim();
-                game.away = sides[1].trim();
+                if(sides.length == 2)
+                {
+                    game.home = sides[0].trim();
+                    game.away = sides[1].trim();
+                }
+                else
+                {
+                    game.home = game.home_alt;
+                    game.away = game.away_alt;
+                }
+
                 game.home_key = helper.getSignificantKey(game.home);
                 game.away_key = helper.getSignificantKey(game.away);
 
