@@ -1687,8 +1687,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
                              game.home = game.home_alt;
                              game.away = game.away_alt;
                          }
-                        console.log(game.home_alt);
-                        console.log(game.away_alt);
+                        
 
                         //TODO  Please don't rely on structure of the website.. use IDs  or CLASS to get Game URLS
 
