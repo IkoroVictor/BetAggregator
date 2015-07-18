@@ -1623,7 +1623,7 @@ StakersdenParser.prototype.getGames = function ($, data) {
                 game.away = game.away_alt;
             }
 
-            
+
 
         game.home_key = helper.getSignificantKey(game.home);
         game.away_key = helper.getSignificantKey(game.away);
