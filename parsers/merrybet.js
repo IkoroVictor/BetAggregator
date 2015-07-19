@@ -1527,6 +1527,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
                 for (var i = 0; i < val.odds.length; i++) {
                     temp_data['odds.scorer.' + helper.fix_scorers(val.keys[i]).toLowerCase() + '.mb.value'] = val.odds[i];
                     temp_data['odds.scorer.' + helper.fix_scorers(val.keys[i]).toLowerCase() + '.mb.outcome_id'] = outcome_ids[i];
+
                 }
 
             }
@@ -1563,6 +1564,8 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             {'id': {$regex: (  helper.clean_symbols(game.away).toLowerCase() )}}
 
         ]}
+    console.log(JSON.stringify(query));
+
 
     process.nextTick(function () {
         db.update(query, {$set: temp_data},
@@ -1701,7 +1704,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
                         game.date = game.datetime.split(" ")[0];
                         game.time = game.datetime.split(" ")[1];
 
-                     console.log(game.id  + " : " + game.sorted_id + " : " +game.timestamp + " : " + game.url + " : " + game.home + " : " + game.away)
+                     //console.log(game.id  + " : " + game.sorted_id + " : " +game.timestamp + " : " + game.url + " : " + game.home + " : " + game.away)
 
                      if (current_cat != undefined)
                             game.category_key = current_cat.key;
