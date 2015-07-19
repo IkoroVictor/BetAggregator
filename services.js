@@ -7,7 +7,7 @@
 var request = require('request').defaults(
     {
         maxRedirects: 20,
-        pool: false
+        pool: {maxSockets: Infinity}
 });
 var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
