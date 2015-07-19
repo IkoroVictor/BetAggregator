@@ -1564,7 +1564,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
             {'id': {$regex: (  helper.clean_symbols(game.away).toLowerCase() )}}
 
         ]}
-    console.log(JSON.stringify(query));
+    //console.log(JSON.stringify(query));
 
 
     process.nextTick(function () {
@@ -1689,7 +1689,8 @@ MerrybetParser.prototype.getGames = function ($, data) {
                              game.home = game.home_alt;
                              game.away = game.away_alt;
                          }
-
+                        game.home_key = helper.getSignificantKey(game.home);
+                        game.away_key = helper.getSignificantKey(game.away);
 
                         //TODO  Please don't rely on structure of the website.. use IDs  or CLASS to get Game URLS
 
