@@ -1672,7 +1672,6 @@ MerrybetParser.prototype.getGames = function ($, data) {
                         game.id = helper.generateGameID(game.title)
                         game.sorted_id = helper.generateSortedGameID(game.title)
 
-
                          game.home_alt =  team_panels.eq(0).attr('onclick').replace(/'/g, '').split(',')[3].trim();
                          game.away_alt =  team_panels.eq(2).attr('onclick').replace(/'/g, '').split(',')[3].trim();
 
@@ -1702,8 +1701,9 @@ MerrybetParser.prototype.getGames = function ($, data) {
                         game.date = game.datetime.split(" ")[0];
                         game.time = game.datetime.split(" ")[1];
 
+                     console.log(game.id  + " : " + game.sorted_id + " : " +game.timestamp)
 
-                        if (current_cat != undefined)
+                     if (current_cat != undefined)
                             game.category_key = current_cat.key;
 
                         data.games.push(game)
