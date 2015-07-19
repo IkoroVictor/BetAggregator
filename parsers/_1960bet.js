@@ -11,12 +11,12 @@ function _1960betParser() {
 
 _1960betParser.prototype.getGameOdds = function ($, game, db) {
 
-    var match_title = $('.eventBetPage_eventName_text', '.event_bets').eq(0).text();
+    //var match_title = $('.eventBetPage_eventName_text', '.event_bets').eq(0).text();
 
-    var match_time = $('.event_title_panel').children().eq(0).text().split(' ');
+    //var match_time = $('.event_title_panel').children().eq(0).text().split(' ');
 
 
-    game.time = match_time[1];
+    /*game.time = match_time[1];
     game.date = match_time[0];
     game.datetime = match_time[0] +  ' ' + match_time[1] ;
 
@@ -33,7 +33,7 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
     {
         console.log(ex);
     }
-
+*/
 
     var temp_data = {};
 
