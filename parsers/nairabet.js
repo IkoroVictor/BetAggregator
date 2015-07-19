@@ -31,7 +31,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
         //var tag = nparser.clean_symbols($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
         var tag = nparser.clean_symbols($('.event_game_title', this).children().eq(0).children().eq(0).text()).toLowerCase();
-        console.log(tag + game.url);
+       
         //var game_code = $(this).children().eq(0).children().eq(1).text();
         var game_code = $('.event_game_title', this).children().eq(1).text();
 
