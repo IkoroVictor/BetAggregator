@@ -4,8 +4,11 @@
 
 
 
-var request = require('request').defaults({maxRedirects: 20});
-;
+var request = require('request').defaults(
+    {
+        maxRedirects: 20,
+        pool: false
+});
 var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
 var scheduler = require('node-schedule');
@@ -276,8 +279,8 @@ exports.startNoQueueBetParsingServiceSeries = function (home_url, nb_object, nb_
             console.log('Error updating game ' + day.short_date + ' : ' + e);
             console.log('Retrying.... for ' + day.short_date);
 
-            if(current_index > 0)
-				current_index -= 1;
+           // if(current_index > 0)
+				//current_index -= 1;
 			//TODO: please review this code, might be volatile and blocking.
 			
                      self(home_url, nb_object,nb_parser, days, (current_index), game_collection, callback);
