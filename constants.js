@@ -23,7 +23,7 @@ function Constants()
     //this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@ds031962.mongolab.com:31962/naijaodds';
 
     //AMAZON EC2 MONGO
-    this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@ec2-54-68-48-99.us-west-2.compute.amazonaws.com:27017/naijaodds';
+    this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus1@ec2-54-68-48-99.us-west-2.compute.amazonaws.com:27017';
 
     //OBJECTROCKET
     //this.MONGO_DB_URL= 'mongodb://ikorovictor:prometheus@iad-c11-1.objectrocket.com:48074/naijaodds';
