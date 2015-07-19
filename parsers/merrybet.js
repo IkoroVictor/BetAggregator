@@ -27,7 +27,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
         game.away = match_title.split('-')[1].trim();
     }
     catch (ex) {
-        console.log(ex);
+        console.log(ex.stack);
     }
 
     var temp_data = {};
@@ -1568,7 +1568,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
         db.update(query, {$set: temp_data},
             function (err, count, status) {
                 if (err)
-                    console.log(err);
+                    console.log(game.url + " : " + err);
                 else {
                     //console.log('[DB SAVED] GAME-ID: ' + game.id + ' COUNT: ' + count);
                     //console.log('[DATA]: ' + JSON.stringify(temp_data));
