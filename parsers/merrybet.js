@@ -13,7 +13,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
     var helper = require('../helpers/misc');
     var root = $('#betsTable');
 
-    var match_title = $('#eventTitleText', root).text();
+    /*var match_title = $('#eventTitleText', root).text();
     var match_time = $('#eventStartText', root).text();
 
 
@@ -28,7 +28,7 @@ MerrybetParser.prototype.getGameOdds = function ($, game, db) {
     }
     catch (ex) {
         console.log(ex.stack);
-    }
+    }*/
 
     var temp_data = {};
 
@@ -1701,7 +1701,7 @@ MerrybetParser.prototype.getGames = function ($, data) {
                         game.date = game.datetime.split(" ")[0];
                         game.time = game.datetime.split(" ")[1];
 
-                     console.log(game.id  + " : " + game.sorted_id + " : " +game.timestamp)
+                     console.log(game.id  + " : " + game.sorted_id + " : " +game.timestamp + " : " + game.url + " : " + game.home + " : " + game.away)
 
                      if (current_cat != undefined)
                             game.category_key = current_cat.key;
