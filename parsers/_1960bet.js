@@ -1632,6 +1632,7 @@ _1960betParser.prototype.getGames = function ($, data) {
 
                         game.title = vars.trim();
                         game.id = helper.generateGameID(game.title)
+                        game.sorted_id = helper.generateSortedGameID(game.title)
 
 
 
