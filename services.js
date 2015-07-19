@@ -3,13 +3,16 @@
  */
 
 
-require('http').globalAgent.maxSockets = Infinity;
-require('https').globalAgent.maxSockets = Infinity;
+require('http').globalAgent = false;
+//require('http').globalAgent.maxSockets = Infinity;
+require('https').globalAgent = false;
+//require('https').globalAgent.maxSockets = Infinity;
 
 var request = require('request').defaults(
     {
         maxRedirects: 20,
-        pool: {maxSockets: Infinity}
+        //pool: {maxSockets: Infinity}
+        pool: false
 });
 var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
