@@ -31,6 +31,7 @@ NairabetParser.prototype.getGameOdds = function ($, game, db) {
 
         //var tag = nparser.clean_symbols($(this).children().eq(0).children().eq(0).children().eq(0).text()).toLowerCase();
         var tag = nparser.clean_symbols($('.event_game_title', this).children().eq(0).children().eq(0).text()).toLowerCase();
+
         //var game_code = $(this).children().eq(0).children().eq(1).text();
         var game_code = $('.event_game_title', this).children().eq(1).text();
 
@@ -1646,7 +1647,9 @@ NairabetParser.prototype.getGames = function ($, data) {
                 var vars2 = $('#moreBetsPanel', this).children().eq(0).children().eq(0).attr('onclick');
 
                 if (vars2 != undefined) {
+
                     game.url = vars2.split("'")[1];
+                    game.url = game.url.split("/Odds")[1]; //TODO Might be removed later
                 }
                 game.date = game.datetime.split(" ")[0];
                 game.time = game.datetime.split(" ")[1];
