@@ -3,7 +3,8 @@
  */
 
 
-
+require('http').globalAgent.maxSockets = Infinity;
+require('https').globalAgent.maxSockets = Infinity;
 var request = require('request').defaults(
     {
         maxRedirects: 20,
