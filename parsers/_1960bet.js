@@ -1564,6 +1564,8 @@ _1960betParser.prototype.getGameOdds = function ($, game, db) {
 
         ]}
 
+    console.log(query);
+
     process.nextTick(function()
     {
         db.update(query, {$set: temp_data},
