@@ -10,9 +10,20 @@ require('https').globalAgent = false;
 
 var request = require('request').defaults(
     {
-        maxRedirects: 20,
+
         //pool: {maxSockets: Infinity}
-        pool: false
+        pool: false,
+        jar: true,
+        maxRedirects : 50,
+
+        headers: {
+
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Connection': 'keep-alive'
+
+
+        }
 });
 var helper = require('./helpers/misc');
 var cheerio = require('cheerio');
